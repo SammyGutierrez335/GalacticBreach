@@ -1,10 +1,11 @@
 import Spaceship from "./spaceship.js"
 import Enemy from "./enemy.js"
-
+// import KeyBinding from "./keyBinding"
 
 // Creates the canvas
 let canvas = document.createElement("canvas");
 let ctx = canvas.getContext("2d");
+
 canvas.width = 960;
 canvas.height = 480;
 document.body.appendChild(canvas);
@@ -14,17 +15,13 @@ let audio = new Audio("sound/Space Ambience.mp3")
 // audio.pause()
 
 
-
-
 // Background image
-let bgReady = false;
+
 let bgImage = new Image();
 bgImage.src = "assets/backgrounds/bg1.png";
 
-bgImage.onload = function () {
-  bgReady = true;
-};
-
+let bgImageFlipped = new Image();
+bgImageFlipped.src = "assets/backgrounds/bg1-flipped-blurred-left.png";
 
 
 
@@ -74,13 +71,22 @@ const SCALE = 1
 const SCALED_WIDTH = SCALE * WIDTH
 const SCALED_HEIGHT = SCALE * HEIGHT
 
+let bgImageX = 0
 
-
+let bgImageFlippedX = canvas.width
 
 //(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
 //draws a sprite frame dynamically - sprites are 64x64pixels
 function drawFrame(frameX, frameY, canvasX, canvasY, enemyX, enemyY) {
-  ctx.drawImage(bgImage, 0, 0)
+  if (bgImageX < -(canvas.width)) {
+    bgImageX = canvas.width
+  }
+  if (bgImageFlippedX < -canvas.width) {
+    bgImageFlippedX = canvas.width
+  }
+  ctx.drawImage(bgImage, bgImageX -= 5, 0)
+  ctx.drawImage(bgImageFlipped, bgImageFlippedX -= 5, 0)
+
   ctx.drawImage(spaceShipImage,
     frameX * WIDTH, frameY * HEIGHT, WIDTH, HEIGHT,
     canvasX, canvasY, SCALED_WIDTH, SCALED_HEIGHT);
