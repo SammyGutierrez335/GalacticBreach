@@ -86,19 +86,18 @@ const FRAME_LIMIT = 5;
 // The main game loop
 function gameLoop() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-
   if (keyPresses.w) {
+    spaceShip.moveShip(0, -spaceShip.speed, 0, canvas)
     // moveShip(0, -spaceShip.speed, FLYING_UP)
-    moveShip(0, -spaceShip.speed, 0, 0)
   } else if (keyPresses.s) {
-    moveShip(0, spaceShip.speed, 0, 0)
+    spaceShip.moveShip(0, spaceShip.speed, 0, canvas)
     // moveShip(0, spaceShip.speed, FLYING_DOWN)
   }
   if (keyPresses.a) {
-    moveShip(-spaceShip.speed, 0, 0)
+    spaceShip.moveShip(-spaceShip.speed, 0, 0, canvas)
     // moveShip(-spaceShip.speed, 0, FLYING_LEFT)
   } else if (keyPresses.d) {
-    moveShip(spaceShip.speed, 0, 0)
+    spaceShip.moveShip(spaceShip.speed, 0, 0, canvas)
     // moveShip(spaceShip.speed, 0, FLYING_RIGHT)
   }
 
@@ -114,14 +113,4 @@ function gameLoop() {
 
   drawFrame(CYCLE_LOOP[currentLoopIndex], 0, spaceShip.x, spaceShip.y);
   window.requestAnimationFrame(gameLoop);
-}
-
-function moveShip(deltaX, deltaY, direction) {
-  if (spaceShip.x + deltaX > 0 && spaceShip.x + SCALED_WIDTH + deltaX < canvas.width) {
-    spaceShip.x += deltaX;
-  }
-  if (spaceShip.y + deltaY > 0 && spaceShip.y + SCALED_HEIGHT + deltaY < canvas.height) {
-    spaceShip.y += deltaY;
-  }
-  // currentDirection = direction;
 }
