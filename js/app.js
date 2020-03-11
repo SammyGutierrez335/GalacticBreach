@@ -21,7 +21,7 @@ let bgImage = new Image();
 bgImage.src = "assets/backgrounds/bg1.png";
 
 let bgImageFlipped = new Image();
-bgImageFlipped.src = "assets/backgrounds/bg1-flipped-blurred-left.png";
+bgImageFlipped.src = "assets/backgrounds/bg1-flipped-blurred.png";
 
 
 
