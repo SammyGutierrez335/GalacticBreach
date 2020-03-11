@@ -21,7 +21,7 @@ let bgImage = new Image();
 bgImage.src = "assets/backgrounds/bg1.png";
 
 let bgImageFlipped = new Image();
-bgImageFlipped.src = "assets/backgrounds/bg1-flipped-blurred.png";
+bgImageFlipped.src = "assets/backgrounds/bg1-flipped-edged.png";
 
 
 
@@ -50,17 +50,7 @@ window.requestAnimationFrame(gameLoop)
 
 
 
-let keyPresses = {};
 
-window.addEventListener('keydown', keyDownListener, false);
-function keyDownListener(event) {
-  keyPresses[event.key] = true;
-}
-
-window.addEventListener('keyup', keyUpListener, false);
-function keyUpListener(event) {
-  keyPresses[event.key] = false;
-}
 
 
 
@@ -101,29 +91,12 @@ function drawFrame(frameX, frameY, canvasX, canvasY, enemyX, enemyY) {
 const CYCLE_LOOP = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 let currentLoopIndex = 0;
 let frameCount = 0;
-// const FLYING_DOWN = 0;
-// const FLYING_UP = 0;
-// const FLYING_LEFT = 0;
-// const FLYING_RIGHT = 0;
-// let currentDirection = FLYING_DOWN;
+
 const FRAME_LIMIT = 5;
 // The main game loop
 function gameLoop() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  if (keyPresses.w) {
-    spaceShip.moveShip(0, -spaceShip.speed, 0, canvas)
-    // moveShip(0, -spaceShip.speed, FLYING_UP)
-  } else if (keyPresses.s) {
-    spaceShip.moveShip(0, spaceShip.speed, 0, canvas)
-    // moveShip(0, spaceShip.speed, FLYING_DOWN)
-  }
-  if (keyPresses.a) {
-    spaceShip.moveShip(-spaceShip.speed, 0, 0, canvas)
-    // moveShip(-spaceShip.speed, 0, FLYING_LEFT)
-  } else if (keyPresses.d) {
-    spaceShip.moveShip(spaceShip.speed, 0, 0, canvas)
-    // moveShip(spaceShip.speed, 0, FLYING_RIGHT)
-  }
+  spaceShip.moveShip(canvas)
   enemy.moveEnemy(enemy.speed, 0, 0, canvas)
   if (!enemy.offScreen) {
     setTimeout(function () {
