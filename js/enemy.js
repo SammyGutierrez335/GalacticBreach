@@ -4,6 +4,7 @@ export default class Enemy {
     this.x = options.x;
     this.y = options.y;
     this.imgSrc = options.imgSrc
+    this.offScreen = true
   }
 
   renderImg(enemyImage) {
@@ -11,11 +12,10 @@ export default class Enemy {
   }
   //checks for inbounds
   moveEnemy(deltaX, deltaY, direction, canvas) {
-    if (this.x + deltaX > 0) {
-      this.x -= deltaX;
+    if (this.x + deltaX === -100) {
+      console.log("offscreen")
+      this.offScreen = false
     }
-    if (this.y + deltaY > 0 && this.y + 64 + deltaY < canvas.height) {
-      this.y -= deltaY;
-    }
+    this.x -= deltaX;
   }
 }
