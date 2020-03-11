@@ -5,7 +5,6 @@ export default class Spaceship {
     this.y = options.y;
     this.imgSrc = options.imgSrc
     this.ssReady = false;
-    this.ctx = options.ctx
   }
 
   renderImg(spaceShipImage) {
@@ -14,4 +13,13 @@ export default class Spaceship {
       this.ssReady = true
     }
   }
+  //   function moveShip(deltaX, deltaY, direction) {
+  //   if (spaceShip.x + deltaX > 0 && spaceShip.x + SCALED_WIDTH + deltaX < canvas.width) {
+  //     spaceShip.x += deltaX;
+  //   }
+  //   if (spaceShip.y + deltaY > 0 && spaceShip.y + SCALED_HEIGHT + deltaY < canvas.height) {
+  //     spaceShip.y += deltaY;
+  //   }
+  //   currentDirection = direction;
+  // }
 }
