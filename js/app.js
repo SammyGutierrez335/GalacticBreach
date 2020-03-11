@@ -1,3 +1,6 @@
+import Spaceship from "./Spaceship.js"
+
+
 // Creates the canvas
 let canvas = document.createElement("canvas");
 let ctx = canvas.getContext("2d");
@@ -8,7 +11,7 @@ document.body.appendChild(canvas);
 let audio = new Audio("sound/Space Ambience.mp3")
 audio.play()
 audio.pause()
-// audio.addEventListener("loadedData", () => audio.play())
+
 
 
 
@@ -24,23 +27,20 @@ bgImage.onload = function () {
 
 
 
-
 //player spaceship
-let spaceShipImage = new Image();
-spaceShipImage.src = "assets/player/playership.png";
-let ssReady = false
-spaceShipImage.onload = function () {
-  ssReady = true
-
-  window.requestAnimationFrame(gameLoop);
-
-}
-
-let spaceShip = {
-  speed: 3, // movement in pixels per second
+let spaceShip = new Spaceship({
+  speed: 3,
   x: 50,
-  y: 200
-};
+  y: 200,
+  imgSrc: "assets/player/playership.png",
+  ctx: ctx
+})
+
+let spaceShipImage = new Image();
+spaceShip.renderImg(spaceShipImage)
+window.requestAnimationFrame(gameLoop)
+
+
 
 // Handle keyboard controls
 //To accomplish this we simply have a letiable keysDown which 
@@ -133,4 +133,3 @@ function moveShip(deltaX, deltaY, direction) {
   }
   currentDirection = direction;
 }
-
