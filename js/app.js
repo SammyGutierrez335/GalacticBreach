@@ -74,7 +74,7 @@ const SCALE = 1
 const SCALED_WIDTH = SCALE * WIDTH
 const SCALED_HEIGHT = SCALE * HEIGHT
 
-let enemyOffScreen = true
+
 
 
 //(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
@@ -84,7 +84,7 @@ function drawFrame(frameX, frameY, canvasX, canvasY, enemyX, enemyY) {
   ctx.drawImage(spaceShipImage,
     frameX * WIDTH, frameY * HEIGHT, WIDTH, HEIGHT,
     canvasX, canvasY, SCALED_WIDTH, SCALED_HEIGHT);
-  if (enemyOffScreen) {
+  if (enemy.offScreen) {
     ctx.drawImage(enemyImage,
       frameX * WIDTH, frameY * HEIGHT, WIDTH, HEIGHT,
       enemyX, enemyY, SCALED_WIDTH, SCALED_HEIGHT);
@@ -118,14 +118,13 @@ function gameLoop() {
     spaceShip.moveShip(spaceShip.speed, 0, 0, canvas)
     // moveShip(spaceShip.speed, 0, FLYING_RIGHT)
   }
-  if (enemyOffScreen) {
-    enemyOffScreen = enemy.moveEnemy(enemy.speed, 0, 0, canvas)
-  } else {
+  enemy.moveEnemy(enemy.speed, 0, 0, canvas)
+  if (!enemy.offScreen) {
     setTimeout(function () {
       enemy.x = 1000
-      enemyOffScreen = true
+      enemy.offScreen = true
       console.log()
-    }, 3000);
+    }, 2000);
   }
 
   frameCount++;
