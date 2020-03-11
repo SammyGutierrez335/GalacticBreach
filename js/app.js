@@ -1,18 +1,20 @@
 // Creates the canvas
-var canvas = document.createElement("canvas");
-var ctx = canvas.getContext("2d");
+let canvas = document.createElement("canvas");
+let ctx = canvas.getContext("2d");
 canvas.width = 960;
 canvas.height = 480;
 document.body.appendChild(canvas);
 
-
-
+let audio = new Audio("sound/Space Ambience.mp3")
+audio.play()
+audio.pause()
+// audio.addEventListener("loadedData", () => audio.play())
 
 
 
 // Background image
-var bgReady = false;
-var bgImage = new Image();
+let bgReady = false;
+let bgImage = new Image();
 bgImage.src = "assets/backgrounds/bg1.png";
 
 bgImage.onload = function () {
@@ -24,9 +26,9 @@ bgImage.onload = function () {
 
 
 //player spaceship
-var spaceShipImage = new Image();
+let spaceShipImage = new Image();
 spaceShipImage.src = "assets/player/playership.png";
-var ssReady = false
+let ssReady = false
 spaceShipImage.onload = function () {
   ssReady = true
 
@@ -34,14 +36,14 @@ spaceShipImage.onload = function () {
 
 }
 
-var spaceShip = {
+let spaceShip = {
   speed: 3, // movement in pixels per second
   x: 50,
   y: 200
 };
 
 // Handle keyboard controls
-//To accomplish this we simply have a variable keysDown which 
+//To accomplish this we simply have a letiable keysDown which 
 //stores any event's keyCode. If a key code is in the object, the user is currently pressing that key. Simple!
 let keyPresses = {};
 
