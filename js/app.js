@@ -74,8 +74,9 @@ const SCALE = 1
 const SCALED_WIDTH = SCALE * WIDTH
 const SCALED_HEIGHT = SCALE * HEIGHT
 
+let enemyOffScreen = true
 
-let enemyOnScreen = true
+
 //(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
 //draws a sprite frame dynamically - sprites are 64x64pixels
 function drawFrame(frameX, frameY, canvasX, canvasY, enemyX, enemyY) {
@@ -83,7 +84,7 @@ function drawFrame(frameX, frameY, canvasX, canvasY, enemyX, enemyY) {
   ctx.drawImage(spaceShipImage,
     frameX * WIDTH, frameY * HEIGHT, WIDTH, HEIGHT,
     canvasX, canvasY, SCALED_WIDTH, SCALED_HEIGHT);
-  if (enemyOnScreen) {
+  if (enemyOffScreen) {
     ctx.drawImage(enemyImage,
       frameX * WIDTH, frameY * HEIGHT, WIDTH, HEIGHT,
       enemyX, enemyY, SCALED_WIDTH, SCALED_HEIGHT);
@@ -117,9 +118,14 @@ function gameLoop() {
     spaceShip.moveShip(spaceShip.speed, 0, 0, canvas)
     // moveShip(spaceShip.speed, 0, FLYING_RIGHT)
   }
-
-  if (enemyOnScreen) {
-    enemyOnScreen = enemy.moveEnemy(enemy.speed, 0, 0, canvas)
+  if (enemyOffScreen) {
+    enemyOffScreen = enemy.moveEnemy(enemy.speed, 0, 0, canvas)
+  } else {
+    setTimeout(function () {
+      enemy.x = 1000
+      enemyOffScreen = true
+      console.log()
+    }, 3000);
   }
 
   frameCount++;
