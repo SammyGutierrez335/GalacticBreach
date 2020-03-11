@@ -56,10 +56,17 @@ function drawFrame(frameX, frameY, canvasX, canvasY) {
 }
 
 
-const cycleLoop = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+const cycleLoop = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 let currentLoopIndex = 0;
+let frameCount = 0;
 
 function step() {
+  frameCount++
+  if (frameCount < 4) {
+    window.requestAnimationFrame(step);
+    return
+  }
+  frameCount = 0
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.drawImage(bgImage, 0, 0)
   drawFrame(cycleLoop[currentLoopIndex], 0, 0, 0);
