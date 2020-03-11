@@ -75,6 +75,7 @@ const SCALED_WIDTH = SCALE * WIDTH
 const SCALED_HEIGHT = SCALE * HEIGHT
 
 
+let enemyOnScreen = true
 //(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
 //draws a sprite frame dynamically - sprites are 64x64pixels
 function drawFrame(frameX, frameY, canvasX, canvasY, enemyX, enemyY) {
@@ -82,9 +83,11 @@ function drawFrame(frameX, frameY, canvasX, canvasY, enemyX, enemyY) {
   ctx.drawImage(spaceShipImage,
     frameX * WIDTH, frameY * HEIGHT, WIDTH, HEIGHT,
     canvasX, canvasY, SCALED_WIDTH, SCALED_HEIGHT);
-  ctx.drawImage(enemyImage,
-    frameX * WIDTH, frameY * HEIGHT, WIDTH, HEIGHT,
-    enemyX, enemyY, SCALED_WIDTH, SCALED_HEIGHT);
+  if (enemyOnScreen) {
+    ctx.drawImage(enemyImage,
+      frameX * WIDTH, frameY * HEIGHT, WIDTH, HEIGHT,
+      enemyX, enemyY, SCALED_WIDTH, SCALED_HEIGHT);
+  }
 }
 
 //enemy atom has 24 stack frames
@@ -96,7 +99,6 @@ let frameCount = 0;
 // const FLYING_LEFT = 0;
 // const FLYING_RIGHT = 0;
 // let currentDirection = FLYING_DOWN;
-
 const FRAME_LIMIT = 5;
 // The main game loop
 function gameLoop() {
@@ -116,7 +118,10 @@ function gameLoop() {
     // moveShip(spaceShip.speed, 0, FLYING_RIGHT)
   }
 
-  enemy.moveEnemy(enemy.speed, 0, 0, canvas)
+  if (enemyOnScreen) {
+    enemyOnScreen = enemy.moveEnemy(enemy.speed, 0, 0, canvas)
+  }
+
   frameCount++;
   if (frameCount >= FRAME_LIMIT) {
     frameCount = 0;
