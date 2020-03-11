@@ -1,3 +1,7 @@
+import Spaceship from "./spaceship.js"
+import Enemy from "./enemy.js"
+
+
 // Creates the canvas
 let canvas = document.createElement("canvas");
 let ctx = canvas.getContext("2d");
@@ -6,9 +10,9 @@ canvas.height = 480;
 document.body.appendChild(canvas);
 
 let audio = new Audio("sound/Space Ambience.mp3")
-audio.play()
-audio.pause()
-// audio.addEventListener("loadedData", () => audio.play())
+// audio.play()
+// audio.pause()
+
 
 
 
@@ -24,27 +28,31 @@ bgImage.onload = function () {
 
 
 
-
 //player spaceship
-let spaceShipImage = new Image();
-spaceShipImage.src = "assets/player/playership.png";
-let ssReady = false
-spaceShipImage.onload = function () {
-  ssReady = true
-
-  window.requestAnimationFrame(gameLoop);
-
-}
-
-let spaceShip = {
-  speed: 3, // movement in pixels per second
+let spaceShip = new Spaceship({
+  speed: 4,
   x: 50,
-  y: 200
-};
+  y: 200,
+  imgSrc: "assets/player/playership.png",
+})
 
-// Handle keyboard controls
-//To accomplish this we simply have a letiable keysDown which 
-//stores any event's keyCode. If a key code is in the object, the user is currently pressing that key. Simple!
+let enemy = new Enemy({
+  speed: 2,
+  x: 1000,
+  y: 200,
+  imgSrc: "assets/attackers/atom.png"
+})
+
+let spaceShipImage = new Image();
+spaceShip.renderImg(spaceShipImage)
+
+let enemyImage = new Image()
+enemy.renderImg(enemyImage)
+
+window.requestAnimationFrame(gameLoop)
+
+
+
 let keyPresses = {};
 
 window.addEventListener('keydown', keyDownListener, false);
@@ -60,56 +68,55 @@ function keyUpListener(event) {
 
 
 
-
-
-
 const WIDTH = 64
 const HEIGHT = 64
 const SCALE = 1
 const SCALED_WIDTH = SCALE * WIDTH
 const SCALED_HEIGHT = SCALE * HEIGHT
+
+
 //(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
 //draws a sprite frame dynamically - sprites are 64x64pixels
-
-function drawFrame(frameX, frameY, canvasX, canvasY) {
+function drawFrame(frameX, frameY, canvasX, canvasY, enemyX, enemyY) {
   ctx.drawImage(bgImage, 0, 0)
   ctx.drawImage(spaceShipImage,
     frameX * WIDTH, frameY * HEIGHT, WIDTH, HEIGHT,
     canvasX, canvasY, SCALED_WIDTH, SCALED_HEIGHT);
+  ctx.drawImage(enemyImage,
+    frameX * WIDTH, frameY * HEIGHT, WIDTH, HEIGHT,
+    enemyX, enemyY, SCALED_WIDTH, SCALED_HEIGHT);
 }
 
-
+//enemy atom has 24 stack frames
 const CYCLE_LOOP = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 let currentLoopIndex = 0;
 let frameCount = 0;
-const FLYING_DOWN = 0;
-const FLYING_UP = 0;
-const FLYING_LEFT = 0;
-const FLYING_RIGHT = 0;
-let currentDirection = FLYING_DOWN;
+// const FLYING_DOWN = 0;
+// const FLYING_UP = 0;
+// const FLYING_LEFT = 0;
+// const FLYING_RIGHT = 0;
+// let currentDirection = FLYING_DOWN;
 
 const FRAME_LIMIT = 5;
 // The main game loop
 function gameLoop() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  let hasMoved = false;
-
   if (keyPresses.w) {
-    moveShip(0, -spaceShip.speed, FLYING_UP)
-    hasMoved = true;
+    spaceShip.moveShip(0, -spaceShip.speed, 0, canvas)
+    // moveShip(0, -spaceShip.speed, FLYING_UP)
   } else if (keyPresses.s) {
-    moveShip(0, spaceShip.speed, FLYING_DOWN)
-    hasMoved = true;
+    spaceShip.moveShip(0, spaceShip.speed, 0, canvas)
+    // moveShip(0, spaceShip.speed, FLYING_DOWN)
   }
   if (keyPresses.a) {
-    moveShip(-spaceShip.speed, 0, FLYING_LEFT)
-    hasMoved = true;
+    spaceShip.moveShip(-spaceShip.speed, 0, 0, canvas)
+    // moveShip(-spaceShip.speed, 0, FLYING_LEFT)
   } else if (keyPresses.d) {
-    moveShip(spaceShip.speed, 0, FLYING_RIGHT)
-    hasMoved = true;
+    spaceShip.moveShip(spaceShip.speed, 0, 0, canvas)
+    // moveShip(spaceShip.speed, 0, FLYING_RIGHT)
   }
 
+  enemy.moveEnemy(enemy.speed, 0, 0, canvas)
   frameCount++;
   if (frameCount >= FRAME_LIMIT) {
     frameCount = 0;
@@ -119,18 +126,6 @@ function gameLoop() {
     }
   }
 
-
-  drawFrame(CYCLE_LOOP[currentLoopIndex], currentDirection, spaceShip.x, spaceShip.y);
+  drawFrame(CYCLE_LOOP[currentLoopIndex], 0, spaceShip.x, spaceShip.y, enemy.x, enemy.y);
   window.requestAnimationFrame(gameLoop);
 }
-
-function moveShip(deltaX, deltaY, direction) {
-  if (spaceShip.x + deltaX > 0 && spaceShip.x + SCALED_WIDTH + deltaX < canvas.width) {
-    spaceShip.x += deltaX;
-  }
-  if (spaceShip.y + deltaY > 0 && spaceShip.y + SCALED_HEIGHT + deltaY < canvas.height) {
-    spaceShip.y += deltaY;
-  }
-  currentDirection = direction;
-}
-
