@@ -6,45 +6,43 @@ export default class Spaceship {
     this.imgSrc = options.imgSrc
     this.deltaX = 0
     this.deltaY = 0
+    this.keyPresses = {}
+    this.keyDownListener = this.keyDownListener.bind(this)
+    this.keyUpListener = this.keyUpListener.bind(this)
+    window.addEventListener('keydown', this.keyDownListener, false);
+    window.addEventListener('keyup', this.keyUpListener, false);
+  }
+
+  keyDownListener(event) {
+    this.keyPresses[event.key] = true;
+  }
+
+  keyUpListener(event) {
+    this.keyPresses[event.key] = false;
+    this.deltaX = 0
+    this.deltaY = 0
   }
 
   renderImg(spaceShipImage) {
     spaceShipImage.src = this.imgSrc;
   }
 
-  // const FLYING_DOWN = 0;
-  // const FLYING_UP = 0;
-  // const FLYING_LEFT = 0;
-  // const FLYING_RIGHT = 0;
-  // let currentDirection = FLYING_DOWN;
 
   moveShip(canvas) {
     let deltaX = this.speed
     let deltaY = this.speed
-    let keyPresses = {};
 
-    window.addEventListener('keydown', keyDownListener, false);
-    function keyDownListener(event) {
-      keyPresses[event.key] = true;
-    }
-
-    window.addEventListener('keyup', keyUpListener, false);
-    function keyUpListener(event) {
-      keyPresses[event.key] = false;
-    }
-
-    if (keyPresses.w) {
+    if (this.keyPresses.w) {
       this.deltaY = -(deltaY)
       // moveShip(0, -spaceShip.speed, FLYING_UP)
-    } else if (keyPresses.s) {
+    } else if (this.keyPresses.s) {
       this.deltaY = deltaY
       // moveShip(0, spaceShip.speed, FLYING_DOWN)
     }
-    if (keyPresses.a) {
-      debugger
+    if (this.keyPresses.a) {
       this.deltaX = -(deltaX)
       // moveShip(-spaceShip.speed, 0, FLYING_LEFT)
-    } else if (keyPresses.d) {
+    } else if (this.keyPresses.d) {
       this.deltaX = deltaX
       // moveShip(spaceShip.speed, 0, FLYING_RIGHT)
     }
