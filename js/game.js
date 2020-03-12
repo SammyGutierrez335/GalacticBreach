@@ -116,11 +116,6 @@ export default class Game {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     spaceShip.moveShip(canvas)
     enemy.moveEnemy(enemy.speed, 0, 0, canvas)
-    let frameCount = this.frameCount
-    const FRAME_LIMIT = this.FRAME_LIMIT
-    const CYCLE_LOOP = this.CYCLE_LOOP
-    let currentLoopIndex = this.currentLoopIndex
-
     if (!enemy.offScreen) {
       setTimeout(function () {
         enemy.x = 1000
@@ -132,18 +127,19 @@ export default class Game {
       return
     }
 
-    frameCount++;
-    if (frameCount >= FRAME_LIMIT) {
-      frameCount = 0;
-      currentLoopIndex++;
-      if (currentLoopIndex >= CYCLE_LOOP.length) {
-        currentLoopIndex = 0;
+    this.frameCount++;
+    console.log(this.frameCount)
+    if (this.frameCount >= this.FRAME_LIMIT) {
+      this.frameCount = 0;
+      this.currentLoopIndex++;
+      if (this.currentLoopIndex >= this.CYCLE_LOOP.length) {
+        this.currentLoopIndex = 0;
       }
     }
 
 
 
-    this.drawFrame(CYCLE_LOOP[currentLoopIndex], 0, spaceShip.x, spaceShip.y, enemy.x, enemy.y);
+    this.drawFrame(this.CYCLE_LOOP[this.currentLoopIndex], 0, spaceShip.x, spaceShip.y, enemy.x, enemy.y);
     window.requestAnimationFrame(this.gameloop);
   }
 
