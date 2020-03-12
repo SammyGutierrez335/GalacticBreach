@@ -3,6 +3,8 @@ export default class Enemy {
     this.speed = options.speed; // movement in pixels per second
     this.x = options.x;
     this.y = options.y;
+    this.height = 64
+    this.width = 64
     this.imgSrc = options.imgSrc
     this.offScreen = true
   }

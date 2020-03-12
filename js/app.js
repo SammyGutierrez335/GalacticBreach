@@ -11,8 +11,8 @@ document.body.appendChild(canvas);
 
 // Background music
 let audio = new Audio("sound/Space Ambience.mp3")
-audio.play()
-audio.pause()
+// audio.play()
+// audio.pause()
 
 // Background image
 
@@ -49,19 +49,33 @@ enemy.renderImg(enemyImage)
 window.requestAnimationFrame(gameLoop)
 
 
-const WIDTH = 64
-const HEIGHT = 64
-const SCALE = 1
-const SCALED_WIDTH = SCALE * WIDTH
-const SCALED_HEIGHT = SCALE * HEIGHT
+
+function checkCollision(obj1, obj2) {
+
+  // var rect1 = { x: 5, y: 5, width: 50, height: 50 }
+  // var rect2 = { x: 20, y: 10, width: 10, height: 10 }
+
+  if (obj1.x < obj2.x + obj2.width &&
+    obj1.x + obj1.width > obj2.x &&
+    obj1.y < obj2.y + obj2.height &&
+    obj1.y + obj1.height > obj2.y) {
+    return true
+  }
+  return false
+}
+
+
+
 
 let bgImageX = 0
-
 let bgImageFlippedX = canvas.width
 
 //(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
 //draws a sprite frame dynamically - sprites are 64x64pixels
 function drawFrame(frameX, frameY, canvasX, canvasY, enemyX, enemyY) {
+  const SCALE = 1
+  const SCALED_WIDTH = SCALE * 64
+  const SCALED_HEIGHT = SCALE * 64
   if (bgImageX < -(canvas.width)) {
     bgImageX = canvas.width
   }
@@ -72,11 +86,11 @@ function drawFrame(frameX, frameY, canvasX, canvasY, enemyX, enemyY) {
   ctx.drawImage(bgImageFlipped, bgImageFlippedX -= 5, 0)
 
   ctx.drawImage(spaceShipImage,
-    frameX * WIDTH, frameY * HEIGHT, WIDTH, HEIGHT,
+    frameX * spaceShip.width, frameY * spaceShip.height, spaceShip.width, spaceShip.height,
     canvasX, canvasY, SCALED_WIDTH, SCALED_HEIGHT);
   if (enemy.offScreen) {
     ctx.drawImage(enemyImage,
-      frameX * WIDTH, frameY * HEIGHT, WIDTH, HEIGHT,
+      frameX * enemy.width, frameY * enemy.height, enemy.width, enemy.height,
       enemyX, enemyY, SCALED_WIDTH, SCALED_HEIGHT);
   }
 }
@@ -100,7 +114,9 @@ function gameLoop() {
       console.log()
     }, 2000);
   }
-
+  if (checkCollision(spaceShip, enemy)) {
+    return
+  }
   frameCount++;
   if (frameCount >= FRAME_LIMIT) {
     frameCount = 0;

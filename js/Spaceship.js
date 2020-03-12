@@ -3,6 +3,8 @@ export default class Spaceship {
     this.speed = options.speed; // movement in pixels per second
     this.x = options.x;
     this.y = options.y;
+    this.height = 64
+    this.width = 64
     this.imgSrc = options.imgSrc
     this.hasMoved = options.hasMoved
     this.deltaX = 0
@@ -52,7 +54,7 @@ export default class Spaceship {
       // moveShip(spaceShip.speed, 0, FLYING_RIGHT)
     }
 
-
+    //stop moving if going out of bounds
     if (this.x + this.deltaX > 0 && this.x + 64 + this.deltaX < canvas.width) {
       this.x += this.deltaX;
     }
@@ -60,4 +62,5 @@ export default class Spaceship {
       this.y += this.deltaY;
     }
   }
+
 }
