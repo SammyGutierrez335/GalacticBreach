@@ -5,8 +5,7 @@ export default class Game {
   constructor() {
     this.enemies = [];
     this.ships = [];
-
-    this.addEnemy();
+    this.allObjects = this.allObjects.bind
   }
 }
 let canvas = document.getElementsByTagName("canvas");
@@ -18,7 +17,7 @@ bgImage.src = "assets/backgrounds/bg1.png";
 let bgImageFlipped = new Image();
 bgImageFlipped.src = "assets/backgrounds/bg1-flipped-edged.png";
 
-function addEnemy() {
+Game.prototype.addEnemy = function addEnemy() {
   let enemy = new Enemy({
     speed: 2,
     x: 1000,
@@ -31,7 +30,7 @@ function addEnemy() {
 };
 
 //player spaceship
-function addShip() {
+Game.prototype.addShip = function addShip() {
   let spaceShip = new Spaceship({
     hasMoved: false,
     speed: 4,
@@ -39,10 +38,13 @@ function addShip() {
     y: 200,
     imgSrc: "assets/player/playership.png",
   })
-
+  this.ships.push(spaceShip)
   let spaceShipImage = new Image();
   spaceShip.renderImg(spaceShipImage)
 }
+Game.prototype.allObjects = function allObjects() {
+  return [].concat(this.ships, this.enemies);
+};
 
 function checkCollision(obj1, obj2) {
   const allObjects = this.allObjects();
@@ -61,9 +63,7 @@ function checkCollision(obj1, obj2) {
   }
 }
 
-function allObjects() {
-  return [].concat(this.ships, this.enemies);
-};
+
 
 let bgImageX = 0
 let bgImageFlippedX = canvas.width
@@ -103,8 +103,10 @@ const FRAME_LIMIT = 5;
 
 
 // The main game loop
-function gameLoop(canvas) {
-
+Game.prototype.gameloop = function gameloop(canvas, ctx) {
+  let enemy = this.enemies[0]
+  let spaceShip = this.ships[0]
+  console.log(enemy)
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   spaceShip.moveShip(canvas)
   enemy.moveEnemy(enemy.speed, 0, 0, canvas)
@@ -112,7 +114,6 @@ function gameLoop(canvas) {
     setTimeout(function () {
       enemy.x = 1000
       enemy.offScreen = true
-      console.log()
     }, 2000);
   }
   if (checkCollision(spaceShip, enemy)) {
