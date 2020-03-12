@@ -1,3 +1,7 @@
 .hide {
   display: none;
 }
+
+#game-canvas {
+  background: black
+}

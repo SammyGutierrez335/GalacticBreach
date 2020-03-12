@@ -4,17 +4,60 @@ export default class Spaceship {
     this.x = options.x;
     this.y = options.y;
     this.imgSrc = options.imgSrc
+    this.hasMoved = options.hasMoved
+    this.deltaX = 0
+    this.deltaY = 0
+    this.keyPresses = {}
+    this.keyDownListener = this.keyDownListener.bind(this)
+    this.keyUpListener = this.keyUpListener.bind(this)
+    window.addEventListener('keydown', this.keyDownListener, false);
+    window.addEventListener('keyup', this.keyUpListener, false);
+  }
+
+
+
+  keyDownListener(event) {
+    this.keyPresses[event.key] = true;
+    this.hasMoved = true
+  }
+
+  keyUpListener(event) {
+    this.keyPresses[event.key] = false;
+    this.deltaX = 0
+    this.deltaY = 0
   }
 
   renderImg(spaceShipImage) {
     spaceShipImage.src = this.imgSrc;
+
   }
-  moveShip(deltaX, deltaY, direction, canvas) {
-    if (this.x + deltaX > 0 && this.x + 64 + deltaX < canvas.width) {
-      this.x += deltaX;
+
+
+  moveShip(canvas) {
+    let deltaX = this.speed
+    let deltaY = this.speed
+
+    if (this.keyPresses.w) {
+      this.deltaY = -(deltaY)
+      // moveShip(0, -spaceShip.speed, FLYING_UP)
+    } else if (this.keyPresses.s) {
+      this.deltaY = deltaY
+      // moveShip(0, spaceShip.speed, FLYING_DOWN)
     }
-    if (this.y + deltaY > 0 && this.y + 64 + deltaY < canvas.height) {
-      this.y += deltaY;
+    if (this.keyPresses.a) {
+      this.deltaX = -(deltaX)
+      // moveShip(-spaceShip.speed, 0, FLYING_LEFT)
+    } else if (this.keyPresses.d) {
+      this.deltaX = deltaX
+      // moveShip(spaceShip.speed, 0, FLYING_RIGHT)
+    }
+
+
+    if (this.x + this.deltaX > 0 && this.x + 64 + this.deltaX < canvas.width) {
+      this.x += this.deltaX;
+    }
+    if (this.y + this.deltaY > 0 && this.y + 64 + this.deltaY < canvas.height) {
+      this.y += this.deltaY;
     }
   }
 }
