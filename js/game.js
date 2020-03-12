@@ -72,7 +72,7 @@ let bgImageFlippedX = canvas.width
 //(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
 //draws a sprite frame dynamically - sprites are 64x64pixels
 
-function drawFrame(frameX, frameY, canvasX, canvasY, enemyX, enemyY) {
+Game.prototype.drawFrame = function drawFrame(frameX, frameY, canvasX, canvasY, enemyX, enemyY) {
   const SCALE = 1
   const SCALED_WIDTH = SCALE * 64
   const SCALED_HEIGHT = SCALE * 64

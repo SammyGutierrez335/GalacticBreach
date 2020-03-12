@@ -18,7 +18,7 @@ GameView.prototype.animate = function animate() {
 
 
   this.game.gameloop(this.canvas, this.ctx);
-  this.game.drawframe(this.ctx);
+  this.game.drawFrame(this.ctx);
 
   // every call to animate requests causes another call to animate
   requestAnimationFrame(this.animate.bind(this));
