@@ -4,6 +4,7 @@ export default class Spaceship {
     this.x = options.x;
     this.y = options.y;
     this.imgSrc = options.imgSrc
+    this.hasMoved = options.hasMoved
     this.deltaX = 0
     this.deltaY = 0
     this.keyPresses = {}
@@ -13,8 +14,11 @@ export default class Spaceship {
     window.addEventListener('keyup', this.keyUpListener, false);
   }
 
+
+
   keyDownListener(event) {
     this.keyPresses[event.key] = true;
+    this.hasMoved = true
   }
 
   keyUpListener(event) {
@@ -25,6 +29,7 @@ export default class Spaceship {
 
   renderImg(spaceShipImage) {
     spaceShipImage.src = this.imgSrc;
+
   }
 
 

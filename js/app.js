@@ -5,15 +5,14 @@ import Enemy from "./enemy.js"
 // Creates the canvas
 let canvas = document.createElement("canvas");
 let ctx = canvas.getContext("2d");
-
 canvas.width = 960;
 canvas.height = 480;
 document.body.appendChild(canvas);
 
+// Background music
 let audio = new Audio("sound/Space Ambience.mp3")
-// audio.play()
-// audio.pause()
-
+audio.play()
+audio.pause()
 
 // Background image
 
@@ -27,6 +26,7 @@ bgImageFlipped.src = "assets/backgrounds/bg1-flipped-edged.png";
 
 //player spaceship
 let spaceShip = new Spaceship({
+  hasMoved: false,
   speed: 4,
   x: 50,
   y: 200,
@@ -47,12 +47,6 @@ let enemyImage = new Image()
 enemy.renderImg(enemyImage)
 
 window.requestAnimationFrame(gameLoop)
-
-
-
-
-
-
 
 
 const WIDTH = 64
@@ -95,6 +89,7 @@ let frameCount = 0;
 const FRAME_LIMIT = 5;
 // The main game loop
 function gameLoop() {
+
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   spaceShip.moveShip(canvas)
   enemy.moveEnemy(enemy.speed, 0, 0, canvas)
