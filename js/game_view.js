@@ -1,27 +1,19 @@
-function GameView(game, canvas, ctx) {
-  this.ctx = ctx;
-  this.game = game;
-  this.canvas = canvas
-  this.ship = this.game.addShip();
-}
+export default class GameView {
+  constructor(game, canvas, ctx) {
+    this.ctx = ctx;
+    this.game = game;
+    this.canvas = canvas
+    this.animate = this.animate.bind(this)
+  }
+  start() {
+    this.game.addShip();
+    this.game.addEnemy();
+    // start the animation
+    requestAnimationFrame(this.animate);
+  }
 
-GameView.prototype.start = function start() {
-  this.game.addShip()
-  this.game.addEnemy();
-
-  this.lastTime = 0;
-  // start the animation
-  requestAnimationFrame(this.animate().bind(this));
+  animate() {
+    this.game.gameloop();
+    // every call to animate requests causes another call to animates
+  };
 };
-
-GameView.prototype.animate = function animate() {
-
-
-  this.game.gameloop(this.canvas, this.ctx);
-  this.game.drawFrame(this.ctx);
-
-  // every call to animate requests causes another call to animate
-  requestAnimationFrame(this.animate.bind(this));
-};
-
-module.exports = GameView;

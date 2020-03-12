@@ -6,8 +6,7 @@ let ctx = canvas.getContext("2d");
 canvas.width = 960;
 canvas.height = 480;
 document.body.appendChild(canvas);
-console.log(Game)
-const game = new Game();
+const game = new Game(canvas, ctx);
 new GameView(game, canvas, ctx).start()
 
 // Background music
