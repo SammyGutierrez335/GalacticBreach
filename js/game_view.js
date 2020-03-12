@@ -6,18 +6,19 @@ function GameView(game, canvas, ctx) {
 }
 
 GameView.prototype.start = function start() {
+  this.game.addShip()
   this.game.addEnemy();
+
   this.lastTime = 0;
   // start the animation
   requestAnimationFrame(this.animate().bind(this));
 };
 
-GameView.prototype.animate = function animate(time) {
-  const timeDelta = time - this.lastTime;
+GameView.prototype.animate = function animate() {
+
 
   this.game.gameloop(this.canvas, this.ctx);
   this.game.drawframe(this.ctx);
-  this.lastTime = time;
 
   // every call to animate requests causes another call to animate
   requestAnimationFrame(this.animate.bind(this));

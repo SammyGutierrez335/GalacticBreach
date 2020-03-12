@@ -5,7 +5,7 @@ export default class Game {
   constructor() {
     this.enemies = [];
     this.ships = [];
-    this.allObjects = this.allObjects.bind
+    Game.prototype.allObjects = Game.prototype.allObjects.bind(this)
   }
 }
 let canvas = document.getElementsByTagName("canvas");
@@ -47,7 +47,8 @@ Game.prototype.allObjects = function allObjects() {
 };
 
 function checkCollision(obj1, obj2) {
-  const allObjects = this.allObjects();
+  const allObjects = Game.prototype.allObjects();
+  console.log(allObjects)
   for (let i = 0; i < allObjects.length; i++) {
     for (let j = 0; j < allObjects.length; j++) {
       const obj1 = allObjects[i];
