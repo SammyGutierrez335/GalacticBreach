@@ -32,7 +32,7 @@ export default class Game {
 
   addEnemy() {
     let enemy = new Enemy({
-      speed: 2,
+      speed: Math.floor(Math.random() * 5),
       x: this.getRandomX(),
       y: this.getRandomY(),
       imgSrc: "assets/attackers/atom.png"
@@ -45,7 +45,7 @@ export default class Game {
     return Math.random() * (1300 - this.canvas.width) + this.canvas.width
   }
   getRandomY() {
-    return Math.random() * (480 - 0)
+    return Math.random() * (440 - 0)
   }
 
   //player spaceship
