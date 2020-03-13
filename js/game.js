@@ -13,6 +13,8 @@ export default class Game {
     this.currentLoopIndex = 0;
     this.frameCount = 0;
     this.FRAME_LIMIT = 5;
+    this.bgImageX = 0;
+    this.bgImageFlippedX = canvas.width
     // Background image
     // this.allObjects = this.allObjects.bind(this)
     this.drawFrame = this.drawFrame.bind(this)
@@ -67,7 +69,6 @@ export default class Game {
   //draws a sprite frame dynamically - sprites are 64x64pixels
 
   drawFrame(frameX, frameY, canvasX, canvasY, enemyX, enemyY) {
-    let canvas = this.canvas
     let ctx = this.ctx
     let spaceShip = this.ships[0]
     let enemy = this.enemies[0]
@@ -79,20 +80,19 @@ export default class Game {
     let bgImageFlipped = new Image();
     bgImageFlipped.src = "assets/backgrounds/bg1-flipped-edged.png";
 
-    let bgImageX = 0
-    let bgImageFlippedX = canvas.width
+
 
     const SCALE = 1
     const SCALED_WIDTH = SCALE * 64
     const SCALED_HEIGHT = SCALE * 64
-    if (bgImageX < -(canvas.width)) {
-      bgImageX = canvas.width
+    if (this.bgImageX < -(this.canvas.width)) {
+      this.bgImageX = this.canvas.width
     }
-    if (bgImageFlippedX < -canvas.width) {
-      bgImageFlippedX = canvas.width
+    if (this.bgImageFlippedX < -this.canvas.width) {
+      this.bgImageFlippedX = this.canvas.width
     }
-    ctx.drawImage(bgImage, bgImageX -= 5, 0)
-    ctx.drawImage(bgImageFlipped, bgImageFlippedX -= 5, 0)
+    ctx.drawImage(bgImage, this.bgImageX -= 5, 0)
+    ctx.drawImage(bgImageFlipped, this.bgImageFlippedX -= 5, 0)
     ctx.drawImage(spaceShipImage,
       frameX * spaceShip.width, frameY * spaceShip.height, spaceShip.width, spaceShip.height,
       canvasX, canvasY, SCALED_WIDTH, SCALED_HEIGHT);
