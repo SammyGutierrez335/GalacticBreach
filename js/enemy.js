@@ -17,7 +17,7 @@ export default class Enemy {
   //checks for inbounds
   moveEnemy(deltaX, deltaY, direction, canvas) {
     if (this.x + deltaX === -100) {
-      this.offScreen = false
+      this.offScreen = true
     }
     this.x -= deltaX;
   }

@@ -25,16 +25,28 @@ export default class Game {
     this.gameloop = this.gameloop.bind(this)
     this.i = 0
   }
+
+  setInterval() {
+    this.addEnemy(), 1000
+  }
+
   addEnemy() {
     let enemy = new Enemy({
       speed: 2,
-      x: 1000,
-      y: 200,
+      x: this.getRandomX(),
+      y: this.getRandomY(),
       imgSrc: "assets/attackers/atom.png"
     })
     this.enemies.push(enemy)
     enemy.renderImg(this.enemyImage)
   };
+
+  getRandomX() {
+    return Math.random() * (1300 - this.canvas.width) + this.canvas.width
+  }
+  getRandomY() {
+    return Math.random() * (480 - 0)
+  }
 
   //player spaceship
 
@@ -55,9 +67,9 @@ export default class Game {
   addBullet(bullet) {
     this.bullets.push(bullet)
     bullet.renderImg(this.bulletImage)
+    let audio = new Audio("assets/soundfx/fx/shot-1.mp3")
+    audio.play()
     if (!this.shotsFired) {
-      let audio = new Audio("assets/soundfx/fx/shot-1.mp3")
-      audio.play()
       this.shotsFired = true
       this.spaceAmbience.pause()
       this.battleMusic = new Audio("assets/soundfx/space-battle.mp3")
@@ -106,7 +118,7 @@ export default class Game {
 
 
 
-  drawFrame(frameX, frameY, canvasX, canvasY, enemyX, enemyY, bulletX, bulletY) {
+  drawFrame(frameX, frameY, canvasX, canvasY, enemyX, enemyY) {
     let ctx = this.ctx
     let spaceShip = this.ships[0]
     let enemy = this.enemies[0]
@@ -146,10 +158,12 @@ export default class Game {
         enemyX, enemyY, SCALED_WIDTH, SCALED_HEIGHT);
     }
     if (this.bullets.length > 0) {
-      let bullet = this.bullets[0]
-      ctx.drawImage(bulletImage,
-        (frameX % 4), 0, 32, 32,
-        bulletX, bulletY, 32, 32)
+      for (let i = 0; i < this.bullets.length; i++) {
+        let bullet = this.bullets[i]
+        ctx.drawImage(bulletImage,
+          (frameX % 4), 0, 32, 32,
+          bullet.x, bullet.y, 32, 32)
+      }
     }
   }
 
@@ -157,7 +171,7 @@ export default class Game {
 
   // The main game loop should run about 60 times per second
   gameloop() {
-    this.addEnemy();
+    this.addEnemy()
     let spaceShip = this.ships[0]
     if (spaceShip.keyPresses[" "]) {
       let bullet = new Bullet({
@@ -167,8 +181,7 @@ export default class Game {
         imgSrc: "assets/fx/bullet_blue.png",
       })
       spaceShip.keyPresses[" "] = false
-      this.addBullet(bullet);
-
+      this.addBullet(bullet)
     }
     let canvas = this.canvas
     let ctx = this.ctx
@@ -206,15 +219,15 @@ export default class Game {
 
 
     if (this.bullets.length > 0) {
-      //   for (let i = 0; i < this.bullets.length; i++) {
-      let bullet = this.bullets[0]
-      bullet.moveBullet(bullet.speed, 0, 0, canvas)
-      this.drawFrame(this.CYCLE_LOOP[this.currentLoopIndex], 0, spaceShip.x, spaceShip.y, enemy.x, enemy.y, bullet.x, bullet.y)
-      // }
-    } else {
+      for (let i = 0; i < this.bullets.length; i++) {
+        let bullet = this.bullets[i]
+        bullet.moveBullet(bullet.speed, 0, 0, canvas)
+      }
+      // } else {
+      // this.drawFrame(this.CYCLE_LOOP[this.currentLoopIndex], 0, spaceShip.x, spaceShip.y, enemy.x, enemy.y)
       //arguments in drawFrame(frameX, frameY, canvasX, canvasY, enemyX, enemyY, bulletX, bulletY)
-      this.drawFrame(this.CYCLE_LOOP[this.currentLoopIndex], 0, spaceShip.x, spaceShip.y, enemy.x, enemy.y)
     }
+    this.drawFrame(this.CYCLE_LOOP[this.currentLoopIndex], 0, spaceShip.x, spaceShip.y, enemy.x, enemy.y)
     window.requestAnimationFrame(this.gameloop);
   }
 
