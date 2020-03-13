@@ -128,7 +128,6 @@ export default class Game {
     }
 
     this.frameCount++;
-    console.log(this.frameCount)
     if (this.frameCount >= this.FRAME_LIMIT) {
       this.frameCount = 0;
       this.currentLoopIndex++;
