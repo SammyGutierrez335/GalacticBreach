@@ -2,6 +2,16 @@
   display: none;
 }
 
+body {
+  display: flex;
+  justify-content: center
+}
+
+canvas {
+  max-height: 480px;
+  max-width: 960px;
+}
+/* 
 #game-canvas {
   background: black
-}
+} */

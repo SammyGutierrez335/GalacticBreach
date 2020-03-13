@@ -7,7 +7,6 @@ export default class GameView {
   }
   start() {
     this.game.addShip();
-    this.game.addEnemy();
     // start the animation
     requestAnimationFrame(this.animate);
   }

@@ -1,5 +1,6 @@
 import Spaceship from "./spaceship.js"
 import Enemy from "./enemy.js"
+import Bullet from "./bullet.js";
 
 export default class Game {
   constructor(canvas, ctx) {
@@ -7,14 +8,17 @@ export default class Game {
     this.ctx = ctx
     this.enemies = [];
     this.ships = [];
+    this.bullets = [];
     this.spaceShipImage = new Image();
     this.enemyImage = new Image();
+    this.bulletImage = new Image();
     this.CYCLE_LOOP = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
     this.currentLoopIndex = 0;
     this.frameCount = 0;
     this.FRAME_LIMIT = 5;
     this.bgImageX = 0;
     this.bgImageFlippedX = canvas.width
+
     // Background image
     // this.allObjects = this.allObjects.bind(this)
     this.drawFrame = this.drawFrame.bind(this)
@@ -41,12 +45,19 @@ export default class Game {
       imgSrc: "assets/player/playership.png",
     })
     this.ships.push(spaceShip)
-
     spaceShip.renderImg(this.spaceShipImage)
+  }
+
+  addBullet(bullet) {
+    this.bullets.push(bullet)
+    bullet.renderImg(this.bulletImage)
   }
   // allObjects() {
   //   return [].concat(this.ships, this.enemies);
   // };
+
+
+
 
   checkCollision(obj1, obj2) {
     // const allObjects = this.allObjects();
@@ -68,29 +79,32 @@ export default class Game {
   //(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
   //draws a sprite frame dynamically - sprites are 64x64pixels
 
-  drawFrame(frameX, frameY, canvasX, canvasY, enemyX, enemyY) {
+  drawFrame(frameX, frameY, canvasX, canvasY, enemyX, enemyY, bulletX, bulletY) {
     let ctx = this.ctx
     let spaceShip = this.ships[0]
     let enemy = this.enemies[0]
     let spaceShipImage = this.spaceShipImage
     let enemyImage = this.enemyImage
+    let bulletImage = this.bulletImage
     let bgImage = new Image();
-    bgImage.src = "assets/backgrounds/bg1.png";
 
+
+    bgImage.src = "assets/backgrounds/bg1.png";
     let bgImageFlipped = new Image();
     bgImageFlipped.src = "assets/backgrounds/bg1-flipped-edged.png";
-
 
 
     const SCALE = 1
     const SCALED_WIDTH = SCALE * 64
     const SCALED_HEIGHT = SCALE * 64
+
     if (this.bgImageX < -(this.canvas.width)) {
       this.bgImageX = this.canvas.width
     }
     if (this.bgImageFlippedX < -this.canvas.width) {
       this.bgImageFlippedX = this.canvas.width
     }
+
     ctx.drawImage(bgImage, this.bgImageX -= 5, 0)
     ctx.drawImage(bgImageFlipped, this.bgImageFlippedX -= 5, 0)
     ctx.drawImage(spaceShipImage,
@@ -102,17 +116,33 @@ export default class Game {
         frameX * enemy.width, frameY * enemy.height, enemy.width, enemy.height,
         enemyX, enemyY, SCALED_WIDTH, SCALED_HEIGHT);
     }
+    if (this.bullets.length > 0) {
+      let bullet = this.bullets[0]
+      ctx.drawImage(bulletImage,
+        0, 0, 32, 32,
+        bulletX, bulletY, 32, 32)
+    }
   }
 
 
 
   // The main game loop
   gameloop() {
+    this.addEnemy();
+    let spaceShip = this.ships[0]
+    if (spaceShip.keyPresses[" "]) {
+      let bullet = new Bullet({
+        speed: 6,
+        x: spaceShip.x,
+        y: spaceShip.y,
+        imgSrc: "assets/fx/bullet_blue.png",
+      })
+      spaceShip.keyPresses[" "] = false
+      this.addBullet(bullet);
+    }
     let canvas = this.canvas
     let ctx = this.ctx
     let enemy = this.enemies[0]
-    let spaceShip = this.ships[0]
-
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     spaceShip.moveShip(canvas)
     enemy.moveEnemy(enemy.speed, 0, 0, canvas)
@@ -137,8 +167,13 @@ export default class Game {
     }
 
 
-
-    this.drawFrame(this.CYCLE_LOOP[this.currentLoopIndex], 0, spaceShip.x, spaceShip.y, enemy.x, enemy.y);
+    if (this.bullets.length > 0) {
+      let bullet = this.bullets[0]
+      bullet.moveBullet(bullet.speed, 0, 0, canvas)
+      this.drawFrame(this.CYCLE_LOOP[this.currentLoopIndex], 0, spaceShip.x, spaceShip.y, enemy.x, enemy.y, bullet.x, bullet.y)
+    } else {
+      this.drawFrame(this.CYCLE_LOOP[this.currentLoopIndex], 0, spaceShip.x, spaceShip.y, enemy.x, enemy.y)
+    }
     window.requestAnimationFrame(this.gameloop);
   }
 

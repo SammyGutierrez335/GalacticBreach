@@ -1,3 +1,5 @@
+import Bullet from "./bullet"
+
 export default class Spaceship {
   constructor(options) {
     this.speed = options.speed; // movement in pixels per second
@@ -6,7 +8,6 @@ export default class Spaceship {
     this.height = 64
     this.width = 64
     this.imgSrc = options.imgSrc
-    this.hasMoved = options.hasMoved
     this.deltaX = 0
     this.deltaY = 0
     this.keyPresses = {}
@@ -20,7 +21,6 @@ export default class Spaceship {
 
   keyDownListener(event) {
     this.keyPresses[event.key] = true;
-    this.hasMoved = true
   }
 
   keyUpListener(event) {
