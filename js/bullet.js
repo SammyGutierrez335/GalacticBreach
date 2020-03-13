@@ -1,6 +1,7 @@
 export default class Bullet {
   constructor(options) {
     this.speed = options.speed; // movement in pixels per second
+    // this.cycleLoop = [0]
     this.x = options.x;
     this.y = options.y;
     this.height = 32

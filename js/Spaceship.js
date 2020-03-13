@@ -7,6 +7,7 @@ export default class Spaceship {
     this.y = options.y;
     this.height = 64
     this.width = 64
+    // this.cycleLoop = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
     this.imgSrc = options.imgSrc
     this.deltaX = 0
     this.deltaY = 0
@@ -15,6 +16,7 @@ export default class Spaceship {
     this.keyUpListener = this.keyUpListener.bind(this)
     window.addEventListener('keydown', this.keyDownListener, false);
     window.addEventListener('keyup', this.keyUpListener, false);
+
   }
 
 

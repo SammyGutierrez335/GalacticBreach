@@ -9,9 +9,10 @@ let width = canvas.width
 let height = canvas.width
 document.body.appendChild(canvas);
 const game = new Game(canvas, ctx);
+
 new GameView(game, canvas, ctx).start()
 
 // Background music
-let audio = new Audio("sound/Space Ambience.mp3")
+// let audio = new Audio("soundfx/Space Ambience.mp3")
 // audio.play()
 // audio.pause()

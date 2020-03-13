@@ -12,6 +12,10 @@ export default class GameView {
   }
 
   animate() {
+    for (let i = 0; i < 48; i++) {
+      this.game.CYCLE_LOOP.push(i);
+    }
+
     this.game.gameloop();
     // every call to animate requests causes another call to animates
   };

@@ -12,17 +12,18 @@ export default class Game {
     this.spaceShipImage = new Image();
     this.enemyImage = new Image();
     this.bulletImage = new Image();
-    this.CYCLE_LOOP = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+    this.CYCLE_LOOP = []
     this.currentLoopIndex = 0;
     this.frameCount = 0;
     this.FRAME_LIMIT = 5;
     this.bgImageX = 0;
     this.bgImageFlippedX = canvas.width
-
-    // Background image
-    // this.allObjects = this.allObjects.bind(this)
+    this.shotsFired = false
+    this.spaceAmbience = null
+    this.battleMusic = null
     this.drawFrame = this.drawFrame.bind(this)
     this.gameloop = this.gameloop.bind(this)
+    this.i = 0
   }
   addEnemy() {
     let enemy = new Enemy({
@@ -36,7 +37,10 @@ export default class Game {
   };
 
   //player spaceship
+
   addShip() {
+    this.spaceAmbience = new Audio("assets/soundfx/Space Ambience.mp3")
+    this.spaceAmbience.play()
     let spaceShip = new Spaceship({
       hasMoved: false,
       speed: 4,
@@ -51,6 +55,14 @@ export default class Game {
   addBullet(bullet) {
     this.bullets.push(bullet)
     bullet.renderImg(this.bulletImage)
+    if (!this.shotsFired) {
+      let audio = new Audio("assets/soundfx/fx/shot-1.mp3")
+      audio.play()
+      this.shotsFired = true
+      this.spaceAmbience.pause()
+      this.battleMusic = new Audio("assets/soundfx/space-battle.mp3")
+      this.battleMusic.play()
+    }
   }
   // allObjects() {
   //   return [].concat(this.ships, this.enemies);
@@ -78,6 +90,20 @@ export default class Game {
 
   //(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
   //draws a sprite frame dynamically - sprites are 64x64pixels
+
+  remove(object) {
+    if (object instanceof Bullet) {
+      this.bullets.splice(this.bullets.indexOf(object), 1);
+    } else if (object instanceof Enemy) {
+      this.enemies.splice(this.asteroids.indexOf(object), 1);
+    } else if (object instanceof SpaceShip) {
+      this.ships.splice(this.ships.indexOf(object), 1);
+    } else {
+      throw new Error("unknown type of object");
+    }
+  };
+
+
 
   drawFrame(frameX, frameY, canvasX, canvasY, enemyX, enemyY, bulletX, bulletY) {
     let ctx = this.ctx
@@ -107,26 +133,28 @@ export default class Game {
 
     ctx.drawImage(bgImage, this.bgImageX -= 5, 0)
     ctx.drawImage(bgImageFlipped, this.bgImageFlippedX -= 5, 0)
+
     ctx.drawImage(spaceShipImage,
-      frameX * spaceShip.width, frameY * spaceShip.height, spaceShip.width, spaceShip.height,
+      (frameX % 16) * spaceShip.width, frameY * spaceShip.height, spaceShip.width, spaceShip.height,
       canvasX, canvasY, SCALED_WIDTH, SCALED_HEIGHT);
 
     if (enemy.offScreen) {
+
       ctx.drawImage(enemyImage,
-        frameX * enemy.width, frameY * enemy.height, enemy.width, enemy.height,
+        (frameX % 24) * enemy.width, frameY * enemy.height, enemy.width, enemy.height,
         enemyX, enemyY, SCALED_WIDTH, SCALED_HEIGHT);
     }
     if (this.bullets.length > 0) {
       let bullet = this.bullets[0]
       ctx.drawImage(bulletImage,
-        0, 0, 32, 32,
+        (frameX % 4), 0, 32, 32,
         bulletX, bulletY, 32, 32)
     }
   }
 
 
 
-  // The main game loop
+  // The main game loop should run about 60 times per second
   gameloop() {
     this.addEnemy();
     let spaceShip = this.ships[0]
@@ -139,6 +167,7 @@ export default class Game {
       })
       spaceShip.keyPresses[" "] = false
       this.addBullet(bullet);
+
     }
     let canvas = this.canvas
     let ctx = this.ctx
@@ -168,10 +197,13 @@ export default class Game {
 
 
     if (this.bullets.length > 0) {
-      let bullet = this.bullets[0]
-      bullet.moveBullet(bullet.speed, 0, 0, canvas)
-      this.drawFrame(this.CYCLE_LOOP[this.currentLoopIndex], 0, spaceShip.x, spaceShip.y, enemy.x, enemy.y, bullet.x, bullet.y)
+      for (let i = 0; i < this.bullets.length; i++) {
+        let bullet = this.bullets[0]
+        bullet.moveBullet(bullet.speed, 0, 0, canvas)
+        this.drawFrame(this.CYCLE_LOOP[this.currentLoopIndex], 0, spaceShip.x, spaceShip.y, enemy.x, enemy.y, bullet.x, bullet.y)
+      }
     } else {
+      //arguments in drawFrame(frameX, frameY, canvasX, canvasY, enemyX, enemyY, bulletX, bulletY)
       this.drawFrame(this.CYCLE_LOOP[this.currentLoopIndex], 0, spaceShip.x, spaceShip.y, enemy.x, enemy.y)
     }
     window.requestAnimationFrame(this.gameloop);
