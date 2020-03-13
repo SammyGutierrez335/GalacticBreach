@@ -91,11 +91,12 @@ export default class Game {
   //(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
   //draws a sprite frame dynamically - sprites are 64x64pixels
 
-  remove(object) {
+  remove(object, bullet) {
     if (object instanceof Bullet) {
       this.bullets.splice(this.bullets.indexOf(object), 1);
     } else if (object instanceof Enemy) {
-      this.enemies.splice(this.asteroids.indexOf(object), 1);
+      this.enemies.splice(this.enemies.indexOf(object), 1);
+      this.remove(bullet)
     } else if (object instanceof SpaceShip) {
       this.ships.splice(this.ships.indexOf(object), 1);
     } else {
@@ -185,7 +186,11 @@ export default class Game {
     if (this.checkCollision(spaceShip, enemy)) {
       return
     }
-
+    if (this.bullets.length > 0) {
+      if (this.checkCollision(this.bullets[0], enemy)) {
+        this.remove(enemy, this.bullets[0])
+      }
+    }
     this.frameCount++;
     if (this.frameCount >= this.FRAME_LIMIT) {
       this.frameCount = 0;
@@ -197,11 +202,11 @@ export default class Game {
 
 
     if (this.bullets.length > 0) {
-      for (let i = 0; i < this.bullets.length; i++) {
-        let bullet = this.bullets[0]
-        bullet.moveBullet(bullet.speed, 0, 0, canvas)
-        this.drawFrame(this.CYCLE_LOOP[this.currentLoopIndex], 0, spaceShip.x, spaceShip.y, enemy.x, enemy.y, bullet.x, bullet.y)
-      }
+      //   for (let i = 0; i < this.bullets.length; i++) {
+      let bullet = this.bullets[0]
+      bullet.moveBullet(bullet.speed, 0, 0, canvas)
+      this.drawFrame(this.CYCLE_LOOP[this.currentLoopIndex], 0, spaceShip.x, spaceShip.y, enemy.x, enemy.y, bullet.x, bullet.y)
+      // }
     } else {
       //arguments in drawFrame(frameX, frameY, canvasX, canvasY, enemyX, enemyY, bulletX, bulletY)
       this.drawFrame(this.CYCLE_LOOP[this.currentLoopIndex], 0, spaceShip.x, spaceShip.y, enemy.x, enemy.y)
