@@ -182,7 +182,11 @@ export default class Game {
         enemy.offScreen = true
       }, 2000);
     }
-
+    if (this.bullets.length > 0) {
+      if (this.bullets[0].x > canvas.width) {
+        this.remove(this.bullets.shift())
+      }
+    }
     if (this.checkCollision(spaceShip, enemy)) {
       return
     }
