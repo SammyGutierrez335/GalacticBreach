@@ -15,7 +15,7 @@ export default class Enemy {
     enemyImage.src = this.imgSrc;
   }
   //checks for inbounds
-  moveEnemy(deltaX, deltaY, direction, canvas) {
+  moveEnemy(deltaX) {
     if (this.x + deltaX === -100) {
       this.offScreen = true
     }

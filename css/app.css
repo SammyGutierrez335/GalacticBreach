@@ -11,6 +11,9 @@ canvas {
   max-height: 480px;
   max-width: 960px;
 }
+#instructions {
+  font-family: fantasy;
+}
 /* 
 #game-canvas {
   background: black
