@@ -7,7 +7,6 @@ export default class Bullet {
     this.height = 32
     this.width = 32
     this.imgSrc = options.imgSrc
-    this.offScreen = true
   }
 
   renderImg(bulletImage) {
@@ -16,9 +15,6 @@ export default class Bullet {
 
   //checks for inbounds
   moveBullet(deltaX, deltaY, direction, canvas) {
-    if (this.x + deltaX === +100) {
-      this.offScreen = false
-    }
     this.x += deltaX;
   }
 }
