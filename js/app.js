@@ -88,14 +88,14 @@ function draw() {
   // ctx.drawImage(creditsImage, buttonX[3], buttonY[3]);
 }
 
-window.addEventListener('keydown', keyDownListener, false);
+// window.addEventListener('keydown', keyDownListener, false);
 canvas.addEventListener("mousemove", checkPos);
 
-function keyDownListener(event) {
-  if (event.key === "Enter" || "Return") {
-    new GameView(game, canvas, ctx).start()
-  }
-}
+// function keyDownListener(event) {
+//   if (event.key === "Enter" || "Return") {
+//     new GameView(game, canvas, ctx).start()
+//   }
+// }
 
 
 //checks mouseEvent's page or offset depending on browser
