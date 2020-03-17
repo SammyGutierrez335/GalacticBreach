@@ -6,16 +6,16 @@ export default class Game {
   constructor(canvas, ctx) {
     this.canvas = canvas
     this.ctx = ctx
-    this.enemies = [];
-    this.ship = [];
-    this.bullets = [];
-    this.spaceShipImage = new Image();
-    this.enemyImage = new Image();
-    this.bulletImage = new Image();
     this.CYCLE_LOOP = []
-    this.currentLoopIndex = 0;
     this.frameCount = 0;
     this.FRAME_LIMIT = 5;
+    this.currentLoopIndex = 0;
+    this.spaceShipImage = new Image();
+    this.ship = [];
+    this.enemyImage = new Image();
+    this.enemies = [];
+    this.bulletImage = new Image();
+    this.bullets = [];
     this.bgImageX = 0;
     this.bgImageFlippedX = canvas.width
     this.shotsFired = false
@@ -23,20 +23,22 @@ export default class Game {
     this.battleMusic = null
     this.drawFrame = this.drawFrame.bind(this)
     this.gameloop = this.gameloop.bind(this)
-    this.i = 0
+    this.maxEnemies = 5
   }
 
 
 
   addEnemy() {
-    let enemy = new Enemy({
-      speed: Math.floor(Math.random() * 5),
-      x: this.getRandomX(),
-      y: this.getRandomY(),
-      imgSrc: "assets/attackers/atom.png"
-    })
-    this.enemies.push(enemy)
-    enemy.renderImg(this.enemyImage)
+    if (this.enemies.length < this.maxEnemies) {
+      let enemy = new Enemy({
+        speed: Math.floor(Math.random() * 5),
+        x: this.getRandomX(),
+        y: this.getRandomY(),
+        imgSrc: "assets/attackers/atom.png"
+      })
+      this.enemies.push(enemy)
+      enemy.renderImg(this.enemyImage)
+    }
   };
 
   getRandomX() {
@@ -148,7 +150,7 @@ export default class Game {
       (frameX % 16) * spaceShip.width, frameY * spaceShip.height, spaceShip.width, spaceShip.height,
       spaceShip.x, spaceShip.y, SCALED_WIDTH, SCALED_HEIGHT);
 
-    if (this.enemies.length < 5) {
+    if (this.enemies.length <= 5) {
       for (let i = 0; i < this.enemies.length; i++) {
         let enemy = this.enemies[i]
         ctx.drawImage(enemyImage,
@@ -174,7 +176,9 @@ export default class Game {
     let canvas = this.canvas
     let ctx = this.ctx
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
+    if (this.frameCount === 0) {
+      this.addEnemy()
+    }
     if (spaceShip.keyPresses[" "]) {
       let bullet = new Bullet({
         speed: 6,
@@ -216,6 +220,7 @@ export default class Game {
     this.frameCount++;
     if (this.frameCount >= this.FRAME_LIMIT) {
       this.frameCount = 0;
+
       this.currentLoopIndex++;
       if (this.currentLoopIndex >= this.CYCLE_LOOP.length) {
         this.currentLoopIndex = 0;

@@ -128,7 +128,7 @@ function checkClick(mouseEvent) {
     if (mouseX > buttonX[i] && mouseX < buttonX[i] + buttonWidth[i]) {
       if (mouseY > buttonY[i] && mouseY < buttonY[i] + buttonHeight[i]) {
         new GameView(game, canvas, ctx).start()
-        fadeId = setInterval("fadeOut()", 1000 / frames);
+        fadeId = setInterval("this.fadeOut()", 1000 / frames);
         clearInterval(timerId);
         canvas.removeEventListener("mousemove", checkPos);
         canvas.removeEventListener("mouseup", checkClick);
@@ -152,11 +152,3 @@ function fadeOut() {
 
 
 document.body.appendChild(canvas);
-
-
-
-
-// Background music
-// let audio = new Audio("soundfx/Space Ambience.mp3")
-// audio.play()
-// audio.pause()
