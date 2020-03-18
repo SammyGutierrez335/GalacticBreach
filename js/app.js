@@ -124,17 +124,23 @@ function checkPos(mouseEvent) {
 }
 canvas.addEventListener("mouseup", checkClick);
 function checkClick(mouseEvent) {
-  for (let i = 0; i < buttonX.length; i++) {
-    if (mouseX > buttonX[i] && mouseX < buttonX[i] + buttonWidth[i]) {
-      if (mouseY > buttonY[i] && mouseY < buttonY[i] + buttonHeight[i]) {
-        new GameView(game, canvas, ctx).start()
-        fadeId = setInterval("this.fadeOut()", 1000 / frames);
-        clearInterval(timerId);
-        canvas.removeEventListener("mousemove", checkPos);
-        canvas.removeEventListener("mouseup", checkClick);
-      }
-    }
+  if (mouseX > 0 && mouseY > 0) {
+    let gameView = new GameView(game, canvas, ctx)
+    canvas.removeEventListener("mouseup", checkClick);
+    gameView.start()
   }
+  // //       
+  // for (let i = 0; i < buttonX.length; i++) {
+  //   if (mouseX > buttonX[i] && mouseX < buttonX[i] + buttonWidth[i]) {
+  //     if (mouseY > buttonY[i] && mouseY < buttonY[i] + buttonHeight[i]) {
+  //       new GameView(game, canvas, ctx).start()
+  //       fadeId = setInterval("this.fadeOut()", 1000 / frames);
+  //       clearInterval(timerId);
+  // //       canvas.removeEventListener("mousemove", checkPos);
+  // //       canvas.removeEventListener("mouseup", checkClick);
+  // //     }
+  // //   }
+  // }
 }
 function fadeOut() {
   context.fillStyle = "rgba(0,0,0, 0.2)";
