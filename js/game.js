@@ -95,8 +95,7 @@ export default class Game {
     }
     return false
   }
-  // }
-  // }
+
 
   //(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
   //draws a sprite frame dynamically - sprites are 64x64pixels
