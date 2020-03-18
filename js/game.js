@@ -20,11 +20,20 @@ export default class Game {
     this.bgImageFlippedX = canvas.width
     this.shotsFired = false
     this.spaceAmbience = null
-    this.battleMusic = null
+    this.battleMusic = new Audio("assets/soundfx/space-battle.mp3")
+    this.levelUpSfx = new Audio("assets/soundfx/fx/incoming-radar(louder).mp3")
+    this.damage1 = new Audio("assets/soundfx/fx/damage-1.mp3")
+    this.damage2 = new Audio("assets/soundfx/fx/damage-2.mp3")
+    this.damage3 = new Audio("assets/soundfx/fx/damage-3.mp3")
     this.drawFrame = this.drawFrame.bind(this)
     this.gameloop = this.gameloop.bind(this)
     this.remove = this.remove.bind(this)
-    this.maxEnemies = 5
+    this.maxEnemies = 3
+    this.score = 0
+    this.playerLevel = 1
+    this.numHits = 0
+    this.playerInvicibility = false
+    this.slippynoooooo = false
   }
 
 
@@ -32,7 +41,7 @@ export default class Game {
   addEnemy() {
     if (this.enemies.length < this.maxEnemies) {
       let enemy = new Enemy({
-        speed: Math.floor(Math.random() * 5),
+        speed: Math.ceil(Math.random() * 5),
         x: this.getRandomX(),
         y: this.getRandomY(),
         imgSrc: "assets/attackers/atom.png"
@@ -73,7 +82,6 @@ export default class Game {
     if (!this.shotsFired) {
       this.shotsFired = true
       this.spaceAmbience.pause()
-      this.battleMusic = new Audio("assets/soundfx/space-battle.mp3")
       this.battleMusic.play()
     }
   }
@@ -101,6 +109,14 @@ export default class Game {
       if (bullet) {
         this.remove(bullet)
       }
+      this.score += 1
+      if (this.score === this.playerLevel * 10) {
+        this.playerLevel += 1
+        this.maxEnemies += 3
+        this.levelUpSfx.play()
+        console.log("score:", this.score)
+        console.log("level:", this.playerLevel)
+      }
     } else if (object instanceof Spaceship) {
       //eventually lose a life/gameover here...
       this.ships.shift()
@@ -109,6 +125,19 @@ export default class Game {
     }
   }
 
+  takeDamage() {
+    this.numHits += 1;
+    this.playerInvicibility = false
+    if (this.numHits === 1) {
+      this.damage1.play();
+    } else if (this.numHits === 2) {
+      this.damage2.play();
+    } else if (this.numHits === 3) {
+      this.damage3.play();
+    } else {
+      this.slippynoooooo = true
+    }
+  }
 
 
   drawFrame(frameX, frameY) {
@@ -146,19 +175,20 @@ export default class Game {
       spaceship.x, spaceship.y, SCALED_WIDTH, SCALED_HEIGHT);
 
     //enemy rendering
+
     if (this.enemies.length > 0) {
-      if (this.enemies.length <= 5) {
+      if (this.enemies.length <= this.maxEnemies) {
         for (let i = 0; i < this.enemies.length; i++) {
           let enemy = this.enemies[i]
           enemy.moveEnemy(enemy.speed, 0, 0, this.canvas)
+          if (this.checkCollision(this.ships[0], enemy) && !this.playerInvicibility) {
+            setTimeout(this.takeDamage(), 5000)
+          }
           ctx.drawImage(enemyImage,
             (frameX % 24) * enemy.width, frameY * enemy.height, enemy.width, enemy.height,
             enemy.x, enemy.y, SCALED_WIDTH, SCALED_HEIGHT)
           if (enemy.x < 0) {
             this.remove(enemy, null)
-          }
-          if (this.checkCollision(spaceship, enemy)) {
-            return
           }
         }
       }
@@ -180,7 +210,7 @@ export default class Game {
 
         //checks if bullets hit enemies
         for (let i = 0; i < this.enemies.length; i++) {
-          let enemy = this.enemies[0]
+          let enemy = this.enemies[i]
           if (this.checkCollision(enemy, bullet)) {
             this.remove(enemy, bullet)
           }
@@ -193,10 +223,11 @@ export default class Game {
 
   // The main game loop should run about 60 times per second
   gameloop() {
+
     let spaceship = this.ships[0]
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-    if (this.enemies.length < 5) {
+    if (this.enemies.length < this.maxEnemies) {
       this.addEnemy()
     }
 
@@ -228,7 +259,10 @@ export default class Game {
 
 
     this.drawFrame(this.CYCLE_LOOP[this.currentLoopIndex], 0)
-    window.requestAnimationFrame(this.gameloop);
-  }
+    let myReq = window.requestAnimationFrame(this.gameloop);
+    if (this.slippynoooooo) {
+      window.cancelAnimationFrame(myReq)
 
+    }
+  }
 }
