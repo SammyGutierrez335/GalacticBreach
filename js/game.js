@@ -153,12 +153,12 @@ export default class Game {
     const SCALED_WIDTH = SCALE * 64
     const SCALED_HEIGHT = SCALE * 64
    
-    // background
-    // bgImage.src = "assets/backgrounds/bg1.png";
-    // let bgImageFlipped = new Image();
-    // bgImageFlipped.src = "assets/backgrounds/bg1-flipped-edged.png";
+    // // background
+    bgImage.src = "assets/backgrounds/bg1.png";
+    let bgImageFlipped = new Image();
+    bgImageFlipped.src = "assets/backgrounds/bg1-flipped-edged.png";
 
-    // //cycles background animation
+    //cycles background animation
     // if (this.bgImageX < -(this.canvas.width)) {
     //   this.bgImageX = this.canvas.width
     // }
@@ -168,6 +168,8 @@ export default class Game {
 
     // ctx.drawImage(bgImage, this.bgImageX -= 5, 0)
     // ctx.drawImage(bgImageFlipped, this.bgImageFlippedX -= 5, 0)
+    
+    //why isn't the score working?
     ctx.fillText('Score : ' + this.score, 450, 50)
 
 
