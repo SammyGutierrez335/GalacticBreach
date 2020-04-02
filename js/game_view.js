@@ -17,7 +17,7 @@ export default class GameView {
       this.game.CYCLE_LOOP.push(i);
     }
 
-    this.game.gameloop();
     // every call to animate requests causes another call to animates
+    this.game.gameloop();
   };
 };

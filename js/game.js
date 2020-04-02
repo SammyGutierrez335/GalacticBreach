@@ -28,6 +28,7 @@ export default class Game {
     this.drawFrame = this.drawFrame.bind(this)
     this.gameloop = this.gameloop.bind(this)
     this.remove = this.remove.bind(this)
+    this.text = this.text.bind(this)
     this.maxEnemies = 3
     this.score = 0
     this.playerLevel = 1
@@ -97,6 +98,8 @@ export default class Game {
   }
 
 
+
+
   //(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
   //draws a sprite frame dynamically - sprites are 64x64pixels
 
@@ -149,30 +152,30 @@ export default class Game {
     const SCALE = .9
     const SCALED_WIDTH = SCALE * 64
     const SCALED_HEIGHT = SCALE * 64
-
+   
     // background
-    bgImage.src = "assets/backgrounds/bg1.png";
-    let bgImageFlipped = new Image();
-    bgImageFlipped.src = "assets/backgrounds/bg1-flipped-edged.png";
+    // bgImage.src = "assets/backgrounds/bg1.png";
+    // let bgImageFlipped = new Image();
+    // bgImageFlipped.src = "assets/backgrounds/bg1-flipped-edged.png";
 
-    //cycles background animation
-    if (this.bgImageX < -(this.canvas.width)) {
-      this.bgImageX = this.canvas.width
-    }
-    if (this.bgImageFlippedX < -this.canvas.width) {
-      this.bgImageFlippedX = this.canvas.width
-    }
+    // //cycles background animation
+    // if (this.bgImageX < -(this.canvas.width)) {
+    //   this.bgImageX = this.canvas.width
+    // }
+    // if (this.bgImageFlippedX < -this.canvas.width) {
+    //   this.bgImageFlippedX = this.canvas.width
+    // }
 
-    ctx.drawImage(bgImage, this.bgImageX -= 5, 0)
-    ctx.drawImage(bgImageFlipped, this.bgImageFlippedX -= 5, 0)
-
+    // ctx.drawImage(bgImage, this.bgImageX -= 5, 0)
+    // ctx.drawImage(bgImageFlipped, this.bgImageFlippedX -= 5, 0)
+    ctx.fillText('Score : ' + this.score, 450, 50)
 
 
     //renders ship
     ctx.drawImage(spaceshipImage,
       (frameX % 16) * spaceship.width, frameY * spaceship.height, spaceship.width, spaceship.height,
       spaceship.x, spaceship.y, SCALED_WIDTH, SCALED_HEIGHT);
-
+    
     //enemy rendering
 
     if (this.enemies.length > 0) {
@@ -216,6 +219,7 @@ export default class Game {
         }
       }
     }
+    
   }
 
 
@@ -255,13 +259,11 @@ export default class Game {
       }
     }
 
-
-
     this.drawFrame(this.CYCLE_LOOP[this.currentLoopIndex], 0)
     let myReq = window.requestAnimationFrame(this.gameloop);
     if (this.slippynoooooo) {
+      
       window.cancelAnimationFrame(myReq)
-
     }
   }
 }

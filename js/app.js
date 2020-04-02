@@ -78,6 +78,8 @@ function move() {
   shipSize += shipRotate;
 }
 
+
+
 function draw() {
   ctx.fillRect(75, 0, 800, height, "black");
   ctx.drawImage(menuImage, 75, backgroundY);
