@@ -1,16 +1,24 @@
-.hide {
-  display: none;
-}
-
 body {
   display: flex;
-  justify-content: center
+  justify-content: space-around
 }
 
 canvas {
   max-height: 480px;
   max-width: 960px;
 }
+
+/* .scoreboard-canvas {
+    background: black;
+    margin-left: 200;
+    position: absolute;
+    z-index: -1;
+} */
+
+.wrapper {
+  color: black;
+}
+
 #instructions {
   font-family: fantasy;
 }

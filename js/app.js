@@ -7,23 +7,28 @@ canvas.width = 960;
 canvas.height = 480;
 let width = canvas.width
 let height = canvas.width
-const game = new Game(canvas, ctx);
+
+let scoreboardCanvas = document.createElement("canvas")
+let scoreboardCtx = canvas.getContext("2d")
+scoreboardCanvas.width = 960
+scoreboardCanvas.height = 480
+const game = new Game(canvas, ctx, scoreboardCanvas, scoreboardCtx);
 
 //menu
 let menuImage = new Image()
 menuImage.src = "assets/menu/background.png";
 let titleImage = new Image();
 titleImage.src = "assets/menu/blue/title.png";
-let shipImage = new Image()
-shipImage.src = "assets/player/playership.png";
-let playImage = new Image();
-playImage.src = "assets/menu/blue/play.png";
-let instructionsImage = new Image();
-instructionsImage.src = "assets/menu/blue/instructions.png";
-let settingsImage = new Image();
-settingsImage.src = "assets/menu/blue/settings.png";
-let creditsImage = new Image();
-creditsImage.src = "assets/menu/blue/credits.png";
+// let shipImage = new Image()
+// shipImage.src = "assets/player/playership.png";
+// let playImage = new Image();
+// playImage.src = "assets/menu/blue/play.png";
+// let instructionsImage = new Image();
+// instructionsImage.src = "assets/menu/blue/instructions.png";
+// let settingsImage = new Image();
+// settingsImage.src = "assets/menu/blue/settings.png";
+// let creditsImage = new Image();
+// creditsImage.src = "assets/menu/blue/credits.png";
 
 let mouseX;
 let mouseY;
@@ -159,4 +164,7 @@ function fadeOut() {
 
 
 
-document.body.appendChild(canvas);
+let canvasElement = document.body.appendChild(canvas);
+// let scoreboardElement = document.body.appendChild(scoreboardCanvas);
+canvasElement.setAttribute("class", "canvas");
+// scoreboardElement.setAttribute("class", "scoreboard-canvas")

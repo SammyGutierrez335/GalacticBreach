@@ -3,9 +3,11 @@ import Enemy from "./enemy.js"
 import Bullet from "./bullet.js";
 
 export default class Game {
-  constructor(canvas, ctx) {
+  constructor(canvas, ctx, backgroundCanvas, backgroundCtx) {
     this.canvas = canvas
     this.ctx = ctx
+    this.backgroundCanvas = backgroundCanvas
+    this.backgroundCtx = backgroundCtx
     this.CYCLE_LOOP = []
     this.frameCount = 0;
     this.FRAME_LIMIT = 5;
@@ -113,7 +115,7 @@ export default class Game {
       this.score += 1
       if (this.score === this.playerLevel * 10) {
         this.playerLevel += 1
-        this.maxEnemies += 3
+        this.maxEnemies += 2
         this.levelUpSfx.play()
         console.log("score:", this.score)
         console.log("level:", this.playerLevel)
@@ -143,6 +145,7 @@ export default class Game {
 
   drawFrame(frameX, frameY) {
     let ctx = this.ctx
+    let backgroundCtx = this.backgroundCtx
     let bgImage = new Image();
     let spaceship = this.ships[0]
     let spaceshipImage = this.spaceshipImage
@@ -167,9 +170,18 @@ export default class Game {
 
     ctx.drawImage(bgImage, this.bgImageX -= 5, 0)
     ctx.drawImage(bgImageFlipped, this.bgImageFlippedX -= 5, 0)
+    ctx.fillStyle = "#FFFFFF";
+    ctx.font = "20px fantasy"
     
-    //why isn't the score working?
-    ctx.font = "20px serif"
+    // ctx.fillText('Controls : ', 900, 50)
+    // ctx.fillText('Move Up : W' , 900, 50)
+    // ctx.fillText('Move Down : S' , 900, 50)
+    // ctx.fillText('Move Left : A' , 900, 50)
+    // ctx.fillText('Move Right : D' , 900, 50)
+    // ctx.fillText('Fire : Spacebar' , 900, 50)
+    // ctx.fillText('Click on Screen to start', 900, 50)
+    // ctx.fillText('Refresh browser to restart', 900, 50)
+
     ctx.fillText('Score : ' + this.score, 100, 50)
     ctx.fillText('Level : ' + this.playerLevel, 800, 50)
 
