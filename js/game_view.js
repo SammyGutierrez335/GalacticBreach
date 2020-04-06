@@ -8,16 +8,18 @@ export default class GameView {
   start() {
     this.game.addShip();
     // start the animation
+    for (let i = 0; i < 48; i++) {
+      this.game.CYCLE_LOOP.push(i);
+    }
     requestAnimationFrame(this.animate);
   }
 
   animate() {
     //sets up cyle_loop for sprites
-    for (let i = 0; i < 48; i++) {
-      this.game.CYCLE_LOOP.push(i);
-    }
+
 
     // every call to animate requests causes another call to animates
-    this.game.gameloop();
+    let results = this.game.gameloop();
+    return results
   };
 };

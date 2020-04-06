@@ -149,18 +149,18 @@ function checkClick(mouseEvent) {
   // //   }
   // }
 }
-function fadeOut() {
-  context.fillStyle = "rgba(0,0,0, 0.2)";
-  context.fillRect(0, 0, width, height);
-  time += 0.1;
-  if (time >= 2) {
-    clearInterval(fadeId);
-    time = 0;
-    timerId = setInterval("update()", 1000 / frames);
-    canvas.addEventListener("mousemove", checkPos);
-    canvas.addEventListener("mouseup", checkClick);
-  }
-}
+// function fadeOut() {
+//   context.fillStyle = "rgba(0,0,0, 0.2)";
+//   context.fillRect(0, 0, width, height);
+//   time += 0.1;
+//   if (time >= 2) {
+//     clearInterval(fadeId);
+//     time = 0;
+//     timerId = setInterval("update()", 1000 / frames);
+//     canvas.addEventListener("mousemove", checkPos);
+//     canvas.addEventListener("mouseup", checkClick);
+//   }
+// }
 
 
 

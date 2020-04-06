@@ -278,7 +278,12 @@ export default class Game {
     let myReq = window.requestAnimationFrame(this.gameloop);
     if (this.slippynoooooo) {
       this.ctx.fillStyle = "#000000"
-      return window.cancelAnimationFrame(myReq)
+      // this.ctx.fillStyle = "#FFFFFF";
+      this.ctx.font = "20px fantasy"
+      this.ctx.fillText('Game Over : ',  400, 200)
+      this.ctx.fillText('Your Score : ' + this.score, 400, 300)
+      this.ctx.fillText('Your Level : ' + this.playerLevel, 400, 400)
+      window.cancelAnimationFrame(myReq)
     }
   }
 }
