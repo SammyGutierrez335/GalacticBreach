@@ -1,0 +1,26 @@
+{
+  "name": "GalacticBreach",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "webpack": "npx webpack mode=development --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SammyGutierrez335/GalacticBreach.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SammyGutierrez335/GalacticBreach/issues"
+  },
+  "homepage": "https://github.com/SammyGutierrez335/GalacticBreach#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11"
+  }
+}

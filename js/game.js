@@ -28,7 +28,6 @@ export default class Game {
     this.drawFrame = this.drawFrame.bind(this)
     this.gameloop = this.gameloop.bind(this)
     this.remove = this.remove.bind(this)
-    this.text = this.text.bind(this)
     this.maxEnemies = 3
     this.score = 0
     this.playerLevel = 1
@@ -159,18 +158,20 @@ export default class Game {
     bgImageFlipped.src = "assets/backgrounds/bg1-flipped-edged.png";
 
     //cycles background animation
-    // if (this.bgImageX < -(this.canvas.width)) {
-    //   this.bgImageX = this.canvas.width
-    // }
-    // if (this.bgImageFlippedX < -this.canvas.width) {
-    //   this.bgImageFlippedX = this.canvas.width
-    // }
+    if (this.bgImageX < -(this.canvas.width)) {
+      this.bgImageX = this.canvas.width
+    }
+    if (this.bgImageFlippedX < -this.canvas.width) {
+      this.bgImageFlippedX = this.canvas.width
+    }
 
-    // ctx.drawImage(bgImage, this.bgImageX -= 5, 0)
-    // ctx.drawImage(bgImageFlipped, this.bgImageFlippedX -= 5, 0)
+    ctx.drawImage(bgImage, this.bgImageX -= 5, 0)
+    ctx.drawImage(bgImageFlipped, this.bgImageFlippedX -= 5, 0)
     
     //why isn't the score working?
-    ctx.fillText('Score : ' + this.score, 450, 50)
+    ctx.font = "20px serif"
+    ctx.fillText('Score : ' + this.score, 100, 50)
+    ctx.fillText('Level : ' + this.playerLevel, 800, 50)
 
 
     //renders ship
