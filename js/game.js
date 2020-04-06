@@ -182,8 +182,8 @@ export default class Game {
     // ctx.fillText('Click on Screen to start', 900, 50)
     // ctx.fillText('Refresh browser to restart', 900, 50)
 
-    ctx.fillText('Score : ' + this.score, 100, 50)
-    ctx.fillText('Level : ' + this.playerLevel, 800, 50)
+    ctx.fillText('Score : ' + this.score, 50, 50)
+    ctx.fillText('Level : ' + this.playerLevel, 850, 50)
 
 
     //renders ship
@@ -277,8 +277,8 @@ export default class Game {
     this.drawFrame(this.CYCLE_LOOP[this.currentLoopIndex], 0)
     let myReq = window.requestAnimationFrame(this.gameloop);
     if (this.slippynoooooo) {
-      
-      window.cancelAnimationFrame(myReq)
+      this.ctx.fillStyle = "#000000"
+      return window.cancelAnimationFrame(myReq)
     }
   }
 }
