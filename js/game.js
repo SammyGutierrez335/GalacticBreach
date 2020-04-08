@@ -44,12 +44,14 @@ export default class Game {
   addEnemy() {
     if (this.enemies.length < this.maxEnemies) {
       let imgSrc = ["assets/attackers/atom.png", "assets/attackers/mohican.png", "assets/attackers/satelite.png"]
+      let frames = [24, 24, 16]
       let randomIndex = Math.floor(Math.random() * this.playerLevel)
       let enemyImage = new Image();
       let enemy = new Enemy({
         speed: Math.ceil(Math.random() * (4 * (randomIndex || 1))),
         x: this.getRandomX(),
         y: this.getRandomY(),
+        frames: frames[randomIndex],
         enemyImage: enemyImage,
         imgSrc: imgSrc[randomIndex]
       })
@@ -216,7 +218,7 @@ export default class Game {
             setTimeout(this.takeDamage(), 5000)
           }
           ctx.drawImage(enemyImage,
-            (frameX % 24) * enemy.width, frameY * enemy.height, enemy.width, enemy.height,
+            (frameX % enemy.frames) * enemy.width, frameY * enemy.height, enemy.width, enemy.height,
             enemy.x, enemy.y, SCALED_WIDTH, SCALED_HEIGHT)
           if (enemy.x < 0) {
             this.remove(enemy, null)

@@ -8,7 +8,7 @@ export default class GameView {
   start() {
     this.game.addShip();
     // start the animation
-    for (let i = 0; i < 48; i++) {
+    for (let i = 0; i < 384 ; i++) {
       this.game.CYCLE_LOOP.push(i);
     }
     requestAnimationFrame(this.animate);
