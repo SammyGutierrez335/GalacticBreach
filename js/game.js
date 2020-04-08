@@ -14,7 +14,7 @@ export default class Game {
     this.currentLoopIndex = 0;
     this.spaceshipImage = new Image();
     this.ships = [];
-    this.enemyImage = new Image();
+
     this.enemies = [];
     this.bulletImage = new Image();
     this.bullets = [];
@@ -30,6 +30,7 @@ export default class Game {
     this.drawFrame = this.drawFrame.bind(this)
     this.gameloop = this.gameloop.bind(this)
     this.remove = this.remove.bind(this)
+    this.addEnemy = this.addEnemy.bind(this)
     this.maxEnemies = 3
     this.score = 0
     this.playerLevel = 1
@@ -42,14 +43,25 @@ export default class Game {
 
   addEnemy() {
     if (this.enemies.length < this.maxEnemies) {
+      let imgSrc = ["assets/attackers/atom.png", "assets/attackers/mohican.png"]
+      let randomIndex = Math.floor(Math.random() * this.playerLevel)
+      let enemyImage = new Image();
       let enemy = new Enemy({
-        speed: Math.ceil(Math.random() * 5),
+        speed: Math.ceil(Math.random() * (3 * randomIndex)),
         x: this.getRandomX(),
         y: this.getRandomY(),
-        imgSrc: "assets/attackers/atom.png"
+        enemyImage: enemyImage,
+        imgSrc: imgSrc[randomIndex]
       })
-      this.enemies.push(enemy)
-      enemy.renderImg(this.enemyImage)
+      
+      enemy.renderImg(enemyImage)
+      
+      //this is used to prevent the enemy from being pushed prior to having the enemy image loaded.
+      //prevents DOMException: Failed to execute 'drawImage' on 'CanvasRenderingContext2D': 
+      //The HTMLImageElement provided is in the 'broken' state.
+      enemy.enemyImage.onload = () => {
+        this.enemies.push(enemy)
+      };
     }
   };
 
@@ -149,7 +161,6 @@ export default class Game {
     let bgImage = new Image();
     let spaceship = this.ships[0]
     let spaceshipImage = this.spaceshipImage
-    let enemyImage = this.enemyImage
     let bulletImage = this.bulletImage
     const SCALE = .9
     const SCALED_WIDTH = SCALE * 64
@@ -197,6 +208,8 @@ export default class Game {
       if (this.enemies.length <= this.maxEnemies) {
         for (let i = 0; i < this.enemies.length; i++) {
           let enemy = this.enemies[i]
+          let enemyImage = enemy.enemyImage
+
           enemy.moveEnemy(enemy.speed, 0, 0, this.canvas)
           if (this.checkCollision(this.ships[0], enemy) && !this.playerInvicibility) {
             setTimeout(this.takeDamage(), 5000)
