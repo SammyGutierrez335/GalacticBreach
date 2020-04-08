@@ -182,8 +182,8 @@ export default class Game {
       this.bgImageFlippedX = this.canvas.width
     }
 
-    ctx.drawImage(bgImage, this.bgImageX -= 5, 0)
-    ctx.drawImage(bgImageFlipped, this.bgImageFlippedX -= 5, 0)
+    ctx.drawImage(bgImage, this.bgImageX -= 5 + this.playerLevel, 0)
+    ctx.drawImage(bgImageFlipped, this.bgImageFlippedX -= 5 + this.playerLevel, 0)
     ctx.fillStyle = "#FFFFFF";
     ctx.font = "20px fantasy"
     
