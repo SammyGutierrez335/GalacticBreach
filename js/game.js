@@ -123,8 +123,9 @@ export default class Game {
       this.enemies.splice(this.enemies.indexOf(object), 1);
       if (bullet) {
         this.remove(bullet)
+        this.score += 1
       }
-      if (bullet) this.score += 1;
+
       if (this.score === this.playerLevel * 10) {
         this.playerLevel += 1
         this.maxEnemies += 2
