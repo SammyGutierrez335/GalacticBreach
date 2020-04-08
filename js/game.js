@@ -43,11 +43,11 @@ export default class Game {
 
   addEnemy() {
     if (this.enemies.length < this.maxEnemies) {
-      let imgSrc = ["assets/attackers/atom.png", "assets/attackers/mohican.png"]
+      let imgSrc = ["assets/attackers/atom.png", "assets/attackers/mohican.png", "assets/attackers/satelite.png"]
       let randomIndex = Math.floor(Math.random() * this.playerLevel)
       let enemyImage = new Image();
       let enemy = new Enemy({
-        speed: Math.ceil(Math.random() * (3 * randomIndex)),
+        speed: Math.ceil(Math.random() * (4 * (randomIndex || 1))),
         x: this.getRandomX(),
         y: this.getRandomY(),
         enemyImage: enemyImage,
