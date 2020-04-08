@@ -7,6 +7,7 @@ export default class Enemy {
     this.y = options.y;
     this.height = 64
     this.width = 64
+    this.enemyImage = options.enemyImage
     this.imgSrc = options.imgSrc
     this.offScreen = true
   }
