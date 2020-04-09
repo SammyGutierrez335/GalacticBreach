@@ -206,13 +206,19 @@ export default class Game {
       spaceship.x, spaceship.y, SCALED_WIDTH, SCALED_HEIGHT);
     
     //enemy rendering
-
     if (this.enemies.length > 0) {
       if (this.enemies.length <= this.maxEnemies) {
+        let enemyImage
         for (let i = 0; i < this.enemies.length; i++) {
           let enemy = this.enemies[i]
-          let enemyImage = enemy.enemyImage
-
+          if (enemy.hit[0]) {
+            this.remove(enemy, enemy.hit[1])
+            let prevSrc = enemy.enemyImage.src
+            enemy.enemyImage = new Image()
+            enemy.enemyImage.src = prevSrc.split(".png").join("_ghosted.png")
+            enemy.enemyImage.onload = () => {return}
+          }
+          enemyImage = enemy.enemyImage
           enemy.moveEnemy(enemy.speed, 0, 0, this.canvas)
           if (this.checkCollision(this.ships[0], enemy) && !this.playerInvicibility) {
             setTimeout(this.takeDamage(), 5000)
@@ -226,6 +232,7 @@ export default class Game {
         }
       }
     }
+
     //bullet logic
     if (this.bullets.length >= 0) {
       for (let i = 0; i < this.bullets.length; i++) {
@@ -245,7 +252,8 @@ export default class Game {
         for (let i = 0; i < this.enemies.length; i++) {
           let enemy = this.enemies[i]
           if (this.checkCollision(enemy, bullet)) {
-            this.remove(enemy, bullet)
+            new Audio("assets/soundfx/fx/explosions/explosion(shortest).mp3").play()
+            enemy.hit = [true, bullet]
           }
         }
       }
