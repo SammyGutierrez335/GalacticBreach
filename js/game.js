@@ -252,7 +252,7 @@ export default class Game {
         for (let i = 0; i < this.enemies.length; i++) {
           let enemy = this.enemies[i]
           if (this.checkCollision(enemy, bullet)) {
-            new Audio("assets/soundfx/fx/explosions/explosion(shortest).mp3").play()
+            new Audio("assets/soundfx/fx/explosions/very-short-quiet-bass-boost.mp3").play()
             enemy.hit = [true, bullet]
           }
         }
