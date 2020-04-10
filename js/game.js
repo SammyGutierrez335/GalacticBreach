@@ -161,18 +161,18 @@ export default class Game {
   drawFrame(frameX, frameY) {
     let ctx = this.ctx
     let backgroundCtx = this.backgroundCtx
-    let bgImage = new Image();
     let spaceship = this.ships[0]
     let spaceshipImage = this.spaceshipImage
     let bulletImage = this.bulletImage
     const SCALE = .9
     const SCALED_WIDTH = SCALE * 64
     const SCALED_HEIGHT = SCALE * 64
-   
+    
     // // background
-    bgImage.src = "assets/backgrounds/bg1.png";
+    let bgImage = new Image();
     let bgImageFlipped = new Image();
-    bgImageFlipped.src = "assets/backgrounds/bg1-flipped-edged.png";
+    this.playerLevel < 10 ? bgImage.src = "assets/backgrounds/bg1.png" : bgImage.src = "assets/backgrounds/bg2.png";
+    this.playerLevel < 10 ? bgImageFlipped.src = "assets/backgrounds/bg1-flipped-edged.png" : bgImageFlipped.src = "assets/backgrounds/bg2.png";
 
     //cycles background animation
     if (this.bgImageX < -(this.canvas.width)) {
