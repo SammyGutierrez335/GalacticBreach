@@ -14,12 +14,14 @@ export default class Game {
     this.currentLoopIndex = 0;
     this.spaceshipImage = new Image();
     this.ships = [];
-
+    this.backgroundPhase
     this.enemies = [];
     this.bulletImage = new Image();
     this.bullets = [];
     this.bgImageX = 0;
     this.bgImageFlippedX = canvas.width
+    this.bgImageSrc = "assets/backgrounds/bg1.png"
+    this.bgImageSrc2 = "assets/backgrounds/bg1-flipped-edged.png"
     this.shotsFired = false
     this.spaceAmbience = null
     this.battleMusic = new Audio("assets/soundfx/space-battle.mp3")
@@ -132,8 +134,6 @@ export default class Game {
         this.playerLevel += 1
         this.maxEnemies += 2
         this.levelUpSfx.play()
-        console.log("score:", this.score)
-        console.log("level:", this.playerLevel)
       }
     } else if (object instanceof Spaceship) {
       //eventually lose a life/gameover here...
@@ -171,19 +171,34 @@ export default class Game {
     // // background
     let bgImage = new Image();
     let bgImageFlipped = new Image();
-    this.playerLevel < 10 ? bgImage.src = "assets/backgrounds/bg1.png" : bgImage.src = "assets/backgrounds/bg2.png";
-    this.playerLevel < 10 ? bgImageFlipped.src = "assets/backgrounds/bg1-flipped-edged.png" : bgImageFlipped.src = "assets/backgrounds/bg2.png";
-
+    bgImage.src = this.bgImageSrc
+    bgImageFlipped.src = this.bgImageSrc2
+    this.backgroundRendering = false
+    this.background2Rendering = false
     //cycles background animation
     if (this.bgImageX < -(this.canvas.width)) {
       this.bgImageX = this.canvas.width
+      this.backgroundRendering = true
     }
     if (this.bgImageFlippedX < -this.canvas.width) {
       this.bgImageFlippedX = this.canvas.width
+      this.background2Rendering = true
     }
 
-    ctx.drawImage(bgImage, this.bgImageX -= 5 + this.playerLevel, 0)
-    ctx.drawImage(bgImageFlipped, this.bgImageFlippedX -= 5 + this.playerLevel, 0)
+    if (this.playerLevel > 2 && this.backgroundRendering) {
+      this.bgImageSrc= "assets/backgrounds/bg2.png";
+    }
+
+    if (this.playerLevel > 2 && this.background2Rendering) {
+      this.bgImageSrc2 = "assets/backgrounds/bg2.png";
+    }
+
+
+      ctx.drawImage(bgImage, this.bgImageX -= 5 + this.playerLevel, 0)
+      ctx.drawImage(bgImageFlipped, this.bgImageFlippedX -= 5 + this.playerLevel, 0)
+
+    
+    
     ctx.fillStyle = "#FFFFFF";
     ctx.font = "20px fantasy"
     
