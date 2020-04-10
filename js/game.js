@@ -20,6 +20,8 @@ export default class Game {
     this.bullets = [];
     this.bgImageX = 0;
     this.bgImageFlippedX = canvas.width
+    this.moonX =1800
+    this.asteroidX = 1000
     this.bgImageSrc = "assets/backgrounds/bg1.png"
     this.bgImageSrc2 = "assets/backgrounds/bg1-flipped-edged.png"
     this.shotsFired = false
@@ -160,13 +162,9 @@ export default class Game {
 
   drawFrame(frameX, frameY) {
     let ctx = this.ctx
-    let backgroundCtx = this.backgroundCtx
-    let spaceship = this.ships[0]
-    let spaceshipImage = this.spaceshipImage
-    let bulletImage = this.bulletImage
-    const SCALE = .9
-    const SCALED_WIDTH = SCALE * 64
-    const SCALED_HEIGHT = SCALE * 64
+    // let backgroundCtx = this.backgroundCtx
+
+  
     
     // // background
     let bgImage = new Image();
@@ -175,6 +173,7 @@ export default class Game {
     bgImageFlipped.src = this.bgImageSrc2
     this.backgroundRendering = false
     this.background2Rendering = false
+
     //cycles background animation
     if (this.bgImageX < -(this.canvas.width)) {
       this.bgImageX = this.canvas.width
@@ -200,15 +199,29 @@ export default class Game {
     if (this.playerLevel > 15 && this.background2Rendering) {
       this.bgImageSrc2 = "assets/backgrounds/bg3.png";
     }
+    ctx.drawImage(bgImage, this.bgImageX -= 5 + this.playerLevel, 0)
+    ctx.drawImage(bgImageFlipped, this.bgImageFlippedX -= 5 + this.playerLevel, 0)
 
+    //moons
+    let moon = new Image()
+    moon.src = "assets/backgrounds/moon.png"
 
-      ctx.drawImage(bgImage, this.bgImageX -= 5 + this.playerLevel, 0)
-      ctx.drawImage(bgImageFlipped, this.bgImageFlippedX -= 5 + this.playerLevel, 0)
+    // ctx.drawImage(moon, this.moonX -= .1 + this.playerLevel * .1, 0)
+    ctx.drawImage(moon, 0, 0,  280, 280, this.moonX -= .1 + this.playerLevel * .1, 0, 140, 140 )
 
-    
+    // planets
+    let planets = ["assets/backgrounds/pfrozen.png",
+  "assets/backgrounds/planet1.png",
+  "assets/backgrounds/planet2.png",
+  "assets/backgrounds/planet3.png",
+  "assets/backgrounds/planetx.png",
+  "assets/backgrounds/pring.png",
+  "assets/backgrounds/prusty.png"]
     
     ctx.fillStyle = "#FFFFFF";
-    ctx.font = "20px fantasy"
+    ctx.font = "20px fantasy"   
+    ctx.fillText('Score : ' + this.score, 50, 50)
+    ctx.fillText('Level : ' + this.playerLevel, 850, 50)
     
     // ctx.fillText('Controls : ', 900, 50)
     // ctx.fillText('Move Up : W' , 900, 50)
@@ -219,11 +232,13 @@ export default class Game {
     // ctx.fillText('Click on Screen to start', 900, 50)
     // ctx.fillText('Refresh browser to restart', 900, 50)
 
-    ctx.fillText('Score : ' + this.score, 50, 50)
-    ctx.fillText('Level : ' + this.playerLevel, 850, 50)
-
-
     //renders ship
+    const SCALE = .9
+    const SCALED_WIDTH = SCALE * 64
+    const SCALED_HEIGHT = SCALE * 64
+
+    let spaceship = this.ships[0]
+    let spaceshipImage = this.spaceshipImage
     ctx.drawImage(spaceshipImage,
       (frameX % 16) * spaceship.width, frameY * spaceship.height, spaceship.width, spaceship.height,
       spaceship.x, spaceship.y, SCALED_WIDTH, SCALED_HEIGHT);
@@ -257,6 +272,7 @@ export default class Game {
     }
 
     //bullet logic
+    let bulletImage = this.bulletImage
     if (this.bullets.length >= 0) {
       for (let i = 0; i < this.bullets.length; i++) {
         let bullet = this.bullets[i]
