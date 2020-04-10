@@ -185,12 +185,20 @@ export default class Game {
       this.background2Rendering = true
     }
 
-    if (this.playerLevel > 2 && this.backgroundRendering) {
+    if (this.playerLevel > 5 && this.backgroundRendering) {
       this.bgImageSrc= "assets/backgrounds/bg2.png";
     }
 
-    if (this.playerLevel > 2 && this.background2Rendering) {
+    if (this.playerLevel > 5 && this.background2Rendering) {
       this.bgImageSrc2 = "assets/backgrounds/bg2.png";
+    }
+
+    if (this.playerLevel > 15 && this.backgroundRendering) {
+      this.bgImageSrc = "assets/backgrounds/bg3.png";
+    }
+
+    if (this.playerLevel > 15 && this.background2Rendering) {
+      this.bgImageSrc2 = "assets/backgrounds/bg3.png";
     }
 
 
