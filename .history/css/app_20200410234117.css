@@ -1,0 +1,28 @@
+body {
+  display: flex;
+  justify-content: center;
+}
+
+canvas {
+  max-height: 480px;
+  max-width: 960px;
+  background: black;
+}
+.instructions {
+  font-family: fantasy;
+      -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+.wrapper {
+  color: black;
+}
+
+#instructions {
+
+}
+/* 
+#game-canvas {
+  background: black
+} */
