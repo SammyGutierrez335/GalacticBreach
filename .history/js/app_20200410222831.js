@@ -17,7 +17,7 @@ let scoreboardCanvas = document.createElement("canvas")
 let scoreboardCtx = canvas.getContext("2d")
 scoreboardCanvas.width = 440
 scoreboardCanvas.height = 480
-const game = new Game(leftCanvas, leftCanvasCtx, canvas, ctx, scoreboardCanvas, scoreboardCtx);
+const game = new Game(canvas, ctx, scoreboardCanvas, scoreboardCtx);
 
 //title assets
 let titleBackground= new Image()

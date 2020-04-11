@@ -3,7 +3,7 @@ import Enemy from "./enemy.js"
 import Bullet from "./bullet.js";
 
 export default class Game {
-  constructor(leftCanvas, leftCanvasCtx, canvas, ctx, backgroundCanvas, backgroundCtx) {
+  constructor(canvas, ctx, backgroundCanvas, backgroundCtx) {
     this.canvas = canvas
     this.ctx = ctx
     this.backgroundCanvas = backgroundCanvas

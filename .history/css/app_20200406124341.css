@@ -6,7 +6,6 @@ body {
 canvas {
   max-height: 480px;
   max-width: 960px;
-  background: black;
 }
 
 /* .scoreboard-canvas {

@@ -1,11 +1,6 @@
 import Game from "./game";
 import GameView from "./game_view";
 
-let leftCanvas = document.createElement("canvas")
-let leftCanvasCtx = leftCanvas.getContext("2d")
-leftCanvas.width = 440
-leftCanvasCtx.height = 480
-
 let canvas = document.createElement("canvas");
 let ctx = canvas.getContext("2d");
 canvas.width = 960;
@@ -15,9 +10,9 @@ let width = canvas.width
 
 let scoreboardCanvas = document.createElement("canvas")
 let scoreboardCtx = canvas.getContext("2d")
-scoreboardCanvas.width = 440
+scoreboardCanvas.width = 960
 scoreboardCanvas.height = 480
-const game = new Game(leftCanvas, leftCanvasCtx, canvas, ctx, scoreboardCanvas, scoreboardCtx);
+const game = new Game(canvas, ctx, scoreboardCanvas, scoreboardCtx);
 
 //title assets
 let titleBackground= new Image()
@@ -81,10 +76,7 @@ function fadeOut() {
 
 
 
-let leftCanvasElement = document.body.appendChild(leftCanvas)
 let canvasElement = document.body.appendChild(canvas);
 let scoreboardElement = document.body.appendChild(scoreboardCanvas);
-leftCanvasElement.setAttribute("class", "left-canvas")
-
-scoreboardElement.setAttribute("class", "scoreboard-canvas")
 canvasElement.setAttribute("class", "canvas");
+scoreboardElement.setAttribute("class", "scoreboard-canvas")
