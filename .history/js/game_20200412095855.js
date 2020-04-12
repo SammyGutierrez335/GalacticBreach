@@ -338,7 +338,6 @@ export default class Game {
 
     this.drawFrame(this.CYCLE_LOOP[this.currentLoopIndex], 0)
     let myReq = window.requestAnimationFrame(this.gameloop);
-    
     if (this.slippynoooooo) {
       if (this.score > this.allTimeBest) {
         this.allTimeBest = this.score
@@ -354,7 +353,7 @@ export default class Game {
       this.rightCanvasCtx.fillText('All Time High Score : ' + this.allTimeBest, 375, 250)
       this.rightCanvasCtx.fillText('Your Score : ' + this.score, 400, 350)
       this.rightCanvasCtx.fillText('Your Level : ' + this.playerLevel, 400, 450)
-      window.cancelAnimationFrame(myReq)
+      // window.cancelAnimationFrame(myReq)
     }
   }
 }

@@ -338,7 +338,6 @@ export default class Game {
 
     this.drawFrame(this.CYCLE_LOOP[this.currentLoopIndex], 0)
     let myReq = window.requestAnimationFrame(this.gameloop);
-    
     if (this.slippynoooooo) {
       if (this.score > this.allTimeBest) {
         this.allTimeBest = this.score

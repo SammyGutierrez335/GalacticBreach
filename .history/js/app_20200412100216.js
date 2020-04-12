@@ -7,6 +7,8 @@ let ctx = canvas.getContext("2d");
 canvas.width = 960;
 canvas.height = 480;
 let height = canvas.height
+let canvasElement = document.body.appendChild(canvas);
+canvasElement.setAttribute("class", "canvas");
 
 
 
@@ -14,6 +16,10 @@ let rightCanvas = document.createElement("canvas")
 let rightCanvasCtx = canvas.getContext("2d")
 rightCanvas.width = 220
 rightCanvas.height = 480
+rightCanvasElement.setAttribute("class", "scoreboard-canvas")
+let rightCanvasElement = document.body.appendChild(rightCanvas);
+
+
 const game = new Game(canvas, ctx, rightCanvas, rightCanvasCtx);
 
 //title assets
@@ -79,9 +85,3 @@ function fadeOut() {
 }
 
 
-
-let canvasElement = document.body.appendChild(canvas);
-let rightCanvasElement = document.body.appendChild(rightCanvas);
-
-rightCanvasElement.setAttribute("class", "scoreboard-canvas")
-canvasElement.setAttribute("class", "canvas");

@@ -36,7 +36,6 @@ export default class Game {
     this.remove = this.remove.bind(this)
     this.addEnemy = this.addEnemy.bind(this)
     this.maxEnemies = 3
-    this.allTimeBest = 0
     this.score = 0
     this.playerLevel = 1
     this.numHits = 0
@@ -338,23 +337,15 @@ export default class Game {
 
     this.drawFrame(this.CYCLE_LOOP[this.currentLoopIndex], 0)
     let myReq = window.requestAnimationFrame(this.gameloop);
-    
     if (this.slippynoooooo) {
-      if (this.score > this.allTimeBest) {
-        this.allTimeBest = this.score
-      }
-
-
       this.ctx.fillStyle = "#000000"
       this.rightCanvasCtx.fillStyle = "#FFFFFF";
       this.rightCanvasCtx.font = "60px fantasy"
-      this.rightCanvasCtx.fillText('Game Over',  350, 100)
+      this.rightCanvasCtx.fillText('Game Over',  360, 200)
       this.rightCanvasCtx.font = "20px fantasy"
-      
-      this.rightCanvasCtx.fillText('All Time High Score : ' + this.allTimeBest, 375, 250)
-      this.rightCanvasCtx.fillText('Your Score : ' + this.score, 400, 350)
-      this.rightCanvasCtx.fillText('Your Level : ' + this.playerLevel, 400, 450)
-      window.cancelAnimationFrame(myReq)
+      this.rightCanvasCtx.fillText('Your Score : ' + this.score, 400, 300)
+      this.rightCanvasCtx.fillText('Your Level : ' + this.playerLevel, 400, 400)
+      // window.cancelAnimationFrame(myReq)
     }
   }
 }
