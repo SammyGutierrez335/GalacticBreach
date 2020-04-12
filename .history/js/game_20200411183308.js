@@ -6,8 +6,8 @@ export default class Game {
   constructor(canvas, ctx, rightCanvas, rightCanvasCtx) {
     this.canvas = canvas
     this.ctx = ctx
-    this.scoreboardCanvas = rightCanvas
-    this.scoreboardCanvasCtx = rightCanvasCtx
+    this.scoreboardCanvas = scoreboardCanvas
+    this.scoreboardCanvasCtx = scoreboardCanvasCtx
     this.CYCLE_LOOP = []
     this.frameCount = 0;
     this.FRAME_LIMIT = 5;
@@ -74,7 +74,6 @@ export default class Game {
   getRandomX() {
     return Math.random() * (1200 - this.canvas.width) + this.canvas.width
   }
-
   getRandomY() {
     return Math.random() * (440 - 0)
   }
@@ -133,7 +132,7 @@ export default class Game {
         this.score += 1
       }
 
-      if (this.score === (this.playerLevel) * 10) {
+      if (this.score === this.playerLevel * 10) {
         this.playerLevel += 1
         this.maxEnemies += 2
         this.levelUpSfx.play()

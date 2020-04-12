@@ -74,7 +74,7 @@ export default class Game {
   getRandomX() {
     return Math.random() * (1200 - this.canvas.width) + this.canvas.width
   }
-
+  
   getRandomY() {
     return Math.random() * (440 - 0)
   }
@@ -133,7 +133,7 @@ export default class Game {
         this.score += 1
       }
 
-      if (this.score === (this.playerLevel) * 10) {
+      if (this.score === this.playerLevel * 10) {
         this.playerLevel += 1
         this.maxEnemies += 2
         this.levelUpSfx.play()

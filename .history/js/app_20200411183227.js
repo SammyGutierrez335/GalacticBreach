@@ -7,6 +7,7 @@ let ctx = canvas.getContext("2d");
 canvas.width = 960;
 canvas.height = 480;
 let height = canvas.height
+let width = canvas.width
 
 
 let rightCanvas = document.createElement("canvas")

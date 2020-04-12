@@ -6,14 +6,15 @@ let canvas = document.createElement("canvas");
 let ctx = canvas.getContext("2d");
 canvas.width = 960;
 canvas.height = 480;
-let height = canvas.height
+let height = canvas.width
+let width = canvas.width
 
 
 let rightCanvas = document.createElement("canvas")
 let rightCanvasCtx = canvas.getContext("2d")
-rightCanvas.width = 220
-rightCanvas.height = 480
-const game = new Game(canvas, ctx, rightCanvas, rightCanvasCtx);
+rightCanvasCanvas.width = 220
+rightCanvasCanvas.height = 480
+const game = new Game(canvas, ctx, rightCanvasCanvas, rightCanvasCtx);
 
 //title assets
 let titleBackground= new Image()

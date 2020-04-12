@@ -10,16 +10,18 @@ export default class Enemy {
     this.enemyImage = options.enemyImage
     this.frames = options.frames
     this.imgSrc = options.imgSrc
+    this.offScreen = true
     this.hit = [false, null]
   }
 
   renderImg(enemyImage, imgSrc = this.imgSrc) {
     enemyImage.src = imgSrc
   }
-
-  
   //checks for inbounds
   moveEnemy(deltaX) {
+    if (this.x + deltaX === -100) {
+      this.offScreen = true
+    }
     this.x -= deltaX;
   }
 }

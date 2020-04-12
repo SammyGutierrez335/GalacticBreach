@@ -133,7 +133,7 @@ export default class Game {
         this.score += 1
       }
 
-      if (this.score === (this.playerLevel) * 10) {
+      if (this.score === (this.playerLevel * 2) * 10) {
         this.playerLevel += 1
         this.maxEnemies += 2
         this.levelUpSfx.play()
