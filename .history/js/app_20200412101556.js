@@ -70,10 +70,7 @@ function keyDownListener(event) {
   if (event.key === "Enter" || event.key === "Return") {
     window.removeEventListener("keydown", keyDownListener)
     fadeOut(ctx)
-    let gameview = new GameView(game, canvas, ctx, rightCanvas, rightCanvasCtx)
-    if(!gameview.start()){
-      console.log("game over")
-    }
+    new GameView(game, canvas, ctx, rightCanvas, rightCanvasCtx).start()
   }
 }
 

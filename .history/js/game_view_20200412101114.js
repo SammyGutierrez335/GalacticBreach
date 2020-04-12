@@ -10,6 +10,7 @@ export default class GameView {
     for (let i = 0; i < 384 ; i++) {
       this.game.CYCLE_LOOP.push(i);
     }
-    requestAnimationFrame(this.game.gameloop)
+    requestAnimationFrame(() => this.game.gameloop()).then(console.log("game over"))
+   
   }
 }

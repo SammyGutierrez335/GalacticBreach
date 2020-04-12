@@ -128,16 +128,20 @@ export default class Game {
     if (object instanceof Bullet) {
       this.bullets.splice(this.bullets.indexOf(object), 1);
     } else if (object instanceof Enemy) {
-      this.enemies.splice(this.enemies.indexOf(object), 1);
-      if (bullet) {
-        this.remove(bullet)
-        this.score += 1
-      }
-
-      if (this.score === (this.playerLevel) * 10) {
-        this.playerLevel += 1
-        this.maxEnemies += 2
-        this.levelUpSfx.play()
+      if (object.despawning[1] === 4) {
+        this.enemies.splice(this.enemies.indexOf(object), 1);
+        if (bullet) {
+          this.remove(bullet)
+          this.score += 1
+        }
+  
+        if (this.score === (this.playerLevel) * 10) {
+          this.playerLevel += 1
+          this.maxEnemies += 2
+          this.levelUpSfx.play()
+        }
+      } else {
+        this.remove(enemy)
       }
     } else if (object instanceof Spaceship) {
       //eventually lose a life/gameover here...
@@ -247,9 +251,9 @@ export default class Game {
           
           if (enemy.hit[0]) {
             enemy.despawning[0] = true
-            if (enemy.despawning[1] === 1) {
             this.remove(enemy, enemy.hit[1])
-            }
+            // if (enemy.despawning[1] === 4) {
+            // }
 
             let prevSrc = enemy.enemyImage.src
             enemy.enemyImage = new Image()
@@ -297,7 +301,7 @@ export default class Game {
         bullet.moveBullet(bullet.speed, 0, 0, this.canvas)
 
         ctx.drawImage(bulletImage,
-          (frameX % 8), 0, 32, 32,
+          (frameX % 4), 0, 32, 32,
           bullet.x, bullet.y, 32, 32)
 
         //despawns bullet when it goes out of bounds
@@ -310,7 +314,7 @@ export default class Game {
           let enemy = this.enemies[i]
           if (this.checkCollision(enemy, bullet) ) {
             enemy.hit = [true, bullet]
-            bullet.speed= .17
+            this.remove(bullet, null)
             if(!enemy.despawning[0]) 
             new Audio("assets/soundfx/fx/explosions/very-short-quiet-bass-boost.mp3").play()
           }

@@ -11,7 +11,7 @@ export default class Enemy {
     this.frames = options.frames
     this.imgSrc = options.imgSrc
     this.hit = [false, null]
-    this.despawning = [false, 0, 0]
+    this.despawning = [false, 0]
   }
 
   renderImg(enemyImage, imgSrc = this.imgSrc) {

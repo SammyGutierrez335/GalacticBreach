@@ -71,9 +71,7 @@ function keyDownListener(event) {
     window.removeEventListener("keydown", keyDownListener)
     fadeOut(ctx)
     let gameview = new GameView(game, canvas, ctx, rightCanvas, rightCanvasCtx)
-    if(!gameview.start()){
-      console.log("game over")
-    }
+    gameview.start().then(console.log("game over"))
   }
 }
 

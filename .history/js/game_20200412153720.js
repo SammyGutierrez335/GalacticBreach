@@ -9,9 +9,9 @@ export default class Game {
     this.rightCanvas = rightCanvas
     this.rightCanvasCtx = rightCanvasCtx
     this.CYCLE_LOOP = []
-    this.currentLoopIndex = 0;
     this.frameCount = 0;
     this.FRAME_LIMIT = 5;
+    this.currentLoopIndex = 0;
     this.spaceshipImage = new Image();
     this.ships = [];
     this.backgroundPhase
@@ -128,6 +128,7 @@ export default class Game {
     if (object instanceof Bullet) {
       this.bullets.splice(this.bullets.indexOf(object), 1);
     } else if (object instanceof Enemy) {
+      debugger
       this.enemies.splice(this.enemies.indexOf(object), 1);
       if (bullet) {
         this.remove(bullet)
@@ -244,37 +245,26 @@ export default class Game {
         let enemyImage
         for (let i = 0; i < this.enemies.length; i++) {
           let enemy = this.enemies[i]
-          
           if (enemy.hit[0]) {
-            enemy.despawning[0] = true
-            if (enemy.despawning[1] === 1) {
+            enemy.despawning = true
             this.remove(enemy, enemy.hit[1])
-            }
-
             let prevSrc = enemy.enemyImage.src
             enemy.enemyImage = new Image()
-            enemy.enemyImage.src = "assets/attackers/explosions/short_explosions.png"
+            enemy.enemyImage.src = "assets/attackers/explosions/explosion2.png"
             // enemy.enemyImage.src = prevSrc.split(".png").join("_ghosted.png")
             enemy.enemyImage.onload = () => {return}
           }
           enemyImage = enemy.enemyImage
 
           enemy.moveEnemy(enemy.speed, 0, 0, this.canvas)
-          if (this.checkCollision(this.ships[0], enemy) && !enemy.despawning[0]) {
+          if (this.checkCollision(this.ships[0], enemy) && !this.playerInvicibility) {
             setTimeout(this.takeDamage(), 5000)
           }
-
-          if (enemy.despawning[0]) {
-            let explosionFrameX = enemy.despawning[1] * 192
-            let explosionFrameY = enemy.despawning[1] * 177
+          if (enemy.despawning) {
+            console.log(enemyImage)
             ctx.drawImage(enemyImage,
-              explosionFrameX, explosionFrameY, 177, 192,
-              enemy.x - enemy.speed, enemy.y, 44, 48)
-              enemy.despawning[2] += 1
-              if (enemy.despawning[2] === 8) {
-                enemy.despawning[1] += 1
-                enemy.despawning[2] = 0
-              }
+              0, 130, 130, 130,
+              enemy.x, enemy.y, 130, 130)
             } else {
               ctx.drawImage(enemyImage,
                 (frameX % enemy.frames) * enemy.width, frameY * enemy.height, enemy.width, enemy.height,
@@ -297,7 +287,7 @@ export default class Game {
         bullet.moveBullet(bullet.speed, 0, 0, this.canvas)
 
         ctx.drawImage(bulletImage,
-          (frameX % 8), 0, 32, 32,
+          (frameX % 4), 0, 32, 32,
           bullet.x, bullet.y, 32, 32)
 
         //despawns bullet when it goes out of bounds
@@ -308,13 +298,11 @@ export default class Game {
         //checks if bullets hit enemies
         for (let i = 0; i < this.enemies.length; i++) {
           let enemy = this.enemies[i]
-          if (this.checkCollision(enemy, bullet) ) {
-            enemy.hit = [true, bullet]
-            bullet.speed= .17
-            if(!enemy.despawning[0]) 
+          if (this.checkCollision(enemy, bullet)) {
             new Audio("assets/soundfx/fx/explosions/very-short-quiet-bass-boost.mp3").play()
-          }
+            enemy.hit = [true, bullet]
 
+          }
         }
       } 
     }

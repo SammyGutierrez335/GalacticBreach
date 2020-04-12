@@ -247,7 +247,7 @@ export default class Game {
           
           if (enemy.hit[0]) {
             enemy.despawning[0] = true
-            if (enemy.despawning[1] === 1) {
+            if (enemy.despawning[1] === 360) {
             this.remove(enemy, enemy.hit[1])
             }
 
@@ -260,21 +260,17 @@ export default class Game {
           enemyImage = enemy.enemyImage
 
           enemy.moveEnemy(enemy.speed, 0, 0, this.canvas)
-          if (this.checkCollision(this.ships[0], enemy) && !enemy.despawning[0]) {
+          if (this.checkCollision(this.ships[0], enemy) && !this.playerInvicibility) {
             setTimeout(this.takeDamage(), 5000)
           }
 
           if (enemy.despawning[0]) {
-            let explosionFrameX = enemy.despawning[1] * 192
-            let explosionFrameY = enemy.despawning[1] * 177
+            let explosionFrameX = enemy.despawning[1] * 192 / 60
+            let explosionFrameY = enemy.despawning[1] * 177 / 60
             ctx.drawImage(enemyImage,
               explosionFrameX, explosionFrameY, 177, 192,
               enemy.x - enemy.speed, enemy.y, 44, 48)
-              enemy.despawning[2] += 1
-              if (enemy.despawning[2] === 8) {
-                enemy.despawning[1] += 1
-                enemy.despawning[2] = 0
-              }
+              enemy.despawning[1] += 1
             } else {
               ctx.drawImage(enemyImage,
                 (frameX % enemy.frames) * enemy.width, frameY * enemy.height, enemy.width, enemy.height,
@@ -297,7 +293,7 @@ export default class Game {
         bullet.moveBullet(bullet.speed, 0, 0, this.canvas)
 
         ctx.drawImage(bulletImage,
-          (frameX % 8), 0, 32, 32,
+          (frameX % 4), 0, 32, 32,
           bullet.x, bullet.y, 32, 32)
 
         //despawns bullet when it goes out of bounds
@@ -308,13 +304,10 @@ export default class Game {
         //checks if bullets hit enemies
         for (let i = 0; i < this.enemies.length; i++) {
           let enemy = this.enemies[i]
-          if (this.checkCollision(enemy, bullet) ) {
-            enemy.hit = [true, bullet]
-            bullet.speed= .17
-            if(!enemy.despawning[0]) 
+          if (this.checkCollision(enemy, bullet) && enemy.despawning[1] ===0 ) {
             new Audio("assets/soundfx/fx/explosions/very-short-quiet-bass-boost.mp3").play()
+            enemy.hit = [true, bullet]
           }
-
         }
       } 
     }

@@ -3,6 +3,7 @@ export default class GameView {
     this.ctx = ctx;
     this.game = game;
     this.canvas = canvas
+    this.animate = this.animate.bind(this)
   }
   start() {
     this.game.addShip();
@@ -10,6 +11,6 @@ export default class GameView {
     for (let i = 0; i < 384 ; i++) {
       this.game.CYCLE_LOOP.push(i);
     }
-    requestAnimationFrame(this.game.gameloop)
+    requestAnimationFrame(this.game.gameloop());
+   
   }
-}

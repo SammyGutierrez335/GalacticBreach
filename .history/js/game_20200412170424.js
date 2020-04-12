@@ -297,7 +297,7 @@ export default class Game {
         bullet.moveBullet(bullet.speed, 0, 0, this.canvas)
 
         ctx.drawImage(bulletImage,
-          (frameX % 8), 0, 32, 32,
+          (frameX % 6), 0, 32, 32,
           bullet.x, bullet.y, 32, 32)
 
         //despawns bullet when it goes out of bounds
