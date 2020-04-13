@@ -253,7 +253,7 @@ export default class Game {
 
             let prevSrc = enemy.enemyImage.src
             enemy.enemyImage = new Image()
-            enemy.enemyImage.src = "assets/attackers/explosions/explosion2.png"
+            enemy.enemyImage.src = "assets/attackers/explosions/short_explosions.png"
             // enemy.enemyImage.src = prevSrc.split(".png").join("_ghosted.png")
             enemy.enemyImage.onload = () => {return}
           }
