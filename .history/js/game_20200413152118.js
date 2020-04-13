@@ -110,9 +110,6 @@ export default class Game {
   }
 
   checkCollision(obj1, obj2) {
-    if (obj1 instanceof Enemy && obj1.despawning[0]) return false;
-    if (obj2 instanceof Enemy && obj2.despawning[0]) return false;
-
     if (obj1.x < obj2.x + obj2.width &&
       obj1.x + obj1.width > obj2.x &&
       obj1.y < obj2.y + obj2.height &&
@@ -324,6 +321,7 @@ export default class Game {
         for (let i = 0; i < this.enemies.length; i++) {
           let enemy = this.enemies[i]
           if (this.checkCollision(enemy, bullet) ) {
+            debugger
             enemy.hit = [true, bullet]
             bullet.speed= .17
             if(!enemy.despawning[0]) 

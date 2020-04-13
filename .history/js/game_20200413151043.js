@@ -35,7 +35,6 @@ export default class Game {
     this.gameloop = this.gameloop.bind(this)
     this.remove = this.remove.bind(this)
     this.addEnemy = this.addEnemy.bind(this)
-    this.checkLevelUp = this.checkLevelUp.bind(this)
     this.maxEnemies = 3
     this.allTimeBest = 0
     this.score = 0
@@ -110,9 +109,6 @@ export default class Game {
   }
 
   checkCollision(obj1, obj2) {
-    if (obj1 instanceof Enemy && obj1.despawning[0]) return false;
-    if (obj2 instanceof Enemy && obj2.despawning[0]) return false;
-
     if (obj1.x < obj2.x + obj2.width &&
       obj1.x + obj1.width > obj2.x &&
       obj1.y < obj2.y + obj2.height &&
@@ -138,9 +134,8 @@ export default class Game {
         this.score += 1
       }
       this.checkLevelUp()
-    } else if(object === true) {
+    } else if(object instanceof Boolean) {
       this.score += 1
-      this.remove(bullet)
       this.checkLevelUp()
     }
     else if (object instanceof Spaceship) {
@@ -157,7 +152,6 @@ export default class Game {
       this.playerLevel += 1
       this.maxEnemies += 2
       this.levelUpSfx.play()
-      }
   }
 
 
@@ -262,8 +256,11 @@ export default class Game {
           if (enemy.hit[0]) {
             this.remove(true, enemy.hit[1])
             enemy.despawning[0] = true
-            enemy.hit[0] = false
-          
+            if (enemy.despawning[1] === 8) {
+            this.remove(enemy)
+            }
+
+            let prevSrc = enemy.enemyImage.src
             enemy.enemyImage = new Image()
             enemy.enemyImage.src = "assets/attackers/explosions/explosion2.png"
             // enemy.enemyImage.src = prevSrc.split(".png").join("_ghosted.png")
@@ -277,9 +274,6 @@ export default class Game {
           }
 
           if (enemy.despawning[0]) {
-            if (enemy.despawning[1] === 8) {
-              this.remove(enemy)
-            }
             let explosionFrameX = enemy.despawning[1] * 96
             let explosionFrameY = enemy.despawning[1] * 93
             ctx.drawImage(enemyImage,

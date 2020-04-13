@@ -6,12 +6,12 @@ export default class Game {
   constructor(canvas, ctx, rightCanvas, rightCanvasCtx) {
     this.canvas = canvas
     this.ctx = ctx
-    this.rightCanvas = rightCanvas
-    this.rightCanvasCtx = rightCanvasCtx
+    this.scoreboardCanvas = rightCanvas
+    this.scoreboardCanvasCtx = rightCanvasCtx
     this.CYCLE_LOOP = []
-    this.currentLoopIndex = 0;
     this.frameCount = 0;
     this.FRAME_LIMIT = 5;
+    this.currentLoopIndex = 0;
     this.spaceshipImage = new Image();
     this.ships = [];
     this.backgroundPhase
@@ -35,9 +35,7 @@ export default class Game {
     this.gameloop = this.gameloop.bind(this)
     this.remove = this.remove.bind(this)
     this.addEnemy = this.addEnemy.bind(this)
-    this.checkLevelUp = this.checkLevelUp.bind(this)
     this.maxEnemies = 3
-    this.allTimeBest = 0
     this.score = 0
     this.playerLevel = 1
     this.numHits = 0
@@ -110,9 +108,6 @@ export default class Game {
   }
 
   checkCollision(obj1, obj2) {
-    if (obj1 instanceof Enemy && obj1.despawning[0]) return false;
-    if (obj2 instanceof Enemy && obj2.despawning[0]) return false;
-
     if (obj1.x < obj2.x + obj2.width &&
       obj1.x + obj1.width > obj2.x &&
       obj1.y < obj2.y + obj2.height &&
@@ -137,29 +132,19 @@ export default class Game {
         this.remove(bullet)
         this.score += 1
       }
-      this.checkLevelUp()
-    } else if(object === true) {
-      this.score += 1
-      this.remove(bullet)
-      this.checkLevelUp()
-    }
-    else if (object instanceof Spaceship) {
+
+      if (this.score === (this.playerLevel) * 10) {
+        this.playerLevel += 1
+        this.maxEnemies += 2
+        this.levelUpSfx.play()
+      }
+    } else if (object instanceof Spaceship) {
       //eventually lose a life/gameover here...
       this.ships.shift()
     } else {
       throw new Error("unknown type of object");
     }
   }
-
-
-  checkLevelUp() {
-      if (this.score === (this.playerLevel) * 10) {
-      this.playerLevel += 1
-      this.maxEnemies += 2
-      this.levelUpSfx.play()
-      }
-  }
-
 
   takeDamage() {
     this.numHits += 1;
@@ -178,6 +163,10 @@ export default class Game {
 
   drawFrame(frameX, frameY) {
     let ctx = this.ctx
+    // let backgroundCtx = this.backgroundCtx
+
+  
+    
     // // background
     let bgImage = new Image();
     let bgImageFlipped = new Image();
@@ -258,45 +247,21 @@ export default class Game {
         let enemyImage
         for (let i = 0; i < this.enemies.length; i++) {
           let enemy = this.enemies[i]
-          
           if (enemy.hit[0]) {
-            this.remove(true, enemy.hit[1])
-            enemy.despawning[0] = true
-            enemy.hit[0] = false
-          
+            this.remove(enemy, enemy.hit[1])
+            let prevSrc = enemy.enemyImage.src
             enemy.enemyImage = new Image()
-            enemy.enemyImage.src = "assets/attackers/explosions/explosion2.png"
-            // enemy.enemyImage.src = prevSrc.split(".png").join("_ghosted.png")
+            enemy.enemyImage.src = prevSrc.split(".png").join("_ghosted.png")
             enemy.enemyImage.onload = () => {return}
           }
           enemyImage = enemy.enemyImage
-
           enemy.moveEnemy(enemy.speed, 0, 0, this.canvas)
-          if (this.checkCollision(this.ships[0], enemy) && !enemy.despawning[0]) {
+          if (this.checkCollision(this.ships[0], enemy) && !this.playerInvicibility) {
             setTimeout(this.takeDamage(), 5000)
           }
-
-          if (enemy.despawning[0]) {
-            if (enemy.despawning[1] === 8) {
-              this.remove(enemy)
-            }
-            let explosionFrameX = enemy.despawning[1] * 96
-            let explosionFrameY = enemy.despawning[1] * 93
-            ctx.drawImage(enemyImage,
-              explosionFrameX, explosionFrameY, 96, 93,
-              enemy.x - enemy.speed, enemy.y, 44, 48)
-              enemy.despawning[2] += 1
-              if (enemy.despawning[2] === 8) {
-                enemy.despawning[1] += 1
-                enemy.despawning[2] = 0
-              }
-            } else {
-              ctx.drawImage(enemyImage,
-                (frameX % enemy.frames) * enemy.width, frameY * enemy.height, enemy.width, enemy.height,
-                enemy.x, enemy.y, SCALED_WIDTH, SCALED_HEIGHT)
-              }
-              
-        
+          ctx.drawImage(enemyImage,
+            (frameX % enemy.frames) * enemy.width, frameY * enemy.height, enemy.width, enemy.height,
+            enemy.x, enemy.y, SCALED_WIDTH, SCALED_HEIGHT)
           if (enemy.x < 0) {
             this.remove(enemy, null)
           }
@@ -312,7 +277,7 @@ export default class Game {
         bullet.moveBullet(bullet.speed, 0, 0, this.canvas)
 
         ctx.drawImage(bulletImage,
-          (frameX % 8), 0, 32, 32,
+          (frameX % 4), 0, 32, 32,
           bullet.x, bullet.y, 32, 32)
 
         //despawns bullet when it goes out of bounds
@@ -323,17 +288,14 @@ export default class Game {
         //checks if bullets hit enemies
         for (let i = 0; i < this.enemies.length; i++) {
           let enemy = this.enemies[i]
-          if (this.checkCollision(enemy, bullet) ) {
-            enemy.hit = [true, bullet]
-            bullet.speed= .17
-            if(!enemy.despawning[0]) 
+          if (this.checkCollision(enemy, bullet)) {
             new Audio("assets/soundfx/fx/explosions/very-short-quiet-bass-boost.mp3").play()
+            enemy.hit = [true, bullet]
           }
-
         }
-      } 
+      }
     }
-
+    
   }
 
 
@@ -375,18 +337,14 @@ export default class Game {
 
     this.drawFrame(this.CYCLE_LOOP[this.currentLoopIndex], 0)
     let myReq = window.requestAnimationFrame(this.gameloop);
-
-  
-
     if (this.slippynoooooo) {
-      if (this.score > this.allTimeBest) {
-        this.allTimeBest = this.score
-      }
-
-
       this.ctx.fillStyle = "#000000"
+      // this.ctx.fillStyle = "#FFFFFF";
+      this.ctx.font = "20px fantasy"
+      this.ctx.fillText('Game Over : ',  400, 200)
+      this.ctx.fillText('Your Score : ' + this.score, 400, 300)
+      this.ctx.fillText('Your Level : ' + this.playerLevel, 400, 400)
       window.cancelAnimationFrame(myReq)
-
     }
   }
 }
