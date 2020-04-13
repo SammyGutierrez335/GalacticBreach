@@ -252,13 +252,12 @@ export default class Game {
       (frameX % 16) * spaceship.width, frameY * spaceship.height, spaceship.width, spaceship.height,
       spaceship.x, spaceship.y, SCALED_WIDTH, SCALED_HEIGHT);
 
-
-    if(spaceship.thrust) {
       let thruster = new Image()
-      thruster.src = "assets/player/thrust_playership.png"
+    thruster.src = "assets/player/thrust_playership.png"
+
+    if(spaceship.thruster) {
       ctx.drawImage(thruster, 0, 0, 128, 128,
         spaceship.x - 90, spaceship.y - 20, 128, 128)
-      spaceship.thrust = false
     }
 
     //enemy rendering

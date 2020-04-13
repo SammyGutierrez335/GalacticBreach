@@ -7,7 +7,7 @@ export default class Spaceship {
     this.y = options.y;
     this.height = 64
     this.width = 64
-    this.thrust = false
+    this.trust = true
     // this.cycleLoop = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
     this.imgSrc = options.imgSrc
     this.deltaX = 0
@@ -50,11 +50,10 @@ export default class Spaceship {
       // moveShip(0, spaceShip.speed, FLYING_DOWN)
     }
     if (this.keyPresses.a) {
-      this.deltaX = -(deltaX) + 1
+      this.deltaX = -(deltaX)
       // moveShip(-spaceShip.speed, 0, FLYING_LEFT)
     } else if (this.keyPresses.d) {
-      this.deltaX = deltaX + 3
-      this.thrust = true
+      this.deltaX = deltaX
       // moveShip(spaceShip.speed, 0, FLYING_RIGHT)
     }
 

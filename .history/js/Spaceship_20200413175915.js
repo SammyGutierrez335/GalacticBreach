@@ -43,14 +43,14 @@ export default class Spaceship {
     let deltaY = this.speed
 
     if (this.keyPresses.w) {
-      this.deltaY = -(deltaY)
+      this.deltaY = -(deltaY) - 2
       // moveShip(0, -spaceShip.speed, FLYING_UP)
     } else if (this.keyPresses.s) {
       this.deltaY = deltaY
       // moveShip(0, spaceShip.speed, FLYING_DOWN)
     }
     if (this.keyPresses.a) {
-      this.deltaX = -(deltaX) + 1
+      this.deltaX = -(deltaX)
       // moveShip(-spaceShip.speed, 0, FLYING_LEFT)
     } else if (this.keyPresses.d) {
       this.deltaX = deltaX + 3

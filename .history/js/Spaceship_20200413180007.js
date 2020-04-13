@@ -50,7 +50,7 @@ export default class Spaceship {
       // moveShip(0, spaceShip.speed, FLYING_DOWN)
     }
     if (this.keyPresses.a) {
-      this.deltaX = -(deltaX) + 1
+      this.deltaX = -(deltaX) + 3
       // moveShip(-spaceShip.speed, 0, FLYING_LEFT)
     } else if (this.keyPresses.d) {
       this.deltaX = deltaX + 3
