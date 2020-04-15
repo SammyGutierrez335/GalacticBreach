@@ -26,7 +26,7 @@ export default class Game {
     this.bgImageSrc2 = "assets/backgrounds/bg1-flipped-edged.png"
     this.shotsFired = false
     this.spaceAmbience = null
-    this.battleMusic = new Audio("assets/soundfx/space-battle.mp3")
+    this.battleMusic = new Audio("assets/soundfx/space-battle(quieter).mp3")
     this.levelUpSfx = new Audio("assets/soundfx/fx/incoming-radar(louder).mp3")
     this.damage1 = new Audio("assets/soundfx/fx/damage-1.mp3")
     this.damage2 = new Audio("assets/soundfx/fx/damage-2.mp3")
@@ -406,7 +406,7 @@ export default class Game {
 
 
       this.ctx.fillStyle = "#000000"
-      window.cancelAnimationFrame(myReq)
+      // window.cancelAnimationFrame(myReq)
 
     }
   }
