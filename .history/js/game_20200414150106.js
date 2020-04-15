@@ -41,6 +41,7 @@ export default class Game {
     this.score = 0
     this.playerLevel = 1
     this.numHits = 0
+    this.playerInvicibility = false
     this.slippynoooooo = false
   }
 
@@ -162,7 +163,7 @@ export default class Game {
 
   takeDamage() {
     this.numHits += 1;
-    this.ships[0].isInvincible = true
+    this.playerInvicibility = false
     if (this.numHits === 1) {
       this.damage1.play();
     } else if (this.numHits === 2) {
@@ -258,18 +259,6 @@ export default class Game {
       ctx.drawImage(thruster, 0, 0, 128, 128,
         spaceship.x - 90, spaceship.y - 20, 128, 128)
       spaceship.thrust = false
-      }
-    if(spaceship.isInvincible) {
-      spaceshipImage.src = "assets/player/playership_ghosted.png"
-     
-      if (spaceship.invincibilityFrames <= 0) {
-        spaceshipImage.src = "assets/player/playership.png"
-        spaceshipImage.onload = () => {return}
-      spaceship.invincibilityFrames = 120
-        spaceship.isInvincible = false;
-      } else {
-        spaceship.invincibilityFrames--
-      }
     }
 
     //enemy rendering
@@ -292,9 +281,8 @@ export default class Game {
           enemyImage = enemy.enemyImage
 
           enemy.moveEnemy(enemy.speed, 0, 0, this.canvas)
-          if (this.checkCollision(spaceship, enemy) && !enemy.despawning[0] && !spaceship.isInvincible) {
-            console.log(this.numHits)
-            this.takeDamage()
+          if (this.checkCollision(this.ships[0], enemy) && !enemy.despawning[0]) {
+            setTimeout(this.takeDamage(), 5000)
           }
 
           if (enemy.despawning[0]) {

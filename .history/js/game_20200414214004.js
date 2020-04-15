@@ -264,9 +264,10 @@ export default class Game {
      
       if (spaceship.invincibilityFrames <= 0) {
         spaceshipImage.src = "assets/player/playership.png"
-        spaceshipImage.onload = () => {return}
-      spaceship.invincibilityFrames = 120
-        spaceship.isInvincible = false;
+        spaceshipImage.onload = () => {
+          spaceship.invincibilityFrames = 120
+          spaceship.isInvincible = false;
+        }
       } else {
         spaceship.invincibilityFrames--
       }
