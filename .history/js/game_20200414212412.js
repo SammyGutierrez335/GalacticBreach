@@ -258,15 +258,15 @@ export default class Game {
       ctx.drawImage(thruster, 0, 0, 128, 128,
         spaceship.x - 90, spaceship.y - 20, 128, 128)
       spaceship.thrust = false
-      }
+    }
+    console.log(spaceship.isInvincible)
+    console.log(spaceship.invincibilityFrames)
     if(spaceship.isInvincible) {
-      spaceshipImage.src = "assets/player/playership_ghosted.png"
-     
       if (spaceship.invincibilityFrames <= 0) {
-        spaceshipImage.src = "assets/player/playership.png"
-        spaceshipImage.onload = () => {return}
-      spaceship.invincibilityFrames = 120
-        spaceship.isInvincible = false;
+        spaceship.invincibilityFrames = 120
+        spacesship.isInvincible = false;
+        console.log("no longer invincible")
+        console.log(spaceship.invincibilityFrames)
       } else {
         spaceship.invincibilityFrames--
       }
@@ -293,7 +293,6 @@ export default class Game {
 
           enemy.moveEnemy(enemy.speed, 0, 0, this.canvas)
           if (this.checkCollision(spaceship, enemy) && !enemy.despawning[0] && !spaceship.isInvincible) {
-            console.log(this.numHits)
             this.takeDamage()
           }
 

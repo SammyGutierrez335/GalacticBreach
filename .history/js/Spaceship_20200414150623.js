@@ -9,7 +9,6 @@ export default class Spaceship {
     this.width = 64
     this.thrust = false
     this.isInvincible = false
-    this.invincibilityFrames = 120
     // this.cycleLoop = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
     this.imgSrc = options.imgSrc
     this.deltaX = 0

@@ -5,7 +5,9 @@ export default class GameView {
     this.canvas = canvas
   }
   start() {
+    for (let i = 0; i < 3; i++) {
       this.game.addShip();
+    }
   
     // start the animation
     for (let i = 0; i < 384 ; i++) {
