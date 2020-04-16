@@ -20,28 +20,27 @@ const musicToggleImage = document.getElementById('music-toggle-img');
 let musicMuted = false
 const sfxToggle = document.getElementById('sfx-toggle-button');
 const sfxToggleImage = document.getElementById('sfx-toggle-img');
-let sfxMuted = false
+
 musicToggle.addEventListener("click", toggleMusic)
 sfxToggle.addEventListener("click", toggleSfx)
 
 
 function toggleMusic() {
+  console.log(musicMuted)
   if (musicMuted) {
     musicMuted = false
     musicToggleImage.src = "assets/menu/music-toggle.png";
   } else {
     musicMuted = true
-    musicToggleImage.src = "assets/menu/music-toggle-mute.png"
+    musicToggleImage.src = "assets/menu/music-toggle.png"
   }
 }
 
 function toggleSfx() {
-  if (sfxMuted) {
-    sfxMuted = false
-    sfxToggleImage.src = "assets/menu/sfx-toggle.png";
+  if (sfxToggleImage.src = "assets/menu/sfx-toggle.png") {
+    sfxToggleImage.src = "assets/menu/sfx-toggle-mute.png";
   } else {
-    sfxMuted = true
-    sfxToggleImage.src = "assets/menu/sfx-toggle-mute.png"
+    sfxToggleImage.src = "assets/menu/sfx-toggle.png"
   }
 }
 

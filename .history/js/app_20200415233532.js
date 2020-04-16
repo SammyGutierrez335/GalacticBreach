@@ -20,7 +20,7 @@ const musicToggleImage = document.getElementById('music-toggle-img');
 let musicMuted = false
 const sfxToggle = document.getElementById('sfx-toggle-button');
 const sfxToggleImage = document.getElementById('sfx-toggle-img');
-let sfxMuted = false
+let musicMuted = false
 musicToggle.addEventListener("click", toggleMusic)
 sfxToggle.addEventListener("click", toggleSfx)
 
@@ -38,10 +38,10 @@ function toggleMusic() {
 function toggleSfx() {
   if (sfxMuted) {
     sfxMuted = false
-    sfxToggleImage.src = "assets/menu/sfx-toggle.png";
+    sfxToggleImage.src = "assets/menu/music-toggle.png";
   } else {
     sfxMuted = true
-    sfxToggleImage.src = "assets/menu/sfx-toggle-mute.png"
+    sfxToggleImage.src = "assets/menu/music-toggle-mute.png"
   }
 }
 

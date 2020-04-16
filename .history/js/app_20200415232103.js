@@ -16,33 +16,20 @@ rightCanvas.height = 480
 
 const game = new Game(canvas, ctx, rightCanvas, rightCanvasCtx);
 const musicToggle = document.getElementById('music-toggle-button');
-const musicToggleImage = document.getElementById('music-toggle-img');
-let musicMuted = false
+const musicToggleImage = document.getElementById('music-toggle-image');
+const sfxToggleImage = document.getElementById('sfx-toggle-image');
 const sfxToggle = document.getElementById('sfx-toggle-button');
-const sfxToggleImage = document.getElementById('sfx-toggle-img');
-let sfxMuted = false
+
 musicToggle.addEventListener("click", toggleMusic)
 sfxToggle.addEventListener("click", toggleSfx)
 
 
 function toggleMusic() {
-  if (musicMuted) {
-    musicMuted = false
-    musicToggleImage.src = "assets/menu/music-toggle.png";
-  } else {
-    musicMuted = true
-    musicToggleImage.src = "assets/menu/music-toggle-mute.png"
-  }
+  musicToggleImage.src = "assets/menu/music-toggle-mute.png"
 }
 
 function toggleSfx() {
-  if (sfxMuted) {
-    sfxMuted = false
-    sfxToggleImage.src = "assets/menu/sfx-toggle.png";
-  } else {
-    sfxMuted = true
-    sfxToggleImage.src = "assets/menu/sfx-toggle-mute.png"
-  }
+
 }
 
 //title assets

@@ -51,12 +51,11 @@ canvas {
 }
 .audio-options{
   position: absolute;
-  left: 42%;
   top: 680px;
   font-family: fantasy;
 }
 .audio-options p {
-  color: white;
+    color: white;
   font-size: 25;
   font-weight: 800;
 }
