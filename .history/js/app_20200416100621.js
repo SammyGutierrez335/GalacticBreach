@@ -24,13 +24,12 @@ sfxToggle.addEventListener("click", toggleSfx)
 
 
 function toggleMusic() {
-  console.log(game.musicMuted)
   if (game.musicMuted) {
     game.musicMuted = false
     musicToggleImage.src = "assets/menu/music-toggle.png";
   } else {
     game.musicMuted = true
-    musicToggleImage.src = "assets/menu/music-toggle-mute.png"
+    game.musicToggleImage.src = "assets/menu/music-toggle-mute.png"
   }
 }
 

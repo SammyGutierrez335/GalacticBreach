@@ -34,13 +34,12 @@ export default class Game {
     this.damage1 = new Audio("assets/soundfx/fx/damage-1.mp3")
     this.damage2 = new Audio("assets/soundfx/fx/damage-2.mp3")
     this.damage3 = new Audio("assets/soundfx/fx/damage-3.mp3")
-    this.enemyExplosionSfx = new Audio("assets/soundfx/fx/explosions/very-short-quiet-bass-boost.mp3")
+
     this.drawFrame = this.drawFrame.bind(this)
     this.gameloop = this.gameloop.bind(this)
     this.remove = this.remove.bind(this)
     this.addEnemy = this.addEnemy.bind(this)
     this.checkLevelUp = this.checkLevelUp.bind(this)
-    this.handleAudioToggles = this.handleAudioToggles.bind(this)
     this.maxEnemies = 3
     this.allTimeBest = 0
     this.score = 0
@@ -160,12 +159,12 @@ export default class Game {
     this.damage1.volume = sfxVolume
     this.damage2.volume = sfxVolume
     this.damage3.volume = sfxVolume
-    this.enemyExplosionSfx = sfxVolume
-    
+  
     let musicVolume
     this.musicMuted ? musicVolume = 0.0 : musicVolume = 1.0
     this.spaceAmbience.volume = musicVolume
     this.battleMusic.volume = musicVolume
+    this.
   }
 
   checkLevelUp() {
@@ -368,7 +367,7 @@ export default class Game {
             enemy.hit = [true, bullet]
             bullet.speed= .17
             if(!enemy.despawning[0]) 
-           this.enemyExplosionSfx.play()
+            new Audio("assets/soundfx/fx/explosions/very-short-quiet-bass-boost.mp3").play()
           }
 
         }
@@ -381,7 +380,7 @@ export default class Game {
 
   // The main game loop should run about 60 times per second
   gameloop() {
-    this.handleAudioToggles()
+    handleAudioToggles()
 
     let spaceship = this.ships[0]
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);

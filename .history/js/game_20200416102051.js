@@ -160,8 +160,7 @@ export default class Game {
     this.damage1.volume = sfxVolume
     this.damage2.volume = sfxVolume
     this.damage3.volume = sfxVolume
-    this.enemyExplosionSfx = sfxVolume
-    
+  
     let musicVolume
     this.musicMuted ? musicVolume = 0.0 : musicVolume = 1.0
     this.spaceAmbience.volume = musicVolume
@@ -368,7 +367,7 @@ export default class Game {
             enemy.hit = [true, bullet]
             bullet.speed= .17
             if(!enemy.despawning[0]) 
-           this.enemyExplosionSfx.play()
+           this.enemyExplosion.play()
           }
 
         }

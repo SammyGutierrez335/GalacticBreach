@@ -30,7 +30,7 @@ function toggleMusic() {
     musicToggleImage.src = "assets/menu/music-toggle.png";
   } else {
     game.musicMuted = true
-    musicToggleImage.src = "assets/menu/music-toggle-mute.png"
+    game.musicToggleImage.src = "assets/menu/music-toggle-mute.png"
   }
 }
 

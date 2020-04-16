@@ -13,8 +13,10 @@ let rightCanvas = document.createElement("canvas")
 let rightCanvasCtx = canvas.getContext("2d")
 rightCanvas.width = 220
 rightCanvas.height = 480
+let musicMuted = false
+let sfxMuted = false
 
-const game = new Game(canvas, ctx, rightCanvas, rightCanvasCtx);
+const game = new Game(canvas, ctx, rightCanvas, rightCanvasCtx, musicMuted, sfxMuted);
 const musicToggle = document.getElementById('music-toggle-button');
 const musicToggleImage = document.getElementById('music-toggle-img');
 const sfxToggle = document.getElementById('sfx-toggle-button');
@@ -24,22 +26,21 @@ sfxToggle.addEventListener("click", toggleSfx)
 
 
 function toggleMusic() {
-  console.log(game.musicMuted)
   if (game.musicMuted) {
     game.musicMuted = false
     musicToggleImage.src = "assets/menu/music-toggle.png";
   } else {
     game.musicMuted = true
-    musicToggleImage.src = "assets/menu/music-toggle-mute.png"
+    game.musicToggleImage.src = "assets/menu/music-toggle-mute.png"
   }
 }
 
 function toggleSfx() {
-  if (game.sfxMuted) {
-    game.sfxMuted = false
+  if (sfxMuted) {
+    sfxMuted = false
     sfxToggleImage.src = "assets/menu/sfx-toggle.png";
   } else {
-    game.sfxMuted = true
+    sfxMuted = true
     sfxToggleImage.src = "assets/menu/sfx-toggle-mute.png"
   }
 }
