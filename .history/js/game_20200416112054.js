@@ -428,8 +428,6 @@ export default class Game {
         window.cancelAnimationFrame(myReq)
         this.spaceAmbience.play()
               this.ctx.fillStyle = "#000000"
-
-        //game over message here?
       }
 
     }

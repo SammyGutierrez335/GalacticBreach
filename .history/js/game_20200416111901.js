@@ -115,7 +115,6 @@ export default class Game {
     if (!this.shotsFired) {
       this.shotsFired = true
       this.spaceAmbience.pause()
-      this.spaceAmbience.currentTime = 0
       this.battleMusic.volume = this.musicVolume
       this.battleMusic.play()
     }
@@ -428,8 +427,6 @@ export default class Game {
         window.cancelAnimationFrame(myReq)
         this.spaceAmbience.play()
               this.ctx.fillStyle = "#000000"
-
-        //game over message here?
       }
 
     }

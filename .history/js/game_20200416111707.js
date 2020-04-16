@@ -25,13 +25,13 @@ export default class Game {
     this.bgImageSrc = "assets/backgrounds/bg1.png"
     this.bgImageSrc2 = "assets/backgrounds/bg1-flipped-edged.png"
     this.shotsFired = false
-    this.spaceAmbience = new Audio("assets/soundfx/Space Ambience.mp3")
+    this.spaceAmbience = null
     this.battleMusic = new Audio("assets/soundfx/space-battle(quieter).mp3")
     this.levelUpSfx = new Audio("assets/soundfx/fx/incoming-radar(louder).mp3")
     this.sfxMuted = false
     this.musicMuted = false
     this.sfxVolume = 1
-    this.musicVolume = 1
+    this.musicVolume = 0
     this.damage1 = new Audio("assets/soundfx/fx/damage-1.mp3")
     this.damage2 = new Audio("assets/soundfx/fx/damage-2.mp3")
     this.damage3 = new Audio("assets/soundfx/fx/damage-3.mp3")
@@ -91,6 +91,7 @@ export default class Game {
   //player spaceship
 
   addShip() {
+    this.spaceAmbience = new Audio("assets/soundfx/Space Ambience.mp3")
     this.spaceAmbience.volume = this.musicVolume
     this.spaceAmbience.play()
     let spaceship = new Spaceship({
@@ -115,7 +116,6 @@ export default class Game {
     if (!this.shotsFired) {
       this.shotsFired = true
       this.spaceAmbience.pause()
-      this.spaceAmbience.currentTime = 0
       this.battleMusic.volume = this.musicVolume
       this.battleMusic.play()
     }
@@ -428,8 +428,6 @@ export default class Game {
         window.cancelAnimationFrame(myReq)
         this.spaceAmbience.play()
               this.ctx.fillStyle = "#000000"
-
-        //game over message here?
       }
 
     }

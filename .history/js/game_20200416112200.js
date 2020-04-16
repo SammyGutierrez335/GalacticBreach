@@ -429,7 +429,7 @@ export default class Game {
         this.spaceAmbience.play()
               this.ctx.fillStyle = "#000000"
 
-        //game over message here?
+        //game over message here
       }
 
     }
