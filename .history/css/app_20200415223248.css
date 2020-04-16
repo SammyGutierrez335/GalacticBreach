@@ -53,17 +53,7 @@ canvas {
   position: absolute;
   top: 680px;
   font-family: fantasy;
-}
-.audio-options p {
-    color: white;
+  object-fit: cover; 
   font-size: 25;
   font-weight: 800;
-}
-button{
-  background:none;
-}
-
-.toggle {
-  width: 50px;
-  height: 50px;
 }
