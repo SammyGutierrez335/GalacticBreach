@@ -44,11 +44,17 @@ export default class Game {
     this.playerLevel = 1
     this.numHits = 0
     this.slippynoooooo = false
-
   }
 
+let audioOptionsCanvas = document.createElement("canvas");
+let audioOptionsCanvasCtx = canvas.getContext("2d");
+audioOptionsCanvas.width = 200;
+audioOptionsCanvas.height = 200;
+  let canvasElement = document.body.appendChild(canvas);
+let rightCanvasElement = document.body.appendChild(rightCanvas);
 
-
+rightCanvasElement.setAttribute("class", "scoreboard-canvas")
+canvasElement.setAttribute("class", "canvas");
 
 
   addEnemy() {

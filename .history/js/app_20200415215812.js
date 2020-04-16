@@ -11,8 +11,7 @@ let audioOptionsCanvas = document.createElement("canvas");
 let audioOptionsCanvasCtx = audioOptionsCanvas.getContext("2d");
 audioOptionsCanvas.width = 200;
 audioOptionsCanvas.height = 200;
-audioOptionsCanvasCtx.draw(musicToggle)
-audioOptionsCanvasCtx.draw(sfxToggle)
+
 
 
 let rightCanvas = document.createElement("canvas")
@@ -24,7 +23,8 @@ sfxToggle.src = "assets/menu/sfx.png"
 let musicToggle = new Image()
 musicToggle.src = "assets/menu/music.png"
 const game = new Game(canvas, ctx, rightCanvas, rightCanvasCtx, audioOptionsCanvas, audioOptionsCanvasCtx);
-
+audioOptionsCanvasCtx.draw(musicToggle)
+audioOptionsCanvasCtx.draw(sfxToggle)
 
 
 

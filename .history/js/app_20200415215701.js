@@ -11,8 +11,7 @@ let audioOptionsCanvas = document.createElement("canvas");
 let audioOptionsCanvasCtx = audioOptionsCanvas.getContext("2d");
 audioOptionsCanvas.width = 200;
 audioOptionsCanvas.height = 200;
-audioOptionsCanvasCtx.draw(musicToggle)
-audioOptionsCanvasCtx.draw(sfxToggle)
+
 
 
 let rightCanvas = document.createElement("canvas")

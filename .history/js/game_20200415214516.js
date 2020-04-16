@@ -44,10 +44,7 @@ export default class Game {
     this.playerLevel = 1
     this.numHits = 0
     this.slippynoooooo = false
-
   }
-
-
 
 
 

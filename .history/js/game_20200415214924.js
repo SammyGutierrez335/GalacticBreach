@@ -44,10 +44,15 @@ export default class Game {
     this.playerLevel = 1
     this.numHits = 0
     this.slippynoooooo = false
-
   }
 
+let audioOptionsCanvas = document.createElement("canvas");
+let audioOptionsCanvasCtx = audioOptionsCanvas.getContext("2d");
+audioOptionsCanvas.width = 200;
+audioOptionsCanvas.height = 200;
+let audioOptionsCanvasElement = document.body.appendChild(canvas);
 
+audioOptionsCanvasElement.setAttribute("class", "audio-options-canvas")
 
 
 
