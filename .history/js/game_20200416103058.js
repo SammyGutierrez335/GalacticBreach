@@ -25,16 +25,17 @@ export default class Game {
     this.bgImageSrc = "assets/backgrounds/bg1.png"
     this.bgImageSrc2 = "assets/backgrounds/bg1-flipped-edged.png"
     this.shotsFired = false
+    this.musicMuted = false
     this.spaceAmbience = new Audio("assets/soundfx/Space Ambience.mp3")
     this.battleMusic = new Audio("assets/soundfx/space-battle(quieter).mp3")
     this.levelUpSfx = new Audio("assets/soundfx/fx/incoming-radar(louder).mp3")
     this.sfxMuted = false
-    this.musicMuted = false
-    this.sfxVolume = 1
-    this.musicVolume = 0
+    this.bulletSfx = new Audio("assets/soundfx/fx/shot-1.mp3")
     this.damage1 = new Audio("assets/soundfx/fx/damage-1.mp3")
     this.damage2 = new Audio("assets/soundfx/fx/damage-2.mp3")
     this.damage3 = new Audio("assets/soundfx/fx/damage-3.mp3")
+    this.enemyExplosionSfx = new Audio("assets/soundfx/fx/explosions/very-short-quiet-bass-boost.mp3")
+    
     this.drawFrame = this.drawFrame.bind(this)
     this.gameloop = this.gameloop.bind(this)
     this.remove = this.remove.bind(this)
@@ -91,7 +92,6 @@ export default class Game {
   //player spaceship
 
   addShip() {
-    this.spaceAmbience.volume = this.musicVolume
     this.spaceAmbience.play()
     let spaceship = new Spaceship({
       hasMoved: false,
@@ -107,15 +107,10 @@ export default class Game {
   addBullet(bullet) {
     this.bullets.push(bullet)
     bullet.renderImg(this.bulletImage)
-    let bulletSfx = new Audio("assets/soundfx/fx/shot-1.mp3")
-    bulletSfx.volume = this.sfxVolume
-    bulletSfx.play()
-
-    
+    this.bulletSfx.play()
     if (!this.shotsFired) {
       this.shotsFired = true
       this.spaceAmbience.pause()
-      this.battleMusic.volume = this.musicVolume
       this.battleMusic.play()
     }
   }
@@ -159,17 +154,25 @@ export default class Game {
       throw new Error("unknown type of object");
     }
   }
-
   handleAudioToggles() {
-   this.sfxMuted ? this.sfxVolume = 0 : this.sfxVolume = 1  
-   this.musicMuted ? this.musicVolume = 0 : this.musicVolume = 1  
+    let sfxVolume
+    this.sfxMuted ? sfxVolume = 0.0 : sfxVolume = 1.0
+    this.bulletSfx.volume = sfxVolume
+    this.damage1.volume = sfxVolume
+    this.damage2.volume = sfxVolume
+    this.damage3.volume = sfxVolume
+    this.enemyExplosionSfx = sfxVolume
+
+    let musicVolume
+    this.musicMuted ? musicVolume = 0.0 : musicVolume = 1.0
+    this.spaceAmbience.volume = musicVolume
+    this.battleMusic.volume = musicVolume
   }
 
   checkLevelUp() {
       if (this.score === (this.playerLevel) * 10) {
       this.playerLevel += 1
       this.maxEnemies += 2
-      this.levelUpSfx.volume = this.sfxVolume
       this.levelUpSfx.play()
       if (this.score > 10) {
         this.levelUpSfx.volume= 1.5
@@ -182,13 +185,10 @@ export default class Game {
     this.numHits += 1;
     this.ships[0].isInvincible = true
     if (this.numHits === 1) {
-      this.damage1.volume = this.sfxVolume
       this.damage1.play();
     } else if (this.numHits === 2) {
-      this.damage2.volume = this.sfxVolume
       this.damage2.play();
     } else if (this.numHits === 3) {
-      this.damage3.volume = this.sfxVolume
       this.damage3.play();
     } else {
       this.slippynoooooo = true
@@ -363,16 +363,15 @@ export default class Game {
         }
 
         //checks if bullets hit enemies
+        console.log(this)
         for (let i = 0; i < this.enemies.length; i++) {
           let enemy = this.enemies[i]
           if (this.checkCollision(enemy, bullet) ) {
             enemy.hit = [true, bullet]
             bullet.speed= .17
-            if(!enemy.despawning[0]) {
-              let explosionSfx = new Audio("assets/soundfx/fx/explosions/very-short-quiet-bass-boost.mp3")
-              explosionSfx.volume = this.sfxVolume
-              explosionSfx.play()
-            }
+            if(!enemy.despawning[0]) 
+            console.log(this)
+              this.enemyExplosionSfx.play()
           }
 
         }
@@ -431,7 +430,7 @@ export default class Game {
 
 
       this.ctx.fillStyle = "#000000"
-      // window.cancelAnimationFrame(myReq)
+      window.cancelAnimationFrame(myReq)
 
     }
   }

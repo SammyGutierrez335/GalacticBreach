@@ -368,10 +368,11 @@ export default class Game {
           if (this.checkCollision(enemy, bullet) ) {
             enemy.hit = [true, bullet]
             bullet.speed= .17
-            if(!enemy.despawning[0]) {
+            if(!enemy.despawning[0]) 
               let explosionSfx = new Audio("assets/soundfx/fx/explosions/very-short-quiet-bass-boost.mp3")
               explosionSfx.volume = this.sfxVolume
               explosionSfx.play()
+          }
             }
           }
 

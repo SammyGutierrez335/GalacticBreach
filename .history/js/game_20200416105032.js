@@ -159,7 +159,6 @@ export default class Game {
       throw new Error("unknown type of object");
     }
   }
-
   handleAudioToggles() {
    this.sfxMuted ? this.sfxVolume = 0 : this.sfxVolume = 1  
    this.musicMuted ? this.musicVolume = 0 : this.musicVolume = 1  
@@ -368,11 +367,10 @@ export default class Game {
           if (this.checkCollision(enemy, bullet) ) {
             enemy.hit = [true, bullet]
             bullet.speed= .17
-            if(!enemy.despawning[0]) {
-              let explosionSfx = new Audio("assets/soundfx/fx/explosions/very-short-quiet-bass-boost.mp3")
-              explosionSfx.volume = this.sfxVolume
-              explosionSfx.play()
-            }
+            if(!enemy.despawning[0]) 
+            explosionSfx = new Audio("assets/soundfx/fx/explosions/very-short-quiet-bass-boost.mp3")
+            explosionSfx.volume = this.sfxVolume
+            explosionSfx.play()
           }
 
         }
@@ -385,7 +383,7 @@ export default class Game {
 
   // The main game loop should run about 60 times per second
   gameloop() {
-    this.handleAudioToggles()
+    handleAudioToggles()
 
     let spaceship = this.ships[0]
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);

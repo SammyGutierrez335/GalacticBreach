@@ -25,7 +25,7 @@ export default class Game {
     this.bgImageSrc = "assets/backgrounds/bg1.png"
     this.bgImageSrc2 = "assets/backgrounds/bg1-flipped-edged.png"
     this.shotsFired = false
-    this.spaceAmbience = new Audio("assets/soundfx/Space Ambience.mp3")
+    this.spaceAmbience = null
     this.battleMusic = new Audio("assets/soundfx/space-battle(quieter).mp3")
     this.levelUpSfx = new Audio("assets/soundfx/fx/incoming-radar(louder).mp3")
     this.sfxMuted = false
@@ -40,7 +40,6 @@ export default class Game {
     this.remove = this.remove.bind(this)
     this.addEnemy = this.addEnemy.bind(this)
     this.checkLevelUp = this.checkLevelUp.bind(this)
-    this.handleAudioToggles = this.handleAudioToggles.bind(this)
     this.maxEnemies = 3
     this.allTimeBest = 0
     this.score = 0
@@ -159,7 +158,6 @@ export default class Game {
       throw new Error("unknown type of object");
     }
   }
-
   handleAudioToggles() {
    this.sfxMuted ? this.sfxVolume = 0 : this.sfxVolume = 1  
    this.musicMuted ? this.musicVolume = 0 : this.musicVolume = 1  
@@ -368,11 +366,10 @@ export default class Game {
           if (this.checkCollision(enemy, bullet) ) {
             enemy.hit = [true, bullet]
             bullet.speed= .17
-            if(!enemy.despawning[0]) {
-              let explosionSfx = new Audio("assets/soundfx/fx/explosions/very-short-quiet-bass-boost.mp3")
-              explosionSfx.volume = this.sfxVolume
-              explosionSfx.play()
-            }
+            if(!enemy.despawning[0]) 
+            explosionSfx = new Audio("assets/soundfx/fx/explosions/very-short-quiet-bass-boost.mp3")
+            explosionSfx.volume = this.sfxVolume
+            explosionSfx.play()
           }
 
         }
@@ -385,7 +382,7 @@ export default class Game {
 
   // The main game loop should run about 60 times per second
   gameloop() {
-    this.handleAudioToggles()
+    handleAudioToggles()
 
     let spaceship = this.ships[0]
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
