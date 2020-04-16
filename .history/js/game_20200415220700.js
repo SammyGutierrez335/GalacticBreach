@@ -159,9 +159,6 @@ export default class Game {
       this.playerLevel += 1
       this.maxEnemies += 2
       this.levelUpSfx.play()
-      if (this.score > 10) {
-        this.levelUpSfx.volume= 1.5
-      }
       }
   }
 

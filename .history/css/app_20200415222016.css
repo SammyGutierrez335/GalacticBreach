@@ -51,10 +51,6 @@ canvas {
 }
 .audio-options{
   position: absolute;
-  top: 680px;
-  font-family: fantasy;
-  object-fit: cover; 
-  color: white;
-  font-size: 25;
-  font-weight: 800;
+  background: white;
+  top: 680px
 }

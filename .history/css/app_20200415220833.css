@@ -49,12 +49,7 @@ canvas {
   align-items: flex-start;
   justify-content: flex-end;
 }
-.audio-options{
+.audio-options-canvas{
   position: absolute;
-  top: 680px;
-  font-family: fantasy;
-  object-fit: cover; 
-  color: white;
-  font-size: 25;
-  font-weight: 800;
+  
 }

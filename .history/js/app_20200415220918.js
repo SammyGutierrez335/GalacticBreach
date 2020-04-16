@@ -7,6 +7,17 @@ let ctx = canvas.getContext("2d");
 canvas.width = 960;
 canvas.height = 480;
 let height = canvas.height
+let audioOptionsCanvas = document.createElement("canvas");
+let audioOptionsCanvasCtx = audioOptionsCanvas.getContext("2d");
+audioOptionsCanvas.width = 200;
+audioOptionsCanvas.height = 200;
+let sfxToggle = new Image()
+sfxToggle.src = "assets/menu/sfx.png"
+let musicToggle = new Image()
+musicToggle.src = "assets/menu/music.png"
+
+audioOptionsCanvasCtx.drawImage(musicToggle)
+audioOptionsCanvasCtx.drawImage(sfxToggle)
 
 
 let rightCanvas = document.createElement("canvas")
@@ -14,7 +25,7 @@ let rightCanvasCtx = canvas.getContext("2d")
 rightCanvas.width = 220
 rightCanvas.height = 480
 
-const game = new Game(canvas, ctx, rightCanvas, rightCanvasCtx);
+const game = new Game(canvas, ctx, rightCanvas, rightCanvasCtx, audioOptionsCanvas, audioOptionsCanvasCtx);
 
 
 
@@ -72,7 +83,7 @@ function keyDownListener(event) {
   if (event.key === "Enter" || event.key === "Return") {
     window.removeEventListener("keydown", keyDownListener)
     fadeOut(ctx)
-    let gameview = new GameView(game, canvas, ctx,)
+    let gameview = new GameView(game, canvas, ctx, audioOptionsCanvas, audioOptionsCanvasCtx)
     if(!gameview.start()){
       console.log("game over")
     }
@@ -87,6 +98,8 @@ function fadeOut() {
 
 let canvasElement = document.body.appendChild(canvas);
 let rightCanvasElement = document.body.appendChild(rightCanvas);
+let audioOptionsCanvasElement = document.body.appendChild(canvas);
 
 rightCanvasElement.setAttribute("class", "scoreboard-canvas")
 canvasElement.setAttribute("class", "canvas");
+audioOptionsCanvasElement.setAttribute("class", "audio-options-canvas")
