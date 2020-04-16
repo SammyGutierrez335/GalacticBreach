@@ -186,7 +186,7 @@ export default class Game {
     } else if (this.lives === 1) {
       this.damage3.volume = this.sfxVolume
       this.damage3.play();
-    } else if (this.lives <= 0) {
+    } else {
       this.slippynoooooo = true
     }
     this.lives -= 1;
@@ -255,7 +255,7 @@ export default class Game {
 
     ctx.fillText('Score : ' + this.score, 750, 50)
     ctx.fillText('Level : ' + this.playerLevel, 850, 50)
-    ctx.fillText('Lives : ' + this.lives ,50, 50 )
+    ctx.fillText('Lives : ' + (3 - this.numHits) ,50, 50 )
 
 
     //renders ship
@@ -423,11 +423,11 @@ export default class Game {
     if (this.slippynoooooo) {
       if (this.score > this.allTimeBest) {
         this.allTimeBest = this.score
-        this.battleMusic.pause()
-        window.cancelAnimationFrame(myReq)
-        this.spaceAmbience.play()
-              this.ctx.fillStyle = "#000000"
       }
+
+
+      this.ctx.fillStyle = "#000000"
+      // window.cancelAnimationFrame(myReq)
 
     }
   }

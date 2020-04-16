@@ -423,9 +423,7 @@ export default class Game {
     if (this.slippynoooooo) {
       if (this.score > this.allTimeBest) {
         this.allTimeBest = this.score
-        this.battleMusic.pause()
         window.cancelAnimationFrame(myReq)
-        this.spaceAmbience.play()
               this.ctx.fillStyle = "#000000"
       }
 
