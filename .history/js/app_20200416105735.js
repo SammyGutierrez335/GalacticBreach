@@ -9,12 +9,42 @@ canvas.height = 480;
 let height = canvas.height
 
 
-
 let rightCanvas = document.createElement("canvas")
 let rightCanvasCtx = canvas.getContext("2d")
 rightCanvas.width = 220
 rightCanvas.height = 480
+
 const game = new Game(canvas, ctx, rightCanvas, rightCanvasCtx);
+const musicToggle = document.getElementById('music-toggle-button');
+const musicToggleImage = document.getElementById('music-toggle-img');
+const sfxToggle = document.getElementById('sfx-toggle-button');
+const sfxToggleImage = document.getElementById('sfx-toggle-img');
+
+musicToggle.addEventListener("click", toggleMusic)
+musicToggle.addEventListener('focus', function () {this.blur()})
+
+sfxToggle.addEventListener("click", toggleSfx)
+sfxToggle.addEventListener('focus', function () { this.blur() })
+
+function toggleMusic() {
+  if (game.musicMuted) {
+    game.musicMuted = false
+    musicToggleImage.src = "assets/menu/music-toggle.png";
+  } else {
+    game.musicMuted = true
+    musicToggleImage.src = "assets/menu/music-toggle-mute.png"
+  }
+}
+
+function toggleSfx() {
+  if (game.sfxMuted) {
+    game.sfxMuted = false
+    sfxToggleImage.src = "assets/menu/sfx-toggle.png";
+  } else {
+    game.sfxMuted = true
+    sfxToggleImage.src = "assets/menu/sfx-toggle-mute.png"
+  }
+}
 
 //title assets
 let titleBackground= new Image()
@@ -23,8 +53,6 @@ let titleImage = new Image();
 titleImage.src = "assets/menu/blue/title.png";
 
 //controls
-let wasd = new Image()
-wasd.src = "assets/menu/controls/wasd.png"
 
 let frames = 32;
 let timerId = 0;
@@ -70,8 +98,10 @@ function keyDownListener(event) {
   if (event.key === "Enter" || event.key === "Return") {
     window.removeEventListener("keydown", keyDownListener)
     fadeOut(ctx)
-    let gameview = new GameView(game, canvas, ctx, rightCanvas, rightCanvasCtx)
-    gameview.start()
+    let gameview = new GameView(game, canvas, ctx,)
+    if(!gameview.start()){
+      console.log("game over")
+    }
   }
 }
 

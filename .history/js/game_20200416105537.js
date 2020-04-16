@@ -253,9 +253,9 @@ export default class Game {
     ctx.fillStyle = "#FFFFFF";
     ctx.font = "20px fantasy"   
 
-    ctx.fillText('Score : ' + this.score, 750, 50)
+    ctx.fillText('Score : ' + this.score, 50, 50)
     ctx.fillText('Level : ' + this.playerLevel, 850, 50)
-    ctx.fillText('Lives : ' + (3 - this.numHits) ,50, 50 )
+    
 
 
     //renders ship
@@ -311,6 +311,7 @@ export default class Game {
 
           enemy.moveEnemy(enemy.speed, 0, 0, this.canvas)
           if (this.checkCollision(spaceship, enemy) && !enemy.despawning[0] && !spaceship.isInvincible) {
+            console.log(this.numHits)
             this.takeDamage()
           }
 

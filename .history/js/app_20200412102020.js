@@ -71,7 +71,6 @@ function keyDownListener(event) {
     window.removeEventListener("keydown", keyDownListener)
     fadeOut(ctx)
     new GameView(game, canvas, ctx, rightCanvas, rightCanvasCtx).start()
-    console.log(start)
   }
 }
 
