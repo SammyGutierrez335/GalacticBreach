@@ -22,10 +22,7 @@ const sfxToggle = document.getElementById('sfx-toggle-button');
 const sfxToggleImage = document.getElementById('sfx-toggle-img');
 
 const playButton = document.getElementById('play-button');
-playButton.addEventListener("click", () =>  {
-  playButton.className += " hide"
-  gameview.start()
-})
+playButton.addEventListener("click", () => gameview.start())
 playButton.addEventListener('focus', function () { this.blur() })
 
 musicToggle.addEventListener("click", toggleMusic)
