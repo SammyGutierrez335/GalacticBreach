@@ -26,10 +26,12 @@ export default class Game {
     this.bgImageSrc2 = "assets/backgrounds/bg1-flipped-edged.png"
     this.shotsFired = false
     this.spaceAmbience = new Audio("assets/soundfx/Space Ambience.mp3")
-    this.spaceAmbienceOn = true
     this.battleMusic = new Audio("assets/soundfx/space-battle(quieter).mp3")
     this.levelUpSfx = new Audio("assets/soundfx/fx/incoming-radar(louder).mp3")
+    this.spaceAmbienceOff = true
+    this.battleMusicOff = true
     this.sfxMuted = false
+    this.musicMuted = false
     this.sfxVolume = 1
     this.musicVolume = 1
     this.damage1 = new Audio("assets/soundfx/fx/damage-1.mp3")
@@ -163,21 +165,18 @@ export default class Game {
   }
 
   checkMusic() {
+    if(!this.shotsFired) {
       this.spaceAmbience.volume = this.musicVolume
       this.spaceAmbience.play()
+      this.spaceAmbienceOff = false
+    } else {
+      this.battleMusic.volume = this.musicVolume
+    }
   }
 
   handleAudioToggles() {
    this.sfxMuted ? this.sfxVolume = 0 : this.sfxVolume = 1  
-    if (this.musicMuted && !this.shotsFired) {
-      this.spaceAmbience.pause()
-    } else if (!this.musicMuted && !this.shotsFired) { 
-      this.spaceAmbience.play()
-    } else if (this.musicMuted && this.shotsFired) {
-      this.battleMusic.pause()
-    } else if (!this.musicMuted && this.shotsFired) {
-      this.battleMusic.play()
-    }
+   this.musicMuted ? this.musicVolume = 0 : this.musicVolume = 1  
   }
 
   checkLevelUp() {

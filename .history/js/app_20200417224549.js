@@ -34,23 +34,25 @@ sfxToggle.addEventListener('focus', function () { this.blur() })
 function toggleMusic() {
   if (game.musicMuted) {
     game.musicMuted = false
+    game.handleAudioToggles()
     musicToggleImage.src = "assets/menu/music-toggle.png";
   } else {
     game.musicMuted = true
+    console.log(game.musicMuted)
     musicToggleImage.src = "assets/menu/music-toggle-mute.png"
   }
-  game.handleAudioToggles()
 }
 
 function toggleSfx() {
   if (game.sfxMuted) {
     game.sfxMuted = false
+    console.log(game.sfxMuted)
     sfxToggleImage.src = "assets/menu/sfx-toggle.png";
   } else {
     game.sfxMuted = true
+    console.log(game.sfxMuted)
     sfxToggleImage.src = "assets/menu/sfx-toggle-mute.png"
   }
-  game.handleAudioToggles()
 }
 
 

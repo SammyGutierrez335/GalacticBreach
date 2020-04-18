@@ -176,7 +176,7 @@ export default class Game {
     } else if (this.musicMuted && this.shotsFired) {
       this.battleMusic.pause()
     } else if (!this.musicMuted && this.shotsFired) {
-      this.battleMusic.play()
+      this.battleMusic.play()s
     }
   }
 
