@@ -54,7 +54,6 @@ let titleImage = new Image();
 titleImage.src = "assets/menu/blue/title.png";
 let playButton = new Image()
 playButton.src = "assets/menu/play-button.png"
-
 //controls
 
 let frames = 32;

@@ -62,15 +62,12 @@ canvas {
 }
 button{
   background:none;
-}
-
-.toggle {
   width: 50px;
   height: 50px;
 }
-.play {
-width: 100px;
-height: 50px;
+
+.toggle {
+
 }
 
 .hide {

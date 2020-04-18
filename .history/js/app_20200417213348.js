@@ -93,6 +93,7 @@ function draw() {
   ctx.fillRect(75, 0, 800, height, "black");
   ctx.drawImage(titleBackground, 75, backgroundY);
   ctx.drawImage(titleImage, 75, 0 + 150, 820, 200);
+  ctx.drawImage(playButton, 0, 0, 724, 314, 820, 200, 724, 314);
 }
 
 window.addEventListener('keydown', keyDownListener, false);
