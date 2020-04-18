@@ -112,8 +112,6 @@ function keyDownListener(event) {
     window.removeEventListener("keydown", keyDownListener)
     fadeOut(ctx)
     playButton.className += " hide"
-    let game = new Game(canvas, ctx, rightCanvas, rightCanvasCtx);
-    gameview.game = game
     gameview.start()
   }
 }

@@ -22,7 +22,6 @@ const sfxToggle = document.getElementById('sfx-toggle-button');
 const sfxToggleImage = document.getElementById('sfx-toggle-img');
 
 const playButton = document.getElementById('play-button');
-
 playButton.addEventListener("click", () =>  {
   playButton.className += " hide"
   let game = new Game(canvas, ctx, rightCanvas, rightCanvasCtx);
@@ -112,8 +111,6 @@ function keyDownListener(event) {
     window.removeEventListener("keydown", keyDownListener)
     fadeOut(ctx)
     playButton.className += " hide"
-    let game = new Game(canvas, ctx, rightCanvas, rightCanvasCtx);
-    gameview.game = game
     gameview.start()
   }
 }

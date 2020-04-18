@@ -440,8 +440,7 @@ export default class Game {
 
     if (this.slippynoooooo) {
       if (this.score > this.allTimeBest) {
-        var playButton = document.getElementById("play-button");
-        playButton.classList.remove("hide")
+        var playButton = document.getElementById("myElement");
         this.allTimeBest = this.score
         this.battleMusic.pause()
         window.cancelAnimationFrame(myReq)

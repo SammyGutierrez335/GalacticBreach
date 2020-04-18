@@ -14,21 +14,19 @@ let rightCanvasCtx = canvas.getContext("2d")
 rightCanvas.width = 220
 rightCanvas.height = 480
 
-
-let gameview = new GameView(null, canvas, ctx)
+const game = new Game(canvas, ctx, rightCanvas, rightCanvasCtx);
+let gameview = new GameView(game, canvas, ctx)
 const musicToggle = document.getElementById('music-toggle-button');
 const musicToggleImage = document.getElementById('music-toggle-img');
 const sfxToggle = document.getElementById('sfx-toggle-button');
 const sfxToggleImage = document.getElementById('sfx-toggle-img');
 
 const playButton = document.getElementById('play-button');
-
 playButton.addEventListener("click", () =>  {
   playButton.className += " hide"
-  let game = new Game(canvas, ctx, rightCanvas, rightCanvasCtx);
-  gameview.game = game
   gameview.start()
 })
+playButton.addEventListener('focus', function () { this.blur() })
 
 musicToggle.addEventListener("click", toggleMusic)
 musicToggle.addEventListener('focus', function () {this.blur()})
@@ -112,8 +110,6 @@ function keyDownListener(event) {
     window.removeEventListener("keydown", keyDownListener)
     fadeOut(ctx)
     playButton.className += " hide"
-    let game = new Game(canvas, ctx, rightCanvas, rightCanvasCtx);
-    gameview.game = game
     gameview.start()
   }
 }
