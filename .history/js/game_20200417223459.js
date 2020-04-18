@@ -172,7 +172,6 @@ export default class Game {
     } else {
       this.battleMusic.volume = this.musicVolume
       this.battleMusic.play()
-      this.battleMusicOff = false
     }
   }
 

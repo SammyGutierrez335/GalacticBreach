@@ -168,11 +168,9 @@ export default class Game {
     if(!this.shotsFired) {
       this.spaceAmbience.volume = this.musicVolume
       this.spaceAmbience.play()
-      this.spaceAmbienceOff = false
     } else {
       this.battleMusic.volume = this.musicVolume
       this.battleMusic.play()
-      this.battleMusicOff = false
     }
   }
 

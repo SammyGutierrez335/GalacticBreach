@@ -5,7 +5,9 @@ export default class GameView {
     this.canvas = canvas
   }
   start() {
-
+    if (this.game.battleMusicOff && this.game.spaceAmbienceOff) {
+      this.game.startMusic()
+    }
       this.game.addShip();
     // start the animation
     for (let i = 0; i < 384 ; i++) {

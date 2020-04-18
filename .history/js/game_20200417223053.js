@@ -43,7 +43,6 @@ export default class Game {
     this.addEnemy = this.addEnemy.bind(this)
     this.checkLevelUp = this.checkLevelUp.bind(this)
     this.handleAudioToggles = this.handleAudioToggles.bind(this)
-    this.startMusic = this.startMusic.bind(this)
     this.maxEnemies = 3
     this.allTimeBest = 0
     this.score = 0
@@ -166,14 +165,11 @@ export default class Game {
 
   startMusic() {
     if(!this.shotsFired) {
-      this.spaceAmbience.volume = this.musicVolume
-      this.spaceAmbience.play()
-      this.spaceAmbienceOff = false
-    } else {
-      this.battleMusic.volume = this.musicVolume
-      this.battleMusic.play()
-      this.battleMusicOff = false
-    }
+    this.spaceAmbience.volume = this.musicVolume
+    this.spaceAmbience.play()
+  } else {
+    this.battleMusic.volume = this.musicVolume
+    this.battleMusic.play()
   }
 
   handleAudioToggles() {
@@ -397,9 +393,6 @@ export default class Game {
 
   // The main game loop should run about 60 times per second
   gameloop() {
-    if (this.battleMusicOff && this.spaceAmbienceOff) {
-      this.startMusic()
-    }
     this.handleAudioToggles()
 
     let spaceship = this.ships[0]

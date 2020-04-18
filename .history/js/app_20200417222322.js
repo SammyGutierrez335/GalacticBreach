@@ -34,11 +34,11 @@ sfxToggle.addEventListener('focus', function () { this.blur() })
 function toggleMusic() {
   if (game.musicMuted) {
     game.musicMuted = false
-    console.log(game.musicMuted)
+    console.log(game.sfxMuted)
     musicToggleImage.src = "assets/menu/music-toggle.png";
   } else {
     game.musicMuted = true
-    console.log(game.musicMuted)
+    console.log(game.sfxMuted)
     musicToggleImage.src = "assets/menu/music-toggle-mute.png"
   }
 }

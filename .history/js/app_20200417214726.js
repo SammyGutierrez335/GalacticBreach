@@ -15,15 +15,12 @@ rightCanvas.width = 220
 rightCanvas.height = 480
 
 const game = new Game(canvas, ctx, rightCanvas, rightCanvasCtx);
-let gameview = new GameView(game, canvas, ctx)
 const musicToggle = document.getElementById('music-toggle-button');
 const musicToggleImage = document.getElementById('music-toggle-img');
 const sfxToggle = document.getElementById('sfx-toggle-button');
 const sfxToggleImage = document.getElementById('sfx-toggle-img');
 
 const playButton = document.getElementById('play-button');
-playButton.addEventListener("click", () => gameview.start())
-playButton.addEventListener('focus', function () { this.blur() })
 
 musicToggle.addEventListener("click", toggleMusic)
 musicToggle.addEventListener('focus', function () {this.blur()})
@@ -34,11 +31,9 @@ sfxToggle.addEventListener('focus', function () { this.blur() })
 function toggleMusic() {
   if (game.musicMuted) {
     game.musicMuted = false
-    console.log(game.musicMuted)
     musicToggleImage.src = "assets/menu/music-toggle.png";
   } else {
     game.musicMuted = true
-    console.log(game.musicMuted)
     musicToggleImage.src = "assets/menu/music-toggle-mute.png"
   }
 }
@@ -46,11 +41,9 @@ function toggleMusic() {
 function toggleSfx() {
   if (game.sfxMuted) {
     game.sfxMuted = false
-    console.log(game.sfxMuted)
     sfxToggleImage.src = "assets/menu/sfx-toggle.png";
   } else {
     game.sfxMuted = true
-    console.log(game.sfxMuted)
     sfxToggleImage.src = "assets/menu/sfx-toggle-mute.png"
   }
 }
@@ -61,6 +54,8 @@ let titleBackground= new Image()
 titleBackground.src = "assets/menu/background.png";
 let titleImage = new Image();
 titleImage.src = "assets/menu/blue/title.png";
+let playButton = new Image()
+playButton.src = "assets/menu/play-button.png"
 
 //controls
 
@@ -108,7 +103,9 @@ function keyDownListener(event) {
   if (event.key === "Enter" || event.key === "Return") {
     window.removeEventListener("keydown", keyDownListener)
     fadeOut(ctx)
-    gameview.start()
+    let gameview = new GameView(game, canvas, ctx,)
+    if(!gameview.start()){
+    }
   }
 }
 

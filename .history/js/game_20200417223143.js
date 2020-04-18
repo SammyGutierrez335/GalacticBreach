@@ -166,15 +166,13 @@ export default class Game {
 
   startMusic() {
     if(!this.shotsFired) {
-      this.spaceAmbience.volume = this.musicVolume
-      this.spaceAmbience.play()
-      this.spaceAmbienceOff = false
-    } else {
-      this.battleMusic.volume = this.musicVolume
-      this.battleMusic.play()
-      this.battleMusicOff = false
-    }
+    this.spaceAmbience.volume = this.musicVolume
+    this.spaceAmbience.play()
+  } else {
+    this.battleMusic.volume = this.musicVolume
+    this.battleMusic.play()
   }
+}
 
   handleAudioToggles() {
    this.sfxMuted ? this.sfxVolume = 0 : this.sfxVolume = 1  
@@ -397,9 +395,6 @@ export default class Game {
 
   // The main game loop should run about 60 times per second
   gameloop() {
-    if (this.battleMusicOff && this.spaceAmbienceOff) {
-      this.startMusic()
-    }
     this.handleAudioToggles()
 
     let spaceship = this.ships[0]
