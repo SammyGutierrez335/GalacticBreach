@@ -1,4 +1,4 @@
-
+import Game from "./game";
 import GameView from "./game_view";
 
 
@@ -15,16 +15,50 @@ rightCanvas.width = 220
 rightCanvas.height = 480
 
 
-let gameview = new GameView(canvas, ctx, rightCanvas, rightCanvasCtx)
+let gameview = new GameView(null, canvas, ctx)
 
 
 const playButton = document.getElementById('play-button');
 
 playButton.addEventListener("click", () =>  {
   playButton.className += " hide"
+  let game = new Game(canvas, ctx, rightCanvas, rightCanvasCtx);
+  gameview.game = game
   gameview.start()
 })
 
+const musicToggle = document.getElementById('music-toggle-button');
+const musicToggleImage = document.getElementById('music-toggle-img');
+const sfxToggle = document.getElementById('sfx-toggle-button');
+const sfxToggleImage = document.getElementById('sfx-toggle-img');
+
+musicToggle.addEventListener("click", toggleMusic)
+musicToggle.addEventListener('focus', function () {this.blur()})
+
+sfxToggle.addEventListener("click", toggleSfx)
+sfxToggle.addEventListener('focus', function () { this.blur() })
+
+function toggleMusic() {
+  if (game.musicMuted) {
+    game.musicMuted = false
+    musicToggleImage.src = "assets/menu/music-toggle.png";
+  } else {
+    game.musicMuted = true
+    musicToggleImage.src = "assets/menu/music-toggle-mute.png"
+  }
+  game.handleAudioToggles()
+}
+
+function toggleSfx() {
+  if (game.sfxMuted) {
+    game.sfxMuted = false
+    sfxToggleImage.src = "assets/menu/sfx-toggle.png";
+  } else {
+    game.sfxMuted = true
+    sfxToggleImage.src = "assets/menu/sfx-toggle-mute.png"
+  }
+  game.handleAudioToggles()
+}
 
 
 //title assets
@@ -80,6 +114,8 @@ function keyDownListener(event) {
     window.removeEventListener("keydown", keyDownListener)
     fadeOut(ctx)
     playButton.className += " hide"
+    let game = new Game(canvas, ctx, rightCanvas, rightCanvasCtx);
+    gameview.game = game
     gameview.start()
   }
 }

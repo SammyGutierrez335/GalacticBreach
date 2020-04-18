@@ -22,10 +22,10 @@ export default class GameView {
   toggleMusic() {
     if (this.game.musicMuted) {
       this.game.musicMuted = false
-      this.musicToggleImage.src = "assets/menu/music-toggle.png";
+      musicToggleImage.src = "assets/menu/music-toggle.png";
     } else {
       this.game.musicMuted = true
-      this.musicToggleImage.src = "assets/menu/music-toggle-mute.png"
+      musicToggleImage.src = "assets/menu/music-toggle-mute.png"
     }
     this.game.handleAudioToggles()
   }
@@ -33,10 +33,10 @@ export default class GameView {
   toggleSfx() {
     if (this.game.sfxMuted) {
       this.game.sfxMuted = false
-      this.sfxToggleImage.src = "assets/menu/sfx-toggle.png";
+      sfxToggleImage.src = "assets/menu/sfx-toggle.png";
     } else {
       this.game.sfxMuted = true
-      this.sfxToggleImage.src = "assets/menu/sfx-toggle-mute.png"
+      sfxToggleImage.src = "assets/menu/sfx-toggle-mute.png"
     }
     this.game.handleAudioToggles()
   }

@@ -15,7 +15,7 @@ rightCanvas.width = 220
 rightCanvas.height = 480
 
 
-let gameview = new GameView(canvas, ctx, rightCanvas, rightCanvasCtx)
+let gameview = new GameView(null, canvas, ctx)
 
 
 const playButton = document.getElementById('play-button');

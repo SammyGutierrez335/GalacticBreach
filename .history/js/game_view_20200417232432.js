@@ -1,31 +1,28 @@
-import Game from "./game";
-
 export default class GameView {
-  constructor(canvas, ctx, rightCanvas, rightCanvasCtx) {
+  constructor(canvas, ctx) {
     this.ctx = ctx;
     this.canvas = canvas
-    this.game = new Game(canvas, ctx, rightCanvas, rightCanvasCtx)
     this.musicToggle = document.getElementById('music-toggle-button');
     this.musicToggleImage = document.getElementById('music-toggle-img');
     this.sfxToggle = document.getElementById('sfx-toggle-button');
     this.sfxToggleImage = document.getElementById('sfx-toggle-img');
+
     this.toggleMusic = this.toggleMusic.bind(this)
     this.toggleSfx = this.toggleSfx.bind(this)
-    
-    this.musicToggle.addEventListener("click", this.toggleMusic)
-    this.musicToggle.addEventListener('focus', function () { this.blur() })
+    musicToggle.addEventListener("click", this.toggleMusic)
+    musicToggle.addEventListener('focus', function () { this.blur() })
 
-    this.sfxToggle.addEventListener("click", this.toggleSfx)
-    this.sfxToggle.addEventListener('focus', function () { this.blur() })
+    sfxToggle.addEventListener("click", this.toggleSfx)
+    sfxToggle.addEventListener('focus', function () { this.blur() })
   }
 
   toggleMusic() {
     if (this.game.musicMuted) {
       this.game.musicMuted = false
-      this.musicToggleImage.src = "assets/menu/music-toggle.png";
+      musicToggleImage.src = "assets/menu/music-toggle.png";
     } else {
       this.game.musicMuted = true
-      this.musicToggleImage.src = "assets/menu/music-toggle-mute.png"
+      musicToggleImage.src = "assets/menu/music-toggle-mute.png"
     }
     this.game.handleAudioToggles()
   }
@@ -33,10 +30,10 @@ export default class GameView {
   toggleSfx() {
     if (this.game.sfxMuted) {
       this.game.sfxMuted = false
-      this.sfxToggleImage.src = "assets/menu/sfx-toggle.png";
+      sfxToggleImage.src = "assets/menu/sfx-toggle.png";
     } else {
       this.game.sfxMuted = true
-      this.sfxToggleImage.src = "assets/menu/sfx-toggle-mute.png"
+      sfxToggleImage.src = "assets/menu/sfx-toggle-mute.png"
     }
     this.game.handleAudioToggles()
   }
