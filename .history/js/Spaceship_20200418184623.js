@@ -42,19 +42,26 @@ export default class Spaceship {
 
 
   moveShip(canvas) {
-    this.thruster.pause()
     let deltaX = this.speed
     let deltaY = this.speed
 
-      if (this.keyPresses.w) {
+    if (this.keyPresses.w) {
       this.deltaY = -(deltaY)
+      this.thruster.pause()
+      // moveShip(0, -spaceShip.speed, FLYING_UP)
     } else if (this.keyPresses.s) {
+      this.thruster.pause()
       this.deltaY = deltaY
-    } else if (this.keyPresses.a) {
+      // moveShip(0, spaceShip.speed, FLYING_DOWN)
+    }
+    if (this.keyPresses.a) {
+      this.thruster.pause()
       this.deltaX = -(deltaX) + 1
+      // moveShip(-spaceShip.speed, 0, FLYING_LEFT)
     } else if (this.keyPresses.d) {
       this.deltaX = deltaX + 3
       this.thrust = true
+      // moveShip(spaceShip.speed, 0, FLYING_RIGHT)
     }
 
     //stop moving if going out of bounds

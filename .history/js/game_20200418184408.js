@@ -290,11 +290,9 @@ export default class Game {
       thruster.src = "assets/player/thrust_playership.png"
       ctx.drawImage(thruster, 0, 0, 128, 128,
         spaceship.x - 90, spaceship.y - 20, 128, 128)
-      spaceship.thruster.volume = .6
-      spaceship.thruster.play()
       spaceship.thrust = false
+      spaceship.thruster = false
       }
-
     if(spaceship.isInvincible) {
       spaceshipImage.src = "assets/player/playership_ghosted.png"
      

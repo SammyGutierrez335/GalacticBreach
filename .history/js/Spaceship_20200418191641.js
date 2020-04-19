@@ -42,11 +42,10 @@ export default class Spaceship {
 
 
   moveShip(canvas) {
-    this.thruster.pause()
     let deltaX = this.speed
     let deltaY = this.speed
 
-      if (this.keyPresses.w) {
+    if (this.keyPresses.w) {
       this.deltaY = -(deltaY)
     } else if (this.keyPresses.s) {
       this.deltaY = deltaY
