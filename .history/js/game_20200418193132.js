@@ -290,7 +290,7 @@ export default class Game {
       thruster.src = "assets/player/thrust_playership.png"
       ctx.drawImage(thruster, 0, 0, 128, 128,
         spaceship.x - 90, spaceship.y - 20, 128, 128)
-      this.sfxMuted ? spaceship.thruster.volume = 0 :spaceship.thruster.volume = .6;
+      this.sfxMuted ? spaceship.thruster.volume = 0 :spaceship.thruster.volume = .6
       spaceship.thruster.play()
       spaceship.thrust = false
       }
