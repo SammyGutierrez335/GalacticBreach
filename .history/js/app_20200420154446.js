@@ -15,7 +15,7 @@ rightCanvas.width = 220
 rightCanvas.height = 480
 
 
-
+let gameview = new GameView(canvas, ctx, rightCanvas, rightCanvasCtx)
 
 
 const playButton = document.getElementById('play-button');
@@ -81,7 +81,7 @@ function keyDownListener(event) {
     window.removeEventListener("keydown", keyDownListener)
     fadeOut(ctx)
     playButton.className += " hide"
-    new GameView(canvas, ctx, rightCanvas, rightCanvasCtx).start()
+    gameview.start()
   }
 }
 
