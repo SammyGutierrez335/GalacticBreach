@@ -457,9 +457,8 @@ export default class Game {
   }
 
   renderGameOver(){
-    this.ctx.fillText('Score : ' + this.score, 750, 50)
-    this.ctx.fillText('Level : ' + this.playerLevel, 850, 50)
-    this.ctx.fillText('Lives : ' + this.lives, 50, 50)
-    debugger
+    ctx.fillText('Score : ' + this.score, 750, 50)
+    ctx.fillText('Level : ' + this.playerLevel, 850, 50)
+    ctx.fillText('Lives : ' + this.lives, 50, 50)
   }
 }

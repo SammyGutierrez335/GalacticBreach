@@ -29,7 +29,7 @@ canvas {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  text-shadow: 1px 1px 0px #3d7cdd;
+  text-shadow: 1px 1px 20px #3d7cdd;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -78,9 +78,9 @@ button{
 .play {
 width: 100px;
 height: 50px;
-  position: relative;
-  bottom: 70px;
-  right: 100px;
+  position: absolute;
+  left: 37%;
+  top: 80%;
   font-family: fantasy;
 }
 

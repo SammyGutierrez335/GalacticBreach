@@ -35,7 +35,7 @@ titleImage.src = "assets/menu/blue/title.png";
 
 //controls
 
-let frames = 32;
+let frames = 24;
 let timerId = 0;
 let intervalId = 0;
 

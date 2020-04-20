@@ -79,8 +79,7 @@ button{
 width: 100px;
 height: 50px;
   position: relative;
-  bottom: 70px;
-  right: 100px;
+  bottom: 10px;
   font-family: fantasy;
 }
 

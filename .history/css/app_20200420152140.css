@@ -78,9 +78,9 @@ button{
 .play {
 width: 100px;
 height: 50px;
-  position: relative;
-  bottom: 70px;
-  right: 100px;
+  position: absolute;
+  left: 37%;
+  top: 80%;
   font-family: fantasy;
 }
 

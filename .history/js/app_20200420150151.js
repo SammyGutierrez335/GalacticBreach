@@ -35,18 +35,19 @@ titleImage.src = "assets/menu/blue/title.png";
 
 //controls
 
-let frames = 32;
-let timerId = 0;
-let intervalId = 0;
+// let frames = 32;
+// let timerId = 0;
+// let intervalId = 0;
 
-//animates background
-timerId = setInterval(update, 1000 / frames);
-
+// //animates background
+// timerId = setInterval(update, 1000 / frames);
+requestAnimationFrame(update)
 
 function update() {
   clear(ctx);
   move();
   draw();
+  let myReq = window.requestAnimationFrame(this.gameloop);
 }
 
 function clear(ctx) {

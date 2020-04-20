@@ -42,13 +42,13 @@ export default class Game {
     this.checkLevelUp = this.checkLevelUp.bind(this)
     this.handleAudioToggles = this.handleAudioToggles.bind(this)
     this.checkMusic = this.checkMusic.bind(this)
-    this.renderGameOver = this.renderGameOver.bind(this)
     this.maxEnemies = 3
     this.allTimeBest = 0
     this.score = 0
     this.playerLevel = 1
     this.lives = 3
     this.slippynoooooo = false
+    this.renderGameOver = this.renderGameOver.bind(this)
   }
 
 
@@ -454,12 +454,5 @@ export default class Game {
       }
 
     }
-  }
-
-  renderGameOver(){
-    this.ctx.fillText('Score : ' + this.score, 750, 50)
-    this.ctx.fillText('Level : ' + this.playerLevel, 850, 50)
-    this.ctx.fillText('Lives : ' + this.lives, 50, 50)
-    debugger
   }
 }

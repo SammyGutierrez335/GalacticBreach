@@ -41,6 +41,10 @@ let intervalId = 0;
 
 //animates background
 timerId = setInterval(update, 1000 / frames);
+requestAnimationFrame(this.update)
+let backgroundY = 0;
+let speed = .4;
+let bounce = false
 
 
 function update() {
@@ -52,10 +56,6 @@ function update() {
 function clear(ctx) {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
-
-let backgroundY = 0;
-let speed = .4;
-let bounce = false
 
 function move() {
   backgroundY -= speed;

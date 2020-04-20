@@ -41,7 +41,7 @@ let intervalId = 0;
 
 //animates background
 timerId = setInterval(update, 1000 / frames);
-
+let menuReq = window.requestAnimationFrame(this.update);
 
 function update() {
   clear(ctx);
