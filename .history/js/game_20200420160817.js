@@ -448,10 +448,11 @@ export default class Game {
         this.battleMusic.pause()
         window.cancelAnimationFrame(myReq)
               this.ctx.fillStyle = "#000000"
-        var gameOver = document.getElementById("game-over-title");
-        var score = document.createTextNode(`Your Score: ${this.score}`);        
- 
-        document.getElementById("game-over-score").appendChild(score);
+        var gameOver = document.getElementById("game-over-score");
+        var node = document.createElement("p");
+        var score = document.createTextNode(this.score);        
+        node.appendChild(score)                 // Create a <li> node
+        document.getElementById("game-over-title").appendChild(node);
         gameOver.classList.remove("hide")
       }
 

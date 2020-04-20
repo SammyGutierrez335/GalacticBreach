@@ -87,7 +87,7 @@ height: 50px;
 #game-over {
 position: absolute;
 top: 31%;
-    left: 35%;
+    left: 28%;
   font-family: fantasy;
   color: rgb(109,158,226);
   font-size: 48;
@@ -96,7 +96,7 @@ top: 31%;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  text-shadow: 1.5px 1.5px 0px #3d7cdd;
+  text-shadow: 5px 1px 0px #3d7cdd  rgb(109,158,226);;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
