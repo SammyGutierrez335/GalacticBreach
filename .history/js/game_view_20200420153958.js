@@ -43,9 +43,7 @@ export default class GameView {
 
   start() {
     var gameOver = document.getElementById("game-over-title");
-    if (gameOver.className !== "hide") {
-      gameOver.className += "hide"
-    }
+    gameOver.className += " hide"
       this.game.addShip();
 
     for (let i = 0; i < 384 ; i++) {

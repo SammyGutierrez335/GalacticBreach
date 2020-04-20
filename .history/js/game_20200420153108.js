@@ -42,6 +42,7 @@ export default class Game {
     this.checkLevelUp = this.checkLevelUp.bind(this)
     this.handleAudioToggles = this.handleAudioToggles.bind(this)
     this.checkMusic = this.checkMusic.bind(this)
+    this.renderGameOver = this.renderGameOver.bind(this)
     this.maxEnemies = 3
     this.allTimeBest = 0
     this.score = 0
@@ -448,8 +449,9 @@ export default class Game {
         this.battleMusic.pause()
         window.cancelAnimationFrame(myReq)
               this.ctx.fillStyle = "#000000"
-        var gameOver = document.getElementById("game-over-title");
-        gameOver.classList.remove("hide")
+              this.renderGameOver()
+        var gameOver = document.getElementById("play-button");
+        playButton.classList.remove("hide")
       }
 
     }

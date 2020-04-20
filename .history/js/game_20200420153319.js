@@ -448,7 +448,8 @@ export default class Game {
         this.battleMusic.pause()
         window.cancelAnimationFrame(myReq)
               this.ctx.fillStyle = "#000000"
-        var gameOver = document.getElementById("game-over-title");
+              this.renderGameOver()
+        var gameOver = document.getElementById("game-over");
         gameOver.classList.remove("hide")
       }
 
