@@ -440,11 +440,10 @@ export default class Game {
   
 
     if (this.slippynoooooo) {
-      var playButton = document.getElementById("play-button");
-      playButton.classList.remove("hide")
       if (this.score >= this.allTimeBest) {
-      this.allTimeBest = this.score
-    }
+        var playButton = document.getElementById("play-button");
+        playButton.classList.remove("hide")
+        this.allTimeBest = this.score
         this.battleMusic.pause()
         window.cancelAnimationFrame(myReq)
               this.ctx.fillStyle = "#000000"
@@ -453,6 +452,7 @@ export default class Game {
  
         document.getElementById("game-over-score").appendChild(score);
         gameOver.classList.remove("hide")
+      }
 
     }
   }
