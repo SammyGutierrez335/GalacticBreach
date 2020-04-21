@@ -44,11 +44,10 @@ export default class GameView {
   start() {
     var gameOver = document.getElementById("game-over-title");
     var gameOverScore = document.getElementById("game-over-score");
-
+    
     if (gameOver.className !== "hide") {
-      gameOver.className += "hide"
       gameOverScore.className += "hide"
-      gameOverScore.removeChild(gameOverScore.childNodes[0])
+      gameOver.className += "hide"
     }
       this.game.addShip();
       for (let i = 0; i < 384 ; i++) {

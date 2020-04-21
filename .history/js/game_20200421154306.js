@@ -450,11 +450,7 @@ export default class Game {
         this.ctx.fillStyle = "#000000"
         var gameOver = document.getElementById("game-over-title");
         var score = document.createTextNode(`Your Score: ${this.score}`);        
-        
-        if(document.getElementById("game-over-score")) {
-          document.getElementById("game-over-score").className -= "hide"
-        }
-        
+ 
         document.getElementById("game-over-score").appendChild(score);
         gameOver.classList.remove("hide")
 

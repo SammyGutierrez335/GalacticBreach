@@ -452,7 +452,7 @@ export default class Game {
         var score = document.createTextNode(`Your Score: ${this.score}`);        
         
         if(document.getElementById("game-over-score")) {
-          document.getElementById("game-over-score").className -= "hide"
+          document.getElementById("game-over-score").removeClassName("hide")
         }
         
         document.getElementById("game-over-score").appendChild(score);
