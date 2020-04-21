@@ -11,7 +11,7 @@ export default class GameView {
     this.sfxToggleImage = document.getElementById('sfx-toggle-img');
     this.toggleMusic = this.toggleMusic.bind(this)
     this.toggleSfx = this.toggleSfx.bind(this)
-    this.start = this.start.bind(this)
+    
     this.musicToggle.addEventListener("click", this.toggleMusic)
     this.musicToggle.addEventListener('focus', function () { this.blur() })
 
@@ -49,11 +49,15 @@ export default class GameView {
       gameOver.className += "hide"
     }
       this.game.addShip();
-      for (let i = 0; i < 384 ; i++) {
-        this.game.CYCLE_LOOP.push(i);
-      }
-      
-      this.game.addEnemy();
-        requestAnimationFrame(this.game.gameloop)
+
+    for (let i = 0; i < 384 ; i++) {
+      this.game.CYCLE_LOOP.push(i);
+    }
+
+    for (let i = 0; i < this.game.maxEnemies; i++) {
+      this.game.addEnemy()
+    }
+    
+    requestAnimationFrame(this.game.gameloop)
   }
 }

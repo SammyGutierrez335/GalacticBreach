@@ -54,6 +54,11 @@ export default class GameView {
       }
       
       this.game.addEnemy();
+    while (this.game.enemies.length < this.game.maxEnemies) {
+      this.game.addEnemy()
+      if (this.game.enemies.length >= this.game.maxEnemies){
         requestAnimationFrame(this.game.gameloop)
+      }
+    }
   }
 }

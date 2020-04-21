@@ -49,11 +49,16 @@ export default class GameView {
       gameOver.className += "hide"
     }
       this.game.addShip();
-      for (let i = 0; i < 384 ; i++) {
-        this.game.CYCLE_LOOP.push(i);
-      }
-      
-      this.game.addEnemy();
+
+    for (let i = 0; i < 384 ; i++) {
+      this.game.CYCLE_LOOP.push(i);
+    }
+
+    while (this.game.enemies.length < this.game.maxEnemies) {
+      this.game.addEnemy()
+      if (this.game.enemies.length >= this.game.maxEnemies){
         requestAnimationFrame(this.game.gameloop)
+      }
+    }
   }
 }
