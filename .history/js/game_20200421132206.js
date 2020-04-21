@@ -55,6 +55,7 @@ export default class Game {
 
 
   addEnemy() {
+    if (this.enemies.length < this.maxEnemies) {
       let imgSrc = ["assets/attackers/atom.png", "assets/attackers/mohican.png", "assets/attackers/satelite.png"]
       let frames = [24, 24, 16]
       let randomIndex = Math.floor(Math.random() * this.playerLevel)
@@ -76,6 +77,7 @@ export default class Game {
       enemy.enemyImage.onload = () => {
         this.enemies.push(enemy)
       };
+    }
   };
 
   getRandomX() {
