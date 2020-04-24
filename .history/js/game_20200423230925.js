@@ -43,6 +43,7 @@ export default class Game {
     this.handleAudioToggles = this.handleAudioToggles.bind(this)
     this.checkMusic = this.checkMusic.bind(this)
     this.maxEnemies = 3
+    this.allTimeBest = 0
     this.score = 0
     this.playerLevel = 1
     this.lives = 3
@@ -448,10 +449,9 @@ export default class Game {
         allTimeBest = 0
       }
 
-      if (this.score > allTimeBest) {
-        localStorage.setItem("High Score", this.score)
-        allTimeBest = this.score
-      }
+        if (this.score > allTimeBest) {
+          localStorage.setItem("High Score", this.score)
+        }
 
         this.battleMusic.pause()
         window.cancelAnimationFrame(myReq)

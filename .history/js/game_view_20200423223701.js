@@ -45,15 +45,12 @@ export default class GameView {
     var gameOver = document.getElementById("game-over-title");
     var gameOverScore = document.getElementById("game-over-score");
     let gameOverHighScore = document.getElementById("game-over-high-score")
-    debugger
 
     if (gameOver.className !== "hide") {
       gameOver.className += "hide"
-      
-      gameOverScore.removeChild(gameOverScore.childNodes[0])
-      gameOverHighScore.removeChild(gameOverHighScore.childNodes[0])
       gameOverScore.className += "hide"
-      gameOverHighScore.className += "hide"
+      gameOverScore.removeChild(gameOverScore.childNodes[0])
+      gameOverHighScore.removeChild(gameOverHighScore.childNode[0])
     }
       this.game.addShip();
       for (let i = 0; i < 384 ; i++) {

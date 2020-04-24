@@ -51,7 +51,7 @@ export default class GameView {
       gameOver.className += "hide"
       
       gameOverScore.removeChild(gameOverScore.childNodes[0])
-      gameOverHighScore.removeChild(gameOverHighScore.childNodes[0])
+      gameOverHighScore.removeChild(gameOverHighScore.childNode[0])
       gameOverScore.className += "hide"
       gameOverHighScore.className += "hide"
     }

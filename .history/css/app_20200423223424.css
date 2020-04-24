@@ -86,7 +86,7 @@ height: 50px;
 
 #game-over {
   position: absolute;
-  top: 25%;
+  top: 31%;
   left: 35%;
   font-family: fantasy;
   color: rgb(109,158,226);
@@ -102,13 +102,13 @@ height: 50px;
 
 #game-over-score {
   position: relative;
-  top: 245px;
+  top: 200px;
   left: -275px;
 }
 
 #game-over-high-score {
   position: relative;
-  top: 330px;
+  top: 300px;
   left: -620px;
 }
 

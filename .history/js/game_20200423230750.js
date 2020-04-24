@@ -43,6 +43,7 @@ export default class Game {
     this.handleAudioToggles = this.handleAudioToggles.bind(this)
     this.checkMusic = this.checkMusic.bind(this)
     this.maxEnemies = 3
+    this.allTimeBest = 0
     this.score = 0
     this.playerLevel = 1
     this.lives = 3
@@ -442,23 +443,21 @@ export default class Game {
       var playButton = document.getElementById("play-button");
       playButton.classList.remove("hide")
 
-      let allTimeBest = localStorage.getItem("High Score")
-     
+      var allTimeBest = localStorage.getItem("High Score")
       if (!allTimeBest) {
         allTimeBest = 0
       }
 
-      if (this.score > allTimeBest) {
-        localStorage.setItem("High Score", this.score)
-        allTimeBest = this.score
-      }
+        if (this.score > allTimeBest) {
+          localStorage.setItem("High Score", this.score)
+        }
 
         this.battleMusic.pause()
         window.cancelAnimationFrame(myReq)
         this.ctx.fillStyle = "#000000"
         var gameOver = document.getElementById("game-over-title");
         var score = document.createTextNode(`Your Score: ${this.score}`);        
-        let highScore = document.createTextNode(`Your All Time Best: ${allTimeBest}`)
+        let allTimeBest = document.createTextNode(`Your All Time Best: ${allTimeBest}`)
         
         if(document.getElementById("game-over-score")) {
           document.getElementById("game-over-score").classList.remove("hide")
@@ -466,7 +465,7 @@ export default class Game {
         }
         
         document.getElementById("game-over-score").appendChild(score);
-      document.getElementById("game-over-high-score").appendChild(highScore);
+        document.getElementById("game-over-high-score").appendChild(allTimeBest);
 
         gameOver.classList.remove("hide")
 
