@@ -49,7 +49,6 @@ export default class GameView {
       gameOver.className += "hide"
       gameOverScore.className += "hide"
       gameOverScore.removeChild(gameOverScore.childNodes[0])
-      gameOverHighScore.removeChild(gameOverHighScore.childNode[0])
     }
       this.game.addShip();
       for (let i = 0; i < 384 ; i++) {

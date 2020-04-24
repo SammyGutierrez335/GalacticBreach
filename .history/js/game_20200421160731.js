@@ -450,15 +450,13 @@ export default class Game {
         this.ctx.fillStyle = "#000000"
         var gameOver = document.getElementById("game-over-title");
         var score = document.createTextNode(`Your Score: ${this.score}`);        
-        let allTimeBest = document.createTextNode(`Your All Time Best: ${this.allTimeBest}`)
-
+        let score = document.createTextNode(`Your All Time Best: ${this.allTimeBest}`)
         if(document.getElementById("game-over-score")) {
           document.getElementById("game-over-score").className -= "hide"
-          document.getElementById("game-over-high-score").className -= "hide"
         }
         
         document.getElementById("game-over-score").appendChild(score);
-      document.getElementById("game-over-high-score").appendChild(allTimeBest);
+      document.getElementById("game-over-score").appendChild(allTimeBest);
         gameOver.classList.remove("hide")
 
     }

@@ -458,7 +458,7 @@ export default class Game {
         }
         
         document.getElementById("game-over-score").appendChild(score);
-      document.getElementById("game-over-high-score").appendChild(allTimeBest);
+      document.getElementById("game-over-score").appendChild(allTimeBest);
         gameOver.classList.remove("hide")
 
     }

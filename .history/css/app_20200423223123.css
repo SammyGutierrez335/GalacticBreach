@@ -103,13 +103,13 @@ height: 50px;
 #game-over-score {
   position: relative;
   top: 200px;
-  left: -275px;
+  left: -250px;
 }
 
 #game-over-high-score {
   position: relative;
   top: 300px;
-  left: -620px;
+  left: -650px;
 }
 
 .hide {
