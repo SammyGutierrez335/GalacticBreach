@@ -18,6 +18,7 @@ export default class Game {
     this.enemies = [];
     this.bulletImage = new Image();
     this.bullets = [];
+    this.maxbullets = 3
     this.bgImageX = 0;
     this.bgImageFlippedX = canvas.width
     this.moonX =1800
@@ -415,7 +416,7 @@ export default class Game {
     }
 
     //fires bullet
-    if (spaceship.keyPresses[" "]) {
+    if (spaceship.keyPresses[" "] && this.bullets.length < this.maxbullets) {
       let bullet = new Bullet({
         speed: 6,
         x: spaceship.x + 13,
