@@ -327,7 +327,7 @@ export default class Game {
           if (enemy.imgSrc === "assets/attackers/mohican.png") {
             enemy.moveEnemy(enemy.speed, spaceship.x, spaceship.y)
           } else {
-            enemy.moveEnemy(enemy.speed)
+              enemy.moveEnemy(enemy.speed)
           }
           
           
