@@ -20,7 +20,17 @@ export default class Enemy {
 
   
   //checks for inbounds
-  moveEnemy(deltaX) {
+  moveEnemy(deltaX, spaceX, spaceshipY) {
     this.x -= deltaX;
+  
+    if (spaceshipY) {
+      if (spaceshipY > this.y)
+          this.y += .5
+      else {
+          this.y -= .5
+      }
+    }
   }
+
+
 }

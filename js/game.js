@@ -324,7 +324,13 @@ export default class Game {
           }
           enemyImage = enemy.enemyImage
 
-          enemy.moveEnemy(enemy.speed, 0, 0, this.canvas)
+          if (enemy.imgSrc === "assets/attackers/mohican.png") {
+            enemy.moveEnemy(enemy.speed, spaceship.x, spaceship.y)
+          } else {
+            enemy.moveEnemy(enemy.speed)
+          }
+          
+          
           if (this.checkCollision(spaceship, enemy) && !enemy.despawning[0] && !spaceship.isInvincible) {
             this.takeDamage()
           }
