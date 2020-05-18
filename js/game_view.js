@@ -45,7 +45,6 @@ export default class GameView {
     var gameOver = document.getElementById("game-over-title");
     var gameOverScore = document.getElementById("game-over-score");
     let gameOverHighScore = document.getElementById("game-over-high-score")
-    debugger
 
     if (gameOver.className !== "hide") {
       gameOver.className += "hide"
