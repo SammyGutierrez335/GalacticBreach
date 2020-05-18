@@ -14,9 +14,7 @@ Developed exclusively with JavaScript, HTML5, Canvas, and CSS
 
 # Landing Page
 
-![](README_images/game-menu.png)
-
-
+![](README_images/Menu.png)
 
 
 # Coding Challenges     
@@ -51,6 +49,8 @@ Using this property I could then ensure that the image src would only change whe
     
 ```
 
+![](README_images/invincibilityFrames.png)
+
 Decrementing player lives upon being hit posed a unique challenge due to the nature of the requestAnimationFrame function. Since it called approximately 60 times per second a player would be hit 60 times per second and instantly game over upon first collding with an enemy. I created a variable that tracked 120 invincibility frames (approximately 2 seconds) and coded a change in this property when a player collided with an enemy and initiated the decrementing. The switch in this property would also change the image source to a ghosted version to inform the user that they were currently invulerable to further damage. Upon reaching 0 invincibilityFrames, a user is no longer invincible and the playership image is reset back to normal.
 
 ```javascript
@@ -70,16 +70,14 @@ Decrementing player lives upon being hit posed a unique challenge due to the nat
 
 # Upcoming Features
 
-## Satelite Drone will either take multiple hits to destroy or trigger an Alarm/Increase In max enemies.
+### Satelite Drone will either take multiple hits to destroy or trigger an Alarm/Increase In max enemies.
 
-## Power Ups!!! 
+### Power Ups!!! 
+Curent ideas include: 
+* Unlock maximum fire rate for a short period of time (current limit is 4 on screen at once)
+* Speed Boost
+* Extra Life
+* Bomb that explode everything on screen (ala Star Fox)
 
-    ### Curent ideas include: 
-    #### Unlock maximum fire rate for a short period of time (current limit is 4 on screen at once)
-    #### Speed Boost
-    #### Extra Life
-    #### Bomb that explode everything on screen (ala Star Fox)
-    
-## Boss Battle!!! 
-
-## Story Video At the Beginning/Ending Credits
+### Boss Battle!!! 
+### Story Video At the Beginning/Ending Credits
