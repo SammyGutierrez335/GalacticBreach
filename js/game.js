@@ -226,6 +226,8 @@ export default class Game {
       this.background2Rendering = true
     }
 
+
+    //waits until a background is about to rerender to replace with new background image.
     if (this.playerLevel > 5 && this.backgroundRendering) {
       this.bgImageSrc= "assets/backgrounds/bg2.png";
     }
@@ -241,6 +243,8 @@ export default class Game {
     if (this.playerLevel > 15 && this.background2Rendering) {
       this.bgImageSrc2 = "assets/backgrounds/bg3.png";
     }
+
+    // increases this.bgImageX to simulate an increase in player's ship speed.
     ctx.drawImage(bgImage, this.bgImageX -= 5 + this.playerLevel, 0)
     ctx.drawImage(bgImageFlipped, this.bgImageFlippedX -= 5 + this.playerLevel, 0)
 
