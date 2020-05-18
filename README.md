@@ -66,3 +66,20 @@ Decrementing player lives upon being hit posed a unique challenge due to the nat
         spaceship.invincibilityFrames--
       }
     }
+```
+
+# Upcoming Features
+
+## Satelite Drone will either take multiple hits to destroy or trigger an Alarm/Increase In max enemies.
+
+## Power Ups!!! 
+
+    ### Curent ideas include: 
+    #### Unlock maximum fire rate for a short period of time (current limit is 4 on screen at once)
+    #### Speed Boost
+    #### Extra Life
+    #### Bomb that explode everything on screen (ala Star Fox)
+    
+## Boss Battle!!! 
+
+## Story Video At the Beginning/Ending Credits
