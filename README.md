@@ -51,3 +51,18 @@ Using this property I could then ensure that the image src would only change whe
     
 ```
 
+Decrementing player lives upon being hit posed a unique challenge due to the nature of the requestAnimationFrame function. Since it called approximately 60 times per second a player would be hit 60 times per second and instantly game over upon first collding with an enemy. I created a variable that tracked 120 invincibility frames (approximately 2 seconds) and coded a change in this property when a player collided with an enemy and initiated the decrementing. The switch in this property would also change the image source to a ghosted version to inform the user that they were currently invulerable to further damage. Upon reaching 0 invincibilityFrames, a user is no longer invincible and the playership image is reset back to normal.
+
+```javascript
+    if(spaceship.isInvincible) {
+      spaceshipImage.src = "assets/player/playership_ghosted.png"
+     
+      if (spaceship.invincibilityFrames <= 0) {
+        spaceshipImage.src = "assets/player/playership.png"
+        spaceshipImage.onload = () => {return}
+      spaceship.invincibilityFrames = 120
+        spaceship.isInvincible = false;
+      } else {
+        spaceship.invincibilityFrames--
+      }
+    }
