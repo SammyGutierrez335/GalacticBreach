@@ -16,7 +16,6 @@ export default class Game {
     this.ships = [];
     this.backgroundPhase
     this.enemies = [];
-    this.enemyImage = new Image();
     this.bulletImage = new Image();
     this.bullets = [];
     this.maxbullets = 3
@@ -56,10 +55,10 @@ export default class Game {
 
 
   addEnemy() {
-      let imgSrc = ["assets/attackers/atom.png", "assets/attackers/mohican.png", "assets/attackers/satelite.png"]
+    let imgSrc = ["assets/attackers/atom.png", "assets/attackers/mohican.png", "assets/attackers/satelite.png"]
       let frames = [24, 24, 16]
       let randomIndex = Math.floor(Math.random() * this.playerLevel)
-      let enemyImage = this.enemyImage
+      let enemyImage = new Image()
       let enemy = new Enemy({
         speed: Math.ceil(Math.random() * (4 * (randomIndex || 1))),
         x: this.getRandomX(),
@@ -69,7 +68,6 @@ export default class Game {
         imgSrc: imgSrc[randomIndex]
       })
       
-      enemy.renderImg(enemyImage)
       
       //this is used to prevent the enemy from being pushed prior to having the enemy image loaded.
       //prevents DOMException: Failed to execute 'drawImage' on 'CanvasRenderingContext2D': 
@@ -77,6 +75,8 @@ export default class Game {
       enemy.enemyImage.onload = () => {
         this.enemies.push(enemy)
       };
+
+      enemy.renderImg(enemyImage)
   };
 
   getRandomX() {

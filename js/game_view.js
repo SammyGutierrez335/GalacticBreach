@@ -27,7 +27,7 @@ export default class GameView {
       this.game.musicMuted = true
       this.musicToggleImage.src = "assets/menu/music-toggle-mute.png"
     }
-    console.log(this.game.musicMuted)
+
     this.game.handleAudioToggles()
   }
 
@@ -61,7 +61,10 @@ export default class GameView {
       gameOverHighScore.className += "hide"
     }
     this.game.addShip();
-    this.game.addEnemy();
+
+    for (let i = 1; i < this.game.maxEnemies; i++) {
+      this.game.addEnemy();
+    }
     
       requestAnimationFrame(this.game.gameloop)
   }
