@@ -60,9 +60,7 @@ export default class GameView {
       gameOverHighScore.className += "hide"
     }
     this.game.addShip();
-    this.game.addEnemy()
-    
-    
+    this.game.addEnemy();
     
       requestAnimationFrame(this.game.gameloop)
   }
