@@ -191,7 +191,7 @@ export default class Game {
   takeDamage() {
     this.ships[0].isInvincible = true
     if (this.lives === 3) {
-      this.damage1.volume = this.sfxVolume
+      `this.damage1`.volume = this.sfxVolume
       this.damage1.play();
     } else if (this.lives === 2) {
       this.damage2.volume = this.sfxVolume

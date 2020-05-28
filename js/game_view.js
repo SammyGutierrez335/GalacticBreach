@@ -31,6 +31,7 @@ export default class GameView {
   }
 
   toggleSfx() {
+
     if (this.game.sfxMuted) {
       this.game.sfxMuted = false
       this.sfxToggleImage.src = "assets/menu/sfx-toggle.png";

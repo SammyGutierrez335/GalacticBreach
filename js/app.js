@@ -17,7 +17,6 @@ rightCanvas.height = 480
 
 
 
-
 const playButton = document.getElementById('play-button');
 
 playButton.addEventListener("click", () =>  {
