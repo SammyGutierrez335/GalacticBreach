@@ -67,7 +67,6 @@ export default class Game {
         enemyImage: enemyImage,
         imgSrc: imgSrc[randomIndex]
       })
-      console.log(this.enemies)
       
       
       //this is used to prevent the enemy from being pushed prior to having the enemy image loaded.
@@ -364,7 +363,7 @@ export default class Game {
             this.remove(enemy, null)
           }
         }
-
+  
 
     //bullet logic
     let bulletImage = this.bulletImage
