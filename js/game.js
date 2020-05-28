@@ -67,6 +67,7 @@ export default class Game {
         enemyImage: enemyImage,
         imgSrc: imgSrc[randomIndex]
       })
+      console.log(this.enemies)
       
       
       //this is used to prevent the enemy from being pushed prior to having the enemy image loaded.
@@ -311,9 +312,6 @@ export default class Game {
     }
 
     //enemy rendering
-    if (this.enemies.length > 0) {
-      if (this.enemies.length <= this.maxEnemies) {
-        let enemyImage
         for (let i = 0; i < this.enemies.length; i++) {
           let enemy = this.enemies[i]
           
@@ -327,8 +325,10 @@ export default class Game {
             // enemy.enemyImage.src = prevSrc.split(".png").join("_ghosted.png")
             enemy.enemyImage.onload = () => {return}
           }
-          enemyImage = enemy.enemyImage
+          let enemyImage = enemy.enemyImage
 
+
+          //mohican enemies move towards spaceship
           if (enemy.imgSrc === "assets/attackers/mohican.png") {
             enemy.moveEnemy(enemy.speed, spaceship.x, spaceship.y)
           } else {
@@ -341,11 +341,10 @@ export default class Game {
           }
 
           if (enemy.despawning[0]) {
-            if (enemy.despawning[1] === 8) {
-              this.remove(enemy)
-            }
+            if (enemy.despawning[1] === 8) { this.remove(enemy)}
             let explosionFrameX = enemy.despawning[1] * 96
             let explosionFrameY = enemy.despawning[1] * 93
+            
             ctx.drawImage(enemyImage,
               explosionFrameX, explosionFrameY, 96, 93,
               enemy.x - enemy.speed, enemy.y, 44, 48)
@@ -365,8 +364,7 @@ export default class Game {
             this.remove(enemy, null)
           }
         }
-      }
-    }
+
 
     //bullet logic
     let bulletImage = this.bulletImage
