@@ -43,10 +43,14 @@ export default class GameView {
   }
 
   start() {
+    for (let i = 0; i < 384; i++) {
+      this.game.CYCLE_LOOP.push(i)
+    }
+    
     var gameOver = document.getElementById("game-over-title");
     var gameOverScore = document.getElementById("game-over-score");
     let gameOverHighScore = document.getElementById("game-over-high-score")
-
+    
     if (gameOver.className !== "hide") {
       gameOver.className += "hide"
       
@@ -55,11 +59,11 @@ export default class GameView {
       gameOverScore.className += "hide"
       gameOverHighScore.className += "hide"
     }
-      this.game.addShip();
-      for (let i = 0; i < 384 ; i++) {
-        this.game.CYCLE_LOOP.push(i);
-      }
-      
-    this.game.addEnemy().then(() => (requestAnimationFrame(this.game.gameloop)))
+    this.game.addShip();
+    this.game.addEnemy()
+    
+    
+    
+      requestAnimationFrame(this.game.gameloop)
   }
 }

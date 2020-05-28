@@ -448,7 +448,7 @@ export default class Game {
     let myReq = window.requestAnimationFrame(this.gameloop);
 
   
-
+      //game over logic
     if (this.slippynoooooo) {
       var playButton = document.getElementById("play-button");
       playButton.classList.remove("hide")
