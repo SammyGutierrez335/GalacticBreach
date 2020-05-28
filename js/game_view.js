@@ -27,6 +27,7 @@ export default class GameView {
       this.game.musicMuted = true
       this.musicToggleImage.src = "assets/menu/music-toggle-mute.png"
     }
+    console.log(this.game.musicMuted)
     this.game.handleAudioToggles()
   }
 

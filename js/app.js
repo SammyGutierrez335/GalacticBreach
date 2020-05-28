@@ -78,17 +78,10 @@ window.addEventListener('keydown', keyDownListener, false);
 function keyDownListener(event) {
   if (event.key === "Enter" || event.key === "Return") {
     window.removeEventListener("keydown", keyDownListener)
-    fadeOut(ctx)
     playButton.className += " hide"
     new GameView(canvas, ctx, rightCanvas, rightCanvasCtx).start()
   }
 }
-
-function fadeOut() {
-    intervalId = setInterval(update, 1000 / frames);
-}
-
-
 
 let canvasElement = document.body.appendChild(canvas);
 let rightCanvasElement = document.body.appendChild(rightCanvas);

@@ -16,6 +16,7 @@ export default class Game {
     this.ships = [];
     this.backgroundPhase
     this.enemies = [];
+    this.enemyImage = new Image();
     this.bulletImage = new Image();
     this.bullets = [];
     this.maxbullets = 3
@@ -58,7 +59,7 @@ export default class Game {
       let imgSrc = ["assets/attackers/atom.png", "assets/attackers/mohican.png", "assets/attackers/satelite.png"]
       let frames = [24, 24, 16]
       let randomIndex = Math.floor(Math.random() * this.playerLevel)
-      let enemyImage = new Image();
+      let enemyImage = this.enemyImage
       let enemy = new Enemy({
         speed: Math.ceil(Math.random() * (4 * (randomIndex || 1))),
         x: this.getRandomX(),
@@ -74,7 +75,6 @@ export default class Game {
       //prevents DOMException: Failed to execute 'drawImage' on 'CanvasRenderingContext2D': 
       //The HTMLImageElement provided is in the 'broken' state.
       enemy.enemyImage.onload = () => {
-        console.log("image has loaded")
         this.enemies.push(enemy)
       };
   };
@@ -191,7 +191,7 @@ export default class Game {
   takeDamage() {
     this.ships[0].isInvincible = true
     if (this.lives === 3) {
-      `this.damage1`.volume = this.sfxVolume
+      this.damage1.volume = this.sfxVolume
       this.damage1.play();
     } else if (this.lives === 2) {
       this.damage2.volume = this.sfxVolume
