@@ -60,7 +60,6 @@ export default class GameView {
         this.game.CYCLE_LOOP.push(i);
       }
       
-      this.game.addEnemy();
-        requestAnimationFrame(this.game.gameloop)
+    this.game.addEnemy().then(() => (requestAnimationFrame(this.game.gameloop)))
   }
 }
