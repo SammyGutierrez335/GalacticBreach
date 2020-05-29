@@ -16,12 +16,14 @@ export default class Game {
     this.ships = [];
     this.backgroundPhase
     this.enemies = [];
+    this.extraLife = new Image("assets/pickups/extra_life.png")
     this.bulletImage = new Image();
     this.bullets = [];
     this.maxbullets = 3
     this.bgImageX = 0;
     this.bgImageFlippedX = canvas.width
-    this.moonX =1800
+    this.moon = new Image()
+    this.moonX = 1800
     this.asteroidX = 1000
     this.bgImageSrc = "assets/backgrounds/bg1.png"
     this.bgImageSrc2 = "assets/backgrounds/bg1-flipped-edged.png"
@@ -208,7 +210,8 @@ export default class Game {
 
   drawFrame(frameX, frameY) {
     let ctx = this.ctx
-    // // background
+
+    // background
     let bgImage = new Image();
     let bgImageFlipped = new Image();
     bgImage.src = this.bgImageSrc
@@ -216,7 +219,7 @@ export default class Game {
     this.backgroundRendering = false
     this.background2Rendering = false
 
-    //cycles background animation
+    //cycles/loops background images
     if (this.bgImageX < -(this.canvas.width)) {
       this.bgImageX = this.canvas.width
       this.backgroundRendering = true
@@ -248,25 +251,27 @@ export default class Game {
     ctx.drawImage(bgImage, this.bgImageX -= 5 + this.playerLevel, 0)
     ctx.drawImage(bgImageFlipped, this.bgImageFlippedX -= 5 + this.playerLevel, 0)
 
-    //moons
-    if (this.moonX > 0) {
-      let moon = new Image()
-      moon.src = "assets/backgrounds/moon.png"
 
-      //     img  spriteX, sY, sWidth, sheight, dX, dY, dWidth, dHeight (d will be related to sprite position and size on canvas)
-      ctx.drawImage(moon, 0, 0, 280, 280, this.moonX -= .1 + this.playerLevel * .1, 0, 140, 140)
+
+    //moon
+    if (this.moonX > 0) {
+      this.moon.src = "assets/backgrounds/moon.png"
+      // img  spriteX, sY, sWidth, sheight, dX, dY, dWidth, dHeight (d will be related to sprite position and size on canvas)
+      ctx.drawImage(this.moon, 0, 0, 280, 280, this.moonX -= .1 + this.playerLevel * .1, 0, 140, 140)
     }
    
-
-    // planets
+    // to be added later
     let planets = ["assets/backgrounds/pfrozen.png",
-  "assets/backgrounds/planet1.png",
-  "assets/backgrounds/planet2.png",
-  "assets/backgrounds/planet3.png",
-  "assets/backgrounds/planetx.png",
-  "assets/backgrounds/pring.png",
-  "assets/backgrounds/prusty.png"]
+                    "assets/backgrounds/planet1.png",
+                    "assets/backgrounds/planet2.png",
+                    "assets/backgrounds/planet3.png",
+                    "assets/backgrounds/planetx.png",
+                    "assets/backgrounds/pring.png",
+                    "assets/backgrounds/prusty.png"]
     
+
+
+    //player score
     ctx.fillStyle = "#FFFFFF";
     ctx.font = "20px fantasy"   
 
@@ -285,25 +290,26 @@ export default class Game {
     ctx.drawImage(spaceshipImage,
       (frameX % 16) * spaceship.width, frameY * spaceship.height, spaceship.width, spaceship.height,
       spaceship.x, spaceship.y, SCALED_WIDTH, SCALED_HEIGHT);
-
-
+      
+    //thruster logic
     if(spaceship.thrust) {
       let thruster = new Image()
       thruster.src = "assets/player/thrust_playership.png"
       ctx.drawImage(thruster, 0, 0, 128, 128,
-        spaceship.x - 90, spaceship.y - 20, 128, 128)
+      spaceship.x - 90, spaceship.y - 20, 128, 128)
       this.sfxMuted ? spaceship.thruster.volume = 0 :spaceship.thruster.volume = .6;
       spaceship.thruster.play()
       spaceship.thrust = false
       }
 
+    //invincibility frames
     if(spaceship.isInvincible) {
       spaceshipImage.src = "assets/player/playership_ghosted.png"
      
       if (spaceship.invincibilityFrames <= 0) {
         spaceshipImage.src = "assets/player/playership.png"
         spaceshipImage.onload = () => {return}
-      spaceship.invincibilityFrames = 120
+        spaceship.invincibilityFrames = 120
         spaceship.isInvincible = false;
       } else {
         spaceship.invincibilityFrames--
@@ -404,14 +410,17 @@ export default class Game {
 
   // The main game loop should run about 60 times per second
   gameloop() {
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    
     if (this.battleMusicOff && this.spaceAmbienceOff) {
       this.checkMusic()
     }
+    
     this.handleAudioToggles()
-
+    
+    
     let spaceship = this.ships[0]
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
+    
     if (this.enemies.length < this.maxEnemies) {
       this.addEnemy()
     }
