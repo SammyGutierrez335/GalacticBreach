@@ -416,6 +416,14 @@ export default class Game {
       this.addEnemy()
     }
 
+
+    //this code fixes the bug upon first load where the add enemy is called 60+ times prior to populating the enemies array
+    //causing the game to glitch.
+    if (this.enemies.length >= this.maxEnemies) {
+      this.enemies = this.enemies.slice(0, this.maxEnemies)
+    }
+
+    
     //fires bullet
     if (spaceship.keyPresses[" "] && this.bullets.length < this.maxbullets) {
       let bullet = new Bullet({
