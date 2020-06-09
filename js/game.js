@@ -442,6 +442,7 @@ export default class Game {
         imgSrc: "assets/fx/bullet_blue.png",
       })
       spaceship.keyPresses[" "] = false
+
       this.addBullet(bullet)
     }
 

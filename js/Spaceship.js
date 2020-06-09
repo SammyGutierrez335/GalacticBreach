@@ -27,6 +27,9 @@ export default class Spaceship {
 
   keyDownListener(event) {
     this.keyPresses[event.key] = true;
+      if (event.keyCode == 32) {
+        event.preventDefault();
+      }
   }
 
   keyUpListener(event) {
