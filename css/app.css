@@ -124,3 +124,13 @@ height: 50px;
 .hide {
   display:none;
 }
+
+@media all and (max-width: 1900px) {
+  .scoreboard-canvas {
+    display:none
+  }
+  body {
+    flex-direction: column-reverse;
+    
+  }
+}
