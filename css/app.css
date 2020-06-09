@@ -51,8 +51,16 @@ canvas {
   align-items: flex-start;
   justify-content: flex-end;
 }
+
+.game-board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .audio-options{
-  position: absolute;
+  display: flex;
+  align-items: center;
   left: 42%;
   top: 680px;
   font-family: fantasy;
@@ -80,7 +88,6 @@ button{
 .play {
 width: 100px;
 height: 50px;
-  position: relative;
   bottom: 70px;
   right: 100px;
   font-family: fantasy;

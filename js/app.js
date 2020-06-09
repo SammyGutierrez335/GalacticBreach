@@ -83,7 +83,7 @@ function keyDownListener(event) {
   }
 }
 
-let canvasElement = document.body.appendChild(canvas);
+let canvasElement = document.getElementById("game-board").prepend(canvas);
 let rightCanvasElement = document.body.appendChild(rightCanvas);
 
 rightCanvasElement.setAttribute("class", "scoreboard-canvas")
