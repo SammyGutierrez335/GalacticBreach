@@ -48,18 +48,17 @@ export default class GameView {
       this.game.CYCLE_LOOP.push(i)
     }
     
-    var gameOver = document.getElementById("game-over-title");
+    var gameOverModal = document.getElementById("game-over-modal");
+    gameOverModal.addEventListener("click", () => {
+      gameOverModal.className += "hide"
+    })
+
     var gameOverScore = document.getElementById("game-over-score");
     let gameOverHighScore = document.getElementById("game-over-high-score")
     
-    if (gameOver.className !== "hide") {
-      gameOver.className += "hide"
-      
-      gameOverScore.removeChild(gameOverScore.childNodes[0])
-      gameOverHighScore.removeChild(gameOverHighScore.childNodes[0])
-      gameOverScore.className += "hide"
-      gameOverHighScore.className += "hide"
-    }
+    gameOverScore.removeChild(gameOverScore.childNodes[0])
+    gameOverHighScore.removeChild(gameOverHighScore.childNodes[0])
+
     this.game.addShip();
 
     for (let i = 1; i < this.game.maxEnemies; i++) {

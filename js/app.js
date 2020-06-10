@@ -84,7 +84,12 @@ function keyDownListener(event) {
 }
 
 let canvasElement = document.getElementById("game-board").prepend(canvas);
-let rightCanvasElement = document.body.appendChild(rightCanvas);
 
-rightCanvasElement.setAttribute("class", "scoreboard-canvas")
-canvasElement.setAttribute("class", "canvas");
+let rightCanvasElement = document.body.appendChild(rightCanvas);
+if (rightCanvasElement.className !== "hide" ) {
+  rightCanvasElement.setAttribute("class", "scoreboard-canvas")
+}
+
+if (typeof canvasElement !== 'undefined') {
+  canvasElement.setAttribute("class", "canvas");
+}
