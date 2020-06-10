@@ -92,11 +92,20 @@ height: 50px;
   right: 100px;
   font-family: fantasy;
 }
+#game-over-modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.8);
+  min-width: 100%;
+  min-height: 100%;
+  z-index: 10;
+}
 
-#game-over {
-  position: absolute;
-  top: 25%;
-  left: 35%;
+
+#game-over-text-box {
   font-family: fantasy;
   color: rgb(109,158,226);
   font-size: 48;
@@ -107,18 +116,8 @@ height: 50px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-}
-
-#game-over-score {
-  position: relative;
-  top: 245px;
-  left: -275px;
-}
-
-#game-over-high-score {
-  position: relative;
-  top: 330px;
-  left: -620px;
+  display: flex;
+  flex-direction: column;
 }
 
 .hide {
@@ -129,6 +128,7 @@ height: 50px;
   .scoreboard-canvas {
     display:none
   }
+
   body {
     flex-direction: column-reverse;
     

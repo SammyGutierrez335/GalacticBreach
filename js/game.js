@@ -486,12 +486,11 @@ export default class Game {
         var score = document.createTextNode(`Your Score: ${this.score}`);        
         let highScore = document.createTextNode(`Your All Time Best: ${allTimeBest}`)
         
-        if(document.getElementById("game-over-score")) {
-          document.getElementById("game-over-score").classList.remove("hide")
-          document.getElementById("game-over-high-score").classList.remove("hide")
+        if(document.getElementById("game-over-modal")) {
+          document.getElementById("game-over-modal").classList.remove("hide")
         }
         
-        document.getElementById("game-over-score").appendChild(score);
+      document.getElementById("game-over-score").appendChild(score);
       document.getElementById("game-over-high-score").appendChild(highScore);
 
         gameOver.classList.remove("hide")
