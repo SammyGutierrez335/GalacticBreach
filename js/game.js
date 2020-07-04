@@ -45,7 +45,7 @@ export default class Game {
     this.checkLevelUp = this.checkLevelUp.bind(this)
     this.handleAudioToggles = this.handleAudioToggles.bind(this)
     this.checkMusic = this.checkMusic.bind(this)
-    this.maxEnemies = 100
+    this.maxEnemies = 3
     this.score = 0
     this.playerLevel = 1
     this.lives = 3
