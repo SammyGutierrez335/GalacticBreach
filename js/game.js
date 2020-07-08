@@ -14,13 +14,15 @@ export default class Game {
     this.frameCount = 0;
     this.FRAME_LIMIT = 5;
     this.spaceshipImage = new Image();
-    this.ships = [];
+    this.ship = 
     this.backgroundPhase
     this.enemies = [];
     this.extraLife = new Image("assets/pickups/extra_life.png")
     this.bulletImage = new Image();
     this.bullets = [];
     this.maxbullets = 3
+    this.bgImage = new Image("assets/backgrounds/bg1.png")
+    this.bgImageFlipped = new Image("assets/backgrounds/bg1-flipped-edged.png")
     this.bgImageX = 0;
     this.bgImageFlippedX = canvas.width
     this.moon = new Image()
@@ -90,7 +92,7 @@ export default class Game {
       y: 200,
       imgSrc: "assets/player/playership.png",
     })
-    this.ships.push(spaceship)
+    this.ship = spaceship
     spaceship.renderImg(this.spaceshipImage)
   }
 
@@ -147,7 +149,7 @@ export default class Game {
     }
     else if (object instanceof Spaceship) {
       //eventually lose a life/gameover here...
-      this.ships.shift()
+      // this.ship.shift()
     } else {
       throw new Error("unknown type of object");
     }
@@ -182,7 +184,7 @@ export default class Game {
 
 
   takeDamage() {
-    this.ships[0].isInvincible = true
+    this.ship.isInvincible = true
     if (this.lives === 3) {
       this.damage1.volume = this.sfxVolume
       this.damage1.play();
@@ -203,8 +205,8 @@ export default class Game {
     let ctx = this.ctx
 
     // background
-    let bgImage = new Image();
-    let bgImageFlipped = new Image();
+    let bgImage = this.bgImage
+    let bgImageFlipped = this.bgImageFlipped
     bgImage.src = this.bgImageSrc
     bgImageFlipped.src = this.bgImageSrc2
     this.backgroundRendering = false
@@ -276,7 +278,7 @@ export default class Game {
     const SCALED_WIDTH = SCALE * 64
     const SCALED_HEIGHT = SCALE * 64
 
-    let spaceship = this.ships[0]
+    let spaceship = this.ship
     let spaceshipImage = this.spaceshipImage
     ctx.drawImage(spaceshipImage,
       (frameX % 16) * spaceship.width, frameY * spaceship.height, spaceship.width, spaceship.height,
@@ -410,7 +412,7 @@ export default class Game {
     this.handleAudioToggles()
     
     
-    let spaceship = this.ships[0]
+    let spaceship = this.ship
     
     if (this.enemies.length < this.maxEnemies) {
       this.addEnemy()
@@ -419,8 +421,12 @@ export default class Game {
 
     //this code fixes the bug upon first load where the add enemy is called 60+ times prior to populating the enemies array
     //causing the game to glitch.
-    if (this.enemies.length >= this.maxEnemies) {
+    if (this.enemies.length > this.maxEnemies) {
+      let scrapEnemies = this.enemies.slice(0, this.maxEnemies)
       this.enemies = this.enemies.slice(0, this.maxEnemies)
+      scrapEnemies.forEach(enemy => {
+        enemy.src = null
+      })
     }
 
     
