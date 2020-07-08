@@ -40,7 +40,6 @@ export default class Spaceship {
 
   renderImg(spaceShipImage) {
     spaceShipImage.src = this.imgSrc;
-
   }
 
 

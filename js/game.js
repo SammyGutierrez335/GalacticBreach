@@ -1,6 +1,7 @@
 import Spaceship from "./spaceship.js"
 import Enemy from "./enemy.js"
-import Bullet from "./bullet.js";
+import Bullet from "./bullet.js"
+import {getRandomX, getRandomY} from "./util.js"
 
 export default class Game {
   constructor(canvas, ctx, rightCanvas, rightCanvasCtx) {
@@ -52,10 +53,6 @@ export default class Game {
     this.slippynoooooo = false
   }
 
-
-
-
-
   addEnemy() {
     let imgSrc = ["assets/attackers/atom.png", "assets/attackers/mohican.png", "assets/attackers/satelite.png"]
       let frames = [24, 24, 16]
@@ -63,8 +60,8 @@ export default class Game {
       let enemyImage = new Image()
       let enemy = new Enemy({
         speed: Math.ceil(Math.random() * (4 * (randomIndex || 1))),
-        x: this.getRandomX(),
-        y: this.getRandomY(),
+        x: getRandomX(this.canvas),
+        y: getRandomY(),
         frames: frames[randomIndex],
         enemyImage: enemyImage,
         imgSrc: imgSrc[randomIndex]
@@ -80,14 +77,6 @@ export default class Game {
 
       enemy.renderImg(enemyImage)
   };
-
-  getRandomX() {
-    return Math.random() * (1200 - this.canvas.width) + this.canvas.width
-  }
-
-  getRandomY() {
-    return Math.random() * (440 - 0)
-  }
 
   //player spaceship
 
@@ -142,8 +131,10 @@ export default class Game {
   remove(object, bullet) {
     if (object instanceof Bullet) {
       this.bullets.splice(this.bullets.indexOf(object), 1);
+      object.imgSrc = null
     } else if (object instanceof Enemy) {
       this.enemies.splice(this.enemies.indexOf(object), 1);
+      object.imgSrc = null
       if (bullet) {
         this.remove(bullet)
         this.score += 1

@@ -12,6 +12,7 @@ export default class GameView {
     this.toggleMusic = this.toggleMusic.bind(this)
     this.toggleSfx = this.toggleSfx.bind(this)
     this.start = this.start.bind(this)
+    
     this.musicToggle.addEventListener("click", this.toggleMusic)
     this.musicToggle.addEventListener('focus', function () { this.blur() })
 
@@ -44,6 +45,7 @@ export default class GameView {
   }
 
   start() {
+    
     for (let i = 0; i < 384; i++) {
       this.game.CYCLE_LOOP.push(i)
     }
