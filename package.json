@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/SammyGutierrez335/GalacticBreach#readme",
   "dependencies": {
-    "redis": "^3.0.2"
+    "redis": "^3.1.1"
   },
   "devDependencies": {
     "webpack": "^4.42.1",
