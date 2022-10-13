@@ -73,9 +73,7 @@ export default class Game {
       //this is used to prevent the enemy from being pushed prior to having the enemy image loaded.
       //prevents DOMException: Failed to execute 'drawImage' on 'CanvasRenderingContext2D': 
       //The HTMLImageElement provided is in the 'broken' state.
-      enemy.enemyImage.onload = () => {
-        this.enemies.push(enemy)
-      };
+      enemy.enemyImage.onload = () => this.enemies.push(enemy);
 
       enemy.renderImg(enemyImage)
   };
@@ -117,13 +115,10 @@ export default class Game {
     if (obj1 instanceof Enemy && obj1.despawning[0]) return false;
     if (obj2 instanceof Enemy && obj2.despawning[0]) return false;
 
-    if (obj1.x < obj2.x + obj2.width &&
-      obj1.x + obj1.width > obj2.x &&
-      obj1.y < obj2.y + obj2.height &&
-      obj1.y + obj1.height > obj2.y) {
-      return true
-    }
-    return false
+    return obj1.x < obj2.x + obj2.width &&
+        obj1.x + obj1.width > obj2.x &&
+        obj1.y < obj2.y + obj2.height &&
+        obj1.y + obj1.height > obj2.y;
   }
 
 
@@ -301,7 +296,7 @@ export default class Game {
      
       if (spaceship.invincibilityFrames <= 0) {
         spaceshipImage.src = "assets/player/playership.png"
-        spaceshipImage.onload = () => {return}
+        spaceshipImage.onload = () => {}
         spaceship.invincibilityFrames = 120
         spaceship.isInvincible = false;
       } else {
@@ -321,7 +316,7 @@ export default class Game {
             enemy.enemyImage = new Image()
             enemy.enemyImage.src = "assets/attackers/explosions/explosion2.png"
             // enemy.enemyImage.src = prevSrc.split(".png").join("_ghosted.png")
-            enemy.enemyImage.onload = () => {return}
+            enemy.enemyImage.onload = () => {}
           }
           let enemyImage = enemy.enemyImage
 

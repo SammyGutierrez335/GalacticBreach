@@ -1,10 +1,8 @@
-import Bullet from "./bullet"
-
 export default class Spaceship {
-  constructor(options) {
-    this.speed = options.speed; // movement in pixels per second
-    this.x = options.x;
-    this.y = options.y;
+  constructor({speed, x, y, imgSrc}) {
+    this.speed = speed; // movement in pixels per second
+    this.x = x;
+    this.y = y;
     this.height = 64
     this.width = 64
     this.thrust = false
@@ -12,7 +10,7 @@ export default class Spaceship {
     this.invincibilityFrames = 120
     this.thruster = new Audio("assets/soundfx/fx/thruster.mp3")
     // this.cycleLoop = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
-    this.imgSrc = options.imgSrc
+    this.imgSrc = imgSrc
     this.deltaX = 0
     this.deltaY = 0
     this.keyPresses = {}
@@ -25,15 +23,13 @@ export default class Spaceship {
 
 
 
-  keyDownListener(event) {
-    this.keyPresses[event.key] = true;
-      if (event.keyCode == 32) {
-        event.preventDefault();
-      }
+  keyDownListener(e) {
+    this.keyPresses[e.key] = true;
+    if (e.keyCode == 32) e.preventDefault();
   }
 
-  keyUpListener(event) {
-    this.keyPresses[event.key] = false;
+  keyUpListener(e) {
+    this.keyPresses[e.key] = false;
     this.deltaX = 0
     this.deltaY = 0
   }

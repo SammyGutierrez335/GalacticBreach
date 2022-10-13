@@ -1,12 +1,12 @@
 export default class Bullet {
-  constructor(options) {
-    this.speed = options.speed; // movement in pixels per second
+  constructor({speed, x, y, imgSrc}) {
+    this.speed = speed; // movement in pixels per second
     // this.cycleLoop = [0]
-    this.x = options.x;
-    this.y = options.y;
+    this.x = x;
+    this.y = y;
     this.height = 32
     this.width = 32
-    this.imgSrc = options.imgSrc
+    this.imgSrc = imgSrc
   }
 
   renderImg(bulletImage) {
@@ -14,7 +14,8 @@ export default class Bullet {
   }
 
   //checks for inbounds
-  moveBullet(deltaX, deltaY, direction, canvas) {
+  //deltaY, direction, canvas are the 2nd, 3rd, and 4th params. Currently unused
+  moveBullet(deltaX) {
     this.x += deltaX;
   }
 }
