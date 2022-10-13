@@ -1,7 +1,7 @@
 
 import GameView from "./game_view";
 
-
+//TODO DYNAMICALLY SET CANVAS BASED ON SCREEN SIZE
 let gameCanvas = document.createElement("canvas");
 let ctx = gameCanvas.getContext("2d");
 gameCanvas.width = 960;
@@ -35,22 +35,18 @@ titleImage.src = "assets/menu/blue/title.png";
 
 
 
-//animation
-let frames = 32;
-let timerId = 0;
-let intervalId = 0;
-
 //animates background
-timerId = setInterval(update, 1000 / frames);
+let frames = 32;
+// let timerId = setInterval(update, 1000 / frames);
 
 
-function update() {
+const update = () => {
   clear(ctx);
   move();
   draw();
 }
 
-function clear(ctx) {
+const clear = ctx => {
   ctx.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
 }
 
@@ -58,7 +54,7 @@ let backgroundY = 0;
 let speed = .4;
 let bounce = false
 
-function move() {
+const move = () => {
   backgroundY -= speed;
   if (backgroundY < -200) {
     speed = -(speed);
@@ -69,10 +65,10 @@ function move() {
   }
 }
 
-function draw() {
+const draw = () => {
   ctx.fillRect(75, 0, 800, height, "black");
   ctx.drawImage(titleBackground, 75, backgroundY);
-  ctx.drawImage(titleImage, 75, 0 + 150, 820, 200);
+  ctx.drawImage(titleImage, 75, 150, 820, 200);
 }
 
 window.addEventListener('keydown', keyDownListener, false);
@@ -85,7 +81,7 @@ function keyDownListener(event) {
   }
 }
 
-let canvasElement = document.getElementById("game-board").prepend(gameCanvas);
+const canvasElement = document.getElementById("game-board").prepend(gameCanvas);
 
 let rightCanvasElement = document.body.appendChild(rightCanvas);
 if (rightCanvasElement.className !== "hide" ) {
